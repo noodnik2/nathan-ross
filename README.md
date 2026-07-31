@@ -20,10 +20,12 @@ This repository is used to manage artifacts related to building a website for Na
 
 To find recordings in which Nate was involved, the following sources have been identified:
 
-- [MusicBrainz](https://musicbrainz.org)
+- [MusicBrainz](https://musicbrainz.org/doc/Development)
+  - [Online API](https://musicbrainz.org/doc/MusicBrainz_API) 
   - [Database Dumps](https://data.metabrainz.org/pub/musicbrainz/data/fullexport)
   - [Database Documentation](https://musicbrainz.org/doc/MusicBrainz_Database)
   - [Covert Art Archive](https://coverartarchive.org/)
+    - [Online API](https://musicbrainz.org/doc/Cover_Art_Archive/API)
 - [Discogs](https://www.discogs.com/)
 
 ### Other Relevant Sites
