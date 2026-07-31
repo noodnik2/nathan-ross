@@ -4,20 +4,29 @@ This repository is used to manage artifacts related to building a website for Na
 
 ## Streams of Work
 
+### Inspiration & Planning
+
+- See [this ChatGPT](https://chatgpt.com/c/6a6a3682-a7a0-83ea-b892-39bf1149828f) conversation.
+
+### Source Folders
+
 - [Notebooks](./notebooks)
 - [CLI Commands](./cmd)
 - [Images](./docs/image-timeline.md)
 
 ## Resources
 
-## Data Sources
+### Data Sources
 
 To find recordings in which Nate was involved, the following sources have been identified:
 
 - [MusicBrainz](https://musicbrainz.org)
+  - [Database Dumps](https://data.metabrainz.org/pub/musicbrainz/data/fullexport)
+  - [Database Documentation](https://musicbrainz.org/doc/MusicBrainz_Database)
+  - [Covert Art Archive](https://coverartarchive.org/)
 - [Discogs](https://www.discogs.com/)
 
-### Relevant Sites
+### Other Relevant Sites
 
 - Nathan Ross
     - [Discogs](https://www.discogs.com/artist/398631-Nathan-Ross?superFilter=Instruments+%26+Performance)
