@@ -1,11 +1,11 @@
 ---
 name: music-catalog-domain
-description: Maintain the application's provider interfaces, normalized domain entities, and architecture independent of any external music metadata provider.
+description: Maintain the MSE application's provider interfaces, normalized domain entities, and architecture independent of any external music metadata provider.
 ---
 
 # Purpose
 
-The application owns its domain model.
+The Music Session Explorer (MSE) application owns its domain entity model, identified as the Music Catalog Domain (MCD).
 
 External APIs are implementation details.
 

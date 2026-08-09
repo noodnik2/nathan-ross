@@ -2,6 +2,13 @@
 
 This repository is used to manage artifacts related to building a website for Nathan Ross.
 
+## Motivation
+
+A son of Nathan Ross would like to create a website to help others (mainly other family members
+and more distant relatives) to recall his life and works.
+
+Since Nathan was a musician, one of the first use cases envisioned is to allow a visitor 
+
 ## Streams of Work
 
 ### Inspiration & Planning
