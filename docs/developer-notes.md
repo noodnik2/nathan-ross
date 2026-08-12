@@ -1,5 +1,34 @@
 # Developer Notes
 
+## Terminology
+
+Common terminology used across the documentation:
+
+- Developer: A person who is responsible for the development of the software.
+- AI or AI Agent: A software agent that is capable of performing tasks that are not directly
+  related to the user.
+- User or End User: And end user of the software or proxy thereof (e.g., for testing purposes).
+- SPA: Single Page Application.
+
+## Source Control
+
+- Git is used as the source control system.
+- GitHub is used to serve as the upstream origin for local working copies.
+- A "GitHub Workflow" is used for development and promotion of new features,
+  using the branch named `main`as the "trunk."
+- AI agents must not modify the repository or switch branches unless explicitly
+  requested to do so by the developer.
+
+### Source Folders
+
+These folders contain source code and other artifacts related to development of this project.
+
+- [Notebooks](../notebooks)
+- [CLI Commands](../cmd)
+- [GitHub Pages Static Assets](../static)
+- [Music Session Explorer SPA Source](../mse-spa)
+- [Common Typescript Packages](../packages)
+
 ## Jupyter Notebooks
 
 The Jupyter notebooks located in the [notebooks](../notebooks) folder are "playground" assets;
@@ -15,57 +44,53 @@ $ uv pip install pip
 
 NOTE: the `pip install pip` is needed to use `%pip` in the Jupyter Notebook.
 
-## Main Components
+## Deployable Components
 
-The two major deployable functional components of the repository are:
+The deployable functional components of the repository are described in the documents:
+- [Music Session Explorer SPA](./music-session-explorer-spa.md)
+- [Static Assets](./static-assets.md)
 
-### Static Resources: GitHub Pages
+Notifications of significant drift or deviation from what is described in the documents above
+must be brought to the developer's attention through proposed suggestions to address these
+differences.
 
-The main "Nathan Ross" website will (at least initially) be hosted for access by
-its end-users on the existing GitHub Pages site whose source code is located at
-https://github.com/noodnik2/noodnik2.github.io.  Accordingly, only static assets
-can be deployed there.  
+## Milestones
 
-### Music Session Explorer App (MSE)
+Small incremental and deployable Milestones must be used to help ensure visibility and
+realistic measurements of progress.
 
-The source code to this separate application (aka MSE) is stored in a separate folder, and is built
-separately (as it's using another web app technology that can be built into a deployable static asset);
-whereas, the "static" assets needed for just the Nathan Ross GitHub pages web page (not its subordinate
-MSE app) can primarily just be copied into the proper place within the target GitHub pages repository
-identified above.
+See the planned Milestones in the [Milestones](./milestones.md) document.
 
-## Prioritization
+Completion of each Milestone is evidenced by:
+- Successful execution of the set of tests created – see:
+  [Test Driven Development](./test-driven-development.md).
+- Demonstration of user stories in scope. 
 
-The following priorities are preconceived preferences and may be changed if there is a good reason  
-to do so.  Changes to these preferences will be noted in the [changelog](./changelog.md).
+### Plan the Design First
 
-### Technologies
+Before writing any code, design the plan for the (proposed changes to the)
+[Application Architecture](./architecture.md) and other linked documents
+needed to satisfy the user stories for each Milestone.
 
-The MSE application will be implemented using a standard LTS Vite + React framework using Typescript.
+Ensure that all relevant documentation remains consistent with – and updated to – reflect the new design
+to prevent drift or inconsistency.  Non-exclusive examples:
 
-The Nathan Ross static website must strictly follow the patterns and leverage the technology already
-established within the GitHub pages repository into which it will be deployed; i.e.:
-- [noodnik2.github.io](https://github.com/noodnik2/noodnik2.github.io)
+- [Music Session Explorer SPA](./music-session-explorer-spa.md)
+- [Static Assets](./static-assets.md)
+- AI-specific context documentation 
 
-Deviations from these preferences should be clarified and approved prior to introduction.
+Before asking a developer to review the design, carefully critique it as though you
+were reviewing a pull request.
 
-### Milestones
+Request a review of the design from a developer and wait for approval before beginning implementation.
 
-Small incremental and deployable milestones must be used to help ensure visibility and realistic
-measurements of progress.
+### Implement the Planned Design
 
-Goals for each milestone should include user stories to help make them measurable and usable.
+Follow the [Test Driven Development](./test-driven-development.md) process to implement the planned
+design.
 
-The set of tests left behind at the completion of each milestone (as described in
-[Test Driven Development](./test-driven-development.md))
-will provide a documentation trail.
-
-The initial Milestones should focus on development of the MSE application.  User stories
-must take into account that the MSE application will be called by the Nathan Ross static
-website.
-
-Milestones for development of the Nathan Ross static website should be postponed until after
-the completion of the MSE application.
+Carefully critique your proposed implementation as though you were reviewing a pull request before
+asking the developer for review.
 
 ## Deployment Procedures
 
@@ -83,10 +108,3 @@ as (but not limited to):
 - Key Makefile usage scenarios
 - Specific Deployment Procedures
 - Technology Requirements: Assumptions, Risks, etc. 
-
-## Source Control
-
-- Git is used as the source control system.
-- GitHub is used to serve as the upstream origin for local working copies.
-- A "GitHub Workflow" is used for development and promotion of new features,
-  using the branch named `main`as the "trunk."

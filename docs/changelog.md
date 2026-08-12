@@ -1,8 +1,8 @@
 # Changelog
 
-Important changes reflected by evolution of this repository will be documented here.
+Important changes reflected by evolution of this repository will be documented here
+using the format suggested by [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
-## Aug 7th 2026 - This Changelog Added
-
-Each set of changes will be headed in a new section whose title reflects the essence
-of the change, and the date in which the change was introduced.
+## [Unreleased]
+### Added
+- Initial project structure configuration.

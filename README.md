@@ -7,19 +7,15 @@ This repository is used to manage artifacts related to building a website for Na
 A son of Nathan Ross would like to create a website to help others (mainly other family members
 and more distant relatives) to recall his life and works.
 
-Since Nathan was a musician, one of the first use cases envisioned is to allow a visitor 
+Since Nathan was a musician, one of the first use cases envisioned is to allow a visitor to obtain
+a list of recordings in which he was involved, then select a recording to get a list of links to
+other sources of information related to the recording, such as where to listen to the recording.
 
 ## Streams of Work
 
 ### Inspiration & Planning
 
 - See [this ChatGPT](https://chatgpt.com/c/6a6a3682-a7a0-83ea-b892-39bf1149828f) conversation.
-
-### Source Folders
-
-- [Notebooks](./notebooks)
-- [CLI Commands](./cmd)
-- [Images](./docs/image-timeline.md)
 
 ## Resources
 

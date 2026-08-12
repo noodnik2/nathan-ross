@@ -1,6 +1,6 @@
 # Test Driven Development (TDD)
 
-This repository follows strict Test Driven Development (TDD) workflow, as described below.
+This repository follows a strict Test Driven Development (TDD) workflow, as described below.
 
 ## TDD Imperatives
 
@@ -8,9 +8,10 @@ The main imperative of a Test-Driven Development (TDD) workflow is to write a fa
 any production code.
 
 #### The Core Imperatives
-- Test First: Never write functional code without a failing test driving it.
+- Test First: Never write functional code without a failing test that drives it.
 - Minimal Code: Write only the exact amount of code needed to pass the test.
 - Refactor Safely: Clean up the design only when all tests are green.
+
 #### The Red-Green-Refactor Cycle
 - Red: Write a precise test for a small requirement and watch it fail.
 - Green: Write simple, straightforward code to make the test pass quickly.
@@ -18,7 +19,7 @@ any production code.
 
 ### Test Types and Formulation
 
-To break Milestones down into testable sub-units, thoroghly study its requirements and map
+To break Milestones down into testable subunits, thoroughly study its requirements and map
 them from the user's perspective down to individual lines of code.
 
 1. Functional Deconstruction
