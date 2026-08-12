@@ -1,8 +1,8 @@
 ---
 name: test-driven-development
-description: Auto-activates whenever the user asks to write new features, modify source code files, fix runtime bugs, or change application logic.
+description: Use before writing or modifying any file under mse-spa/ or packages/ (.ts/.tsx), before adding a feature or fixing a bug in this repo's application code, or when the task involves Vitest, React Testing Library (RTL), Mock Service Worker (MSW), a *.test.ts(x) file, or the Red-Green-Refactor cycle. Enforces this repo's mandatory TDD workflow (see docs/test-driven-development.md) before any production code is written.
 disable-model-invocation: false
-user-invocable: false
+user-invocable: true
 ---
 
 # TDD Automation Runner

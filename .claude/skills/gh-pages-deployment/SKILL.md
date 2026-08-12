@@ -1,6 +1,6 @@
 ---
 name: gh-pages-deployment
-description: Use to create a separate Makefile for deploying static or SPAs to an external GitHub Pages repository.
+description: Use when creating, modifying, or debugging the Makefile targets that deploy this repo's build output to the external noodnik2.github.io GitHub Pages repository — writing or editing Makefile.gh-pages, the deploy-spa/deploy-assets targets, TARGET_REPO_SSH/TARGET_REPO_HTTPS/TMP_DIR/BRANCH config, a failed git push during deploy, or the SPA's 404.html routing-fallback copy step.
 ---
 
 # Deployment to a GitHub Pages Repository
