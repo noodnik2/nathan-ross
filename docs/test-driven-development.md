@@ -17,6 +17,15 @@ any production code.
 - Green: Write simple, straightforward code to make the test pass quickly.
 - Refactor: Eliminate duplication, improve structure, and maintain passing behavior.
 
+#### Before Red: The Harness Must Exist
+
+A missing or non-functional test toolchain (no `package.json`, test runner not installed, command not
+found, etc.) is not a Red result — Red requires a test that actually runs and fails on an assertion. If
+the harness doesn't exist yet for the folder in question, scaffolding it is prerequisite setup work (e.g.
+Milestone 1 for `mse-spa/`), gated by the "Design before code" Guardrail in CLAUDE.md — not something to
+satisfy by writing production code. Only start the Red-Green-Refactor cycle once the harness can actually
+run a test.
+
 ### Test Types and Formulation
 
 To break Milestones down into testable subunits, thoroughly study its requirements and map

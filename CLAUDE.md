@@ -50,7 +50,7 @@ enough reason to open one "just in case":
   biography/chronology pages, image or `.webp` handling, or the `noodnik2.github.io` deploy target
   for the static site specifically.
 * [Milestones](./docs/milestones.md) — trigger: "what's in scope," acceptance criteria, or
-  Milestone 1-5 sequencing/requirements. Milestones 3-5 do not yet have Requirements or User
+  Milestone 1-5 sequencing/requirements. Milestones 2-5 do not yet have Requirements or User
   Stories written — if you land here and the section you need is empty or cut off, STOP and ask
   the developer to define it; do not infer or invent scope to fill the gap.
 * [Developer Notes](./docs/developer-notes.md) — trigger: "which folder does X belong in" or
