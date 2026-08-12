@@ -37,3 +37,9 @@ Do not attempt to write code without executing these sequential steps:
    Run `npx vitest run` to ensure it turns green.
 5. **Execute Phase 3 (REFACTOR):** Optimize your newly created functions. Run your test runner suite one final time
    to verify no regressions occurred before committing your code changes.
+
+## Out of Scope: End-to-End (Playwright)
+
+This Red-Green-Refactor loop covers only the Vitest-run unit/component suites (`test-unit`/`test-component`).
+The end-to-end suite (Playwright, via `make test-e2e`) is a separate, manually-invoked workflow that assumes
+a prior `make deploy-mse` — it is not part of this automatic loop and must not be run as a side effect of it.

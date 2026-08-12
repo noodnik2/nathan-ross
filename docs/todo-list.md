@@ -7,6 +7,12 @@ The following issues are currently being worked on.
 ### 2026-08-12
 
 - Complete the Milestones and their stories.
+- Decide whether to tighten CLAUDE.md's Guardrail wording ("never modify **the repository's** git state")
+  to explicitly also cover `deploy-mse` pushing to the external `noodnik2.github.io` remote — currently
+  only reads as covering this repo. Now concrete, not hypothetical: `test-e2e` assumes a prior `deploy-mse`
+  (per developer decision), so that push is a real, deliberate action that will actually happen.
+- Next actual step: draft the Milestone 1a design proposal (SPA skeleton + Makefile) per CLAUDE.md's
+  "Design before code" Guardrail — Milestone 1b (deploy + Playwright e2e) comes after 1a lands.
 
 
 ## Completed

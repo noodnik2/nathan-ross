@@ -16,13 +16,10 @@ deployed to its own folder within the GitHub Pages site where it will be accesse
 https://noodnik2.github.io/music-session-explorer.
 
 The testing framework used for the MSE application leverages the latest compatible versions of
-Vitest + RTL + MSW for mocking the external API calls. 
-
-### Conformance
-
-Note the existence of a similar SPA already present at
-https://github.com/noodnik2/noodnik2.github.io/tree/main/firesafehome,
-establishing a general conformance pattern for the MSE application to follow.
+Vitest + RTL + MSW for unit/component tests (mocking the external API calls), and Playwright for the
+end-to-end test suite that verifies the actual deployed GitHub Pages artifact — see
+[Milestones](./milestones.md) for when each is introduced and what scope is expected of the
+end-to-end suite specifically.
 
 ### Build and Deployment
 
