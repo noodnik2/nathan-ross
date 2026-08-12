@@ -16,8 +16,8 @@ Common terminology used across the documentation:
 - GitHub is used to serve as the upstream origin for local working copies.
 - A "GitHub Workflow" is used for development and promotion of new features,
   using the branch named `main`as the "trunk."
-- AI agents must not modify the repository or switch branches unless explicitly
-  requested to do so by the developer.
+- The rule governing AI-agent git/branch actions is stated once, in [CLAUDE.md](../CLAUDE.md)'s
+  Guardrails section — not restated here to avoid drift.
 
 ### Source Folders
 
@@ -68,8 +68,9 @@ Completion of each Milestone is evidenced by:
 
 ### Plan the Design First
 
-Before writing any code, design the plan to satisfy requirements of the current Milestone or
-task and get review and approval to proceed from the developer.
+The requirement to design and get developer approval before writing production code (including
+the self-critique step) is stated once, in [CLAUDE.md](../CLAUDE.md)'s Guardrails section — not
+restated here to avoid drift.
 
 Ensure that all relevant documentation remains consistent with – and updated to – reflect the new design
 to prevent drift or inconsistency.  Non-exclusive examples:
@@ -77,11 +78,6 @@ to prevent drift or inconsistency.  Non-exclusive examples:
 - [Music Session Explorer SPA](./music-session-explorer-spa.md)
 - [Static Assets](./static-assets.md)
 - AI-specific context documentation 
-
-Before asking a developer to review the design, carefully critique it as though you
-were reviewing a pull request.
-
-Request a review of the design from a developer and wait for approval before beginning implementation.
 
 ### Implement the Planned Design
 
