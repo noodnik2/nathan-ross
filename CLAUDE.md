@@ -18,8 +18,10 @@ SYSTEM NOTE: To prevent context bloat, DO NOT read or scan files inside the `/do
 globally or at session startup.
 
 Open and consult the specific reference files linked below ONLY when the active task 
-is strongly suspected to match their criteria:
+matches their criteria:
 
+* Consult [User Interface](./docs/user-interface.md) when asked high-level questions about the
+  high-level user interface or target user experience for the Nathan Ross Site.
 * Consult [Architecture](./docs/architecture.md) when asked high-level questions about the
   overall project structure, business goals, or core system design.
 * Consult [Music Session Explorer (MSE)](./docs/music-session-explorer-spa.md) when modifying, handling,
@@ -29,6 +31,16 @@ is strongly suspected to match their criteria:
 * Consult [Milestones](./docs/milestones.md) when reviewing feature requirements (e.g., before
   planning, implementation, or verifying acceptance criteria), evaluating project timelines, or tracking
   developmental progress.
+
+## Source Code Folders
+
+The three folders containing source code are:
+
+- [static](./static) - contains the static assets for the Nathan Ross Site.
+- [mse-spa](./mse-spa) - contains the source code for the MSE SPA component.
+- [packages](./packages) - contains common Typescript and JavaScript files used (mainly) by the MSE SPA component.
+
+ONLY reference these files when the active task requires it.
 
 ## Operational & Workflow Rules
 

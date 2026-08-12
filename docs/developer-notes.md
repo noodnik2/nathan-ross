@@ -68,9 +68,8 @@ Completion of each Milestone is evidenced by:
 
 ### Plan the Design First
 
-Before writing any code, design the plan for the (proposed changes to the)
-[Application Architecture](./architecture.md) and other linked documents
-needed to satisfy the user stories for each Milestone.
+Before writing any code, design the plan to satisfy requirements of the current Milestone or
+task and get review and approval to proceed from the developer.
 
 Ensure that all relevant documentation remains consistent with – and updated to – reflect the new design
 to prevent drift or inconsistency.  Non-exclusive examples:
