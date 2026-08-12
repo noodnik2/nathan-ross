@@ -11,8 +11,11 @@ The following issues are currently being worked on.
   to explicitly also cover `deploy-mse` pushing to the external `noodnik2.github.io` remote — currently
   only reads as covering this repo. Now concrete, not hypothetical: `test-e2e` assumes a prior `deploy-mse`
   (per developer decision), so that push is a real, deliberate action that will actually happen.
-- Next actual step: draft the Milestone 1a design proposal (SPA skeleton + Makefile) per CLAUDE.md's
-  "Design before code" Guardrail — Milestone 1b (deploy + Playwright e2e) comes after 1a lands.
+- Milestone 1a (SPA skeleton + Makefile) implemented: `mse-spa/` scaffolded with Vite+React+TS,
+  Vitest/RTL/MSW configured via Vitest's `projects` feature (splits `test-unit`/`test-component` by
+  `.test.ts` vs `.test.tsx`), demonstration tests added, root `Makefile` with `build`/`test-unit`/
+  `test-component`/`test`/`help` targets — verified via `make test` and `make build`. Not yet committed.
+- Next actual step: Milestone 1b (deploy-mse + Playwright e2e) — design proposal not yet drafted.
 
 
 ## Completed
