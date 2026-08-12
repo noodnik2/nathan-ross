@@ -1,6 +1,22 @@
 # TODOs
 
-## 2026-08-12
+## In Progress
+
+The following issues are currently being worked on.
+
+### 2026-08-12
+
+- Complete the Milestones and their stories.
+
+
+## Completed
+
+The sets of issues below have been addressed and are being left in this file for a period of time to allow
+re-review in case of need for any further corrections or clarifications, and to help inform those new and
+possibly related (leftover?) issues arising in the near future.  As they age and become less relevant, they
+should be deleted.
+
+### 2026-08-12
 
 I reviewed CLAUDE.md, everything under docs/, and everything under .claude/ (skills + settings). Two of the findings below touch
 content in your currently-uncommitted diff, so they're actionable on work already in flight.
@@ -61,13 +77,10 @@ Priority list
    worth deleting or explaining.
 
 
+### 2026-08-09 
 
-## 2026-08-09 
-
-- Complete the Milestones and their stories.
 - Make the distinction between the use of the "packages" and "app" (spa?) source folders?
 - Fill out the uninitiated documents if worthwhile, and make sure Claude knows how & when to use them:
   - "user-interface.md" document with stuff specific to that level (or delete)
   - "architecture" document with stuff specific to that level (or delete)
-
 
