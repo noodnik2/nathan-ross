@@ -56,7 +56,6 @@ per [Developer Notes](./developer-notes.md#plan-the-design-first).
 
 ## Status
 
-As of this writing, `mse-spa` and `packages` are unpopulated skeletons (Milestone 1 — SPA
-skeleton and Makefile — has not yet landed); this document describes the intended architecture
-the Milestones are building toward, not yet-implemented code. See
-[Milestones](./milestones.md) and [TODOs](./todo-list.md) for open work.
+This document describes the intended architecture the Milestones are building toward, not
+necessarily what's implemented yet. For current implementation status, see
+[Milestones](./milestones.md) and [TODOs](./todo-list.md) — don't infer status from this doc.
