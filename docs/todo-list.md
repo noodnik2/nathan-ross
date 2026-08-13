@@ -7,10 +7,9 @@ The following issues are currently being worked on.
 ### 2026-08-12
 
 - Complete the Milestones and their stories.
-- Decide whether to tighten CLAUDE.md's Guardrail wording ("never modify **the repository's** git state")
-  to explicitly also cover `deploy-mse` pushing to the external `noodnik2.github.io` remote — currently
-  only reads as covering this repo. Now concrete, not hypothetical: `test-e2e` assumes a prior `deploy-mse`
-  (per developer decision), so that push is a real, deliberate action that will actually happen.
+- Resolved: `deploy-mse` pushing to the external `noodnik2.github.io` remote is not a CLAUDE.md
+  git-guardrail question — Makefile targets are developer-run only, never invoked by an AI agent,
+  as a matter of principle, independent of how the guardrail wording reads. No wording change needed.
 - Milestone 1a (SPA skeleton + Makefile) implemented and committed (`c149da3`): `mse-spa/` scaffolded
   with Vite+React+TS, Vitest/RTL/MSW configured via Vitest's `projects` feature (splits `test-unit`/
   `test-component` by `.test.ts` vs `.test.tsx`), demonstration tests added.
@@ -20,8 +19,32 @@ The following issues are currently being worked on.
   dependency, `npm run` invocations). One-off refactor, not a Milestone — done so Milestone 1b's new
   `deploy-mse`/`test-e2e` targets land directly in the right place instead of being added to root and
   relocated afterward. Verified via `make help`, `make build`, `make test`.
-- Next actual step: Milestone 1b (deploy-mse + Playwright e2e) — design proposal drafted in
-  conversation, not yet implemented.
+- Milestone 1b (deploy-mse + Playwright e2e) implemented, not yet committed:
+  - `mse-spa/vite.config.ts` sets `base: '/music-session-explorer/'` for the production build —
+    verified `dist/index.html` emits correctly-prefixed asset paths.
+  - New root `Makefile.gh-pages` owns the shared clone/push helpers (`_setup_target`/`_push_target`)
+    for `noodnik2/noodnik2.github.io` (`main` branch); deliberately omits a bot git identity since
+    only a developer ever runs this — commits carry the developer's own identity.
+  - `mse-spa/Makefile` gets `deploy` (includes `../Makefile.gh-pages`, builds, copies `dist/` into
+    the `music-session-explorer` subfolder + `404.html` fallback, pushes) and `test-e2e` (installs
+    Playwright's Chromium browser on first run, then runs the smoke spec). Root `Makefile` exposes
+    the required public names `deploy-mse`/`test-e2e` as thin delegators.
+  - `make test` (root and `mse-spa`) now includes `test-e2e` in the sequence, per developer decision
+    on the explicit tradeoff: `make test` can no longer succeed offline or before a deployment exists.
+  - `mse-spa/e2e/smoke.spec.ts` (Playwright) asserts the deployed page loads under its subfolder path
+    and that `#root` hydrated — deliberately not asserting literal title/heading text, since that
+    perishes the moment Milestone 2 lands real content (same category of assertion removed in `fe044d7`).
+    Has a `TODO(Milestone 2)` to retarget against the real recording-list once it exists, since
+    `milestones.md`'s "core recording-list interaction" example doesn't apply until then.
+  - `playwright.config.ts` reads `MSE_DEPLOY_URL` with no default and throws if unset — verified this
+    hard-fails `test:e2e` (not skips) when unset, and passes when pointed at a real reachable build
+    (checked against a local `vite preview`, not the live site).
+  - Fixed a latent bug in root `Makefile`'s `help` grep pattern surfaced by this work: `[a-zA-Z_-]+`
+    didn't match target names containing digits (e.g. `test-e2e`), so it silently vanished from
+    `make help`; pattern now includes `0-9`.
+  - Not run: `make deploy-mse` and a real `make test-e2e` — those push to / hit the live external
+    site and are the developer's to run, per the guardrail-scope resolution above.
+- Next actual step: developer runs `make deploy-mse`, then `MSE_DEPLOY_URL=https://noodnik2.github.io/music-session-explorer/ make test-e2e` to confirm Milestone 1b end-to-end, then commit.
 
 
 ## Completed

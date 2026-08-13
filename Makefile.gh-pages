@@ -1,0 +1,27 @@
+TARGET_REPO_SSH   := git@github.com:noodnik2/noodnik2.github.io.git
+TARGET_REPO_HTTPS := https://x-access-token:$(TARGET_TOKEN)@github.com/noodnik2/noodnik2.github.io.git
+TMP_DIR           := /tmp/gh-pages-noodnik2
+BRANCH            := main
+
+# TARGET_TOKEN is unused today — no CI wiring exists; deploy targets are developer-run only.
+ifdef TARGET_TOKEN
+CLONE_URL := $(TARGET_REPO_HTTPS)
+else
+CLONE_URL := $(TARGET_REPO_SSH)
+endif
+
+.PHONY: _setup_target
+_setup_target:
+	@echo "Cleaning old temporary workspace..."
+	rm -rf $(TMP_DIR)
+	@echo "Cloning target GitHub Pages repository..."
+	git clone --depth 1 --branch $(BRANCH) $(CLONE_URL) $(TMP_DIR)
+
+.PHONY: _push_target
+_push_target:
+	@echo "Staging files and pushing..."
+	cd $(TMP_DIR) && git add .
+	cd $(TMP_DIR) && git diff-index --quiet HEAD || git commit -m "Deploy MSE SPA via Makefile workflow"
+	cd $(TMP_DIR) && git push origin $(BRANCH)
+	@echo "Cleaning up workspace..."
+	rm -rf $(TMP_DIR)
