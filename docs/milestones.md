@@ -53,9 +53,40 @@ User Stories:
 
 ## Milestone 2: Strawman Recording List
 
+This milestone is aimed at giving users a first sense of interacting with the MSE application using mock
+data and the current MSE UI first page "concept" example provided in the "User Interface" section of the
+[MSE documentation](./music-session-explorer-spa.md).
+
 Requirements:
-- Analyze the
-- Create the necessary MCD entities to represent recordings 
+- Construct the "recording list" page by analyzing and closely reproducing the one in the "concept"
+  example provided in the "User Interface" section of the MSE documentation (linked above).
+- Construct a standard "error page" template that can be used to display error messages.  This page
+  should share a similar "look and feel" to the "recording list" page.
+- Set up the page routing so that this becomes the home page for the MSE application.
+- During initialization of the "recording list" page, parse the "artist" URL Query parameter value
+  specifying the name of the requested artist.  
+  - If no such parameter is found, route to the "error page" to display the message "No artist name specified".
+  - If the parameter value is "Phil Inblank", simulate a "not found" case and route to the "error page" to
+    display the message "Artist 'Phil Inblank' not found.".
+- Construct a mock MCD `Artist` with a `.name` matching the artist invocation parameter value and
+  a list of mock MCD `Recording` entities using realistic-looking mock values for the other fields.
+- Render the mock `Artist` and `Recording` entities in the "recording list" page.
+
+### User Stories
+
+#### Happy Path
+- A user browses to the MSE application with a URL Query parameter specifying the name of an artist
+  that will be considered as found (e.g., "Helen Sight").
+- The user sees the "recording list" page with a (mock) list of recordings for the given artist,
+  as seen in the name of the artist displayed in the page title.
+
+#### Sad Path 1: Missing Artist
+- A user browses to the MSE application without providing the URL Query parameter specifying the name of an artist.
+- The user sees the "error page" containing the expected message (see above).
+
+#### Sad Path 2: Missing Artist or Artist Not Found
+- A user browses to the MSE application with a URL Query parameter specifying the name "Phil Inblank".
+- The user sees the "error page" containing the expected message (see above).
 
 ## Milestone 3: Strawman Recording Links
 
