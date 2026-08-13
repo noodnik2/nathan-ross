@@ -24,7 +24,7 @@ deploy-mse: ## Deploy the built MSE SPA to GitHub Pages
 	$(MAKE) -C $(MSE_SPA_DIR) deploy
 
 .PHONY: test-e2e
-test-e2e: ## Run the MSE SPA end-to-end smoke suite (requires MSE_DEPLOY_URL; assumes prior deploy-mse)
+test-e2e: ## Run the MSE SPA end-to-end smoke suite against the deployed site (assumes prior deploy-mse; override target with MSE_DEPLOY_URL)
 	$(MAKE) -C $(MSE_SPA_DIR) test-e2e
 
 .PHONY: test

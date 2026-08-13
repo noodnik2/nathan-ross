@@ -18,6 +18,7 @@ test-component: node_modules ## Run the MSE SPA component test suite
 include ../Makefile.gh-pages
 
 DEPLOY_SUBFOLDER := music-session-explorer
+MSE_DEPLOY_URL ?= $(GH_PAGES_BASE_URL)/$(DEPLOY_SUBFOLDER)/
 
 .PHONY: deploy
 deploy: build ## Deploy the built SPA to the GitHub Pages target repo
@@ -33,8 +34,8 @@ deploy: build ## Deploy the built SPA to the GitHub Pages target repo
 	touch .playwright-browsers-installed
 
 .PHONY: test-e2e
-test-e2e: .playwright-browsers-installed ## Run the end-to-end smoke suite (requires MSE_DEPLOY_URL)
-	npm run test:e2e
+test-e2e: .playwright-browsers-installed ## Run the end-to-end smoke suite (defaults to the deployed GitHub Pages URL; override with MSE_DEPLOY_URL)
+	MSE_DEPLOY_URL=$(MSE_DEPLOY_URL) npm run test:e2e
 
 .PHONY: test
 test: ## Run all test suites in sequence, stopping at the first failure

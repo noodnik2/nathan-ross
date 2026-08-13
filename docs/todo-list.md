@@ -7,6 +7,19 @@ The following issues are currently being worked on.
 ### 2026-08-12
 
 - Complete the Milestones and their stories.
+
+
+## Completed
+
+The sets of issues below have been addressed and are being left in this file for a period of time to allow
+re-review in case of need for any further corrections or clarifications, and to help inform those new and
+possibly related (leftover?) issues arising in the near future.  As they age and become less relevant, they
+should be deleted.
+
+### 2026-08-12
+
+#### Batch 2
+
 - Resolved: `deploy-mse` pushing to the external `noodnik2.github.io` remote is not a CLAUDE.md
   git-guardrail question — Makefile targets are developer-run only, never invoked by an AI agent,
   as a matter of principle, independent of how the guardrail wording reads. No wording change needed.
@@ -20,41 +33,43 @@ The following issues are currently being worked on.
   `deploy-mse`/`test-e2e` targets land directly in the right place instead of being added to root and
   relocated afterward. Verified via `make help`, `make build`, `make test`.
 - Milestone 1b (deploy-mse + Playwright e2e) implemented, not yet committed:
-  - `mse-spa/vite.config.ts` sets `base: '/music-session-explorer/'` for the production build —
-    verified `dist/index.html` emits correctly-prefixed asset paths.
-  - New root `Makefile.gh-pages` owns the shared clone/push helpers (`_setup_target`/`_push_target`)
-    for `noodnik2/noodnik2.github.io` (`main` branch); deliberately omits a bot git identity since
-    only a developer ever runs this — commits carry the developer's own identity.
-  - `mse-spa/Makefile` gets `deploy` (includes `../Makefile.gh-pages`, builds, copies `dist/` into
-    the `music-session-explorer` subfolder + `404.html` fallback, pushes) and `test-e2e` (installs
-    Playwright's Chromium browser on first run, then runs the smoke spec). Root `Makefile` exposes
-    the required public names `deploy-mse`/`test-e2e` as thin delegators.
-  - `make test` (root and `mse-spa`) now includes `test-e2e` in the sequence, per developer decision
-    on the explicit tradeoff: `make test` can no longer succeed offline or before a deployment exists.
-  - `mse-spa/e2e/smoke.spec.ts` (Playwright) asserts the deployed page loads under its subfolder path
-    and that `#root` hydrated — deliberately not asserting literal title/heading text, since that
-    perishes the moment Milestone 2 lands real content (same category of assertion removed in `fe044d7`).
-    Has a `TODO(Milestone 2)` to retarget against the real recording-list once it exists, since
-    `milestones.md`'s "core recording-list interaction" example doesn't apply until then.
-  - `playwright.config.ts` reads `MSE_DEPLOY_URL` with no default and throws if unset — verified this
-    hard-fails `test:e2e` (not skips) when unset, and passes when pointed at a real reachable build
-    (checked against a local `vite preview`, not the live site).
-  - Fixed a latent bug in root `Makefile`'s `help` grep pattern surfaced by this work: `[a-zA-Z_-]+`
-    didn't match target names containing digits (e.g. `test-e2e`), so it silently vanished from
-    `make help`; pattern now includes `0-9`.
-  - Not run: `make deploy-mse` and a real `make test-e2e` — those push to / hit the live external
-    site and are the developer's to run, per the guardrail-scope resolution above.
-- Next actual step: developer runs `make deploy-mse`, then `MSE_DEPLOY_URL=https://noodnik2.github.io/music-session-explorer/ make test-e2e` to confirm Milestone 1b end-to-end, then commit.
+    - `mse-spa/vite.config.ts` sets `base: '/music-session-explorer/'` for the production build —
+      verified `dist/index.html` emits correctly-prefixed asset paths.
+    - New root `Makefile.gh-pages` owns the shared clone/push helpers (`_setup_target`/`_push_target`)
+      for `noodnik2/noodnik2.github.io` (`main` branch); deliberately omits a bot git identity since
+      only a developer ever runs this — commits carry the developer's own identity.
+    - `mse-spa/Makefile` gets `deploy` (includes `../Makefile.gh-pages`, builds, copies `dist/` into
+      the `music-session-explorer` subfolder + `404.html` fallback, pushes) and `test-e2e` (installs
+      Playwright's Chromium browser on first run, then runs the smoke spec). Root `Makefile` exposes
+      the required public names `deploy-mse`/`test-e2e` as thin delegators.
+    - `make test` (root and `mse-spa`) now includes `test-e2e` in the sequence, per developer decision
+      on the explicit tradeoff: `make test` can no longer succeed offline or before a deployment exists.
+    - `mse-spa/e2e/smoke.spec.ts` (Playwright) asserts the deployed page loads under its subfolder path
+      and that `#root` hydrated — deliberately not asserting literal title/heading text, since that
+      perishes the moment Milestone 2 lands real content (same category of assertion removed in `fe044d7`).
+      Has a `TODO(Milestone 2)` to retarget against the real recording-list once it exists, since
+      `milestones.md`'s "core recording-list interaction" example doesn't apply until then.
+    - Fixed a latent bug in root `Makefile`'s `help` grep pattern surfaced by this work: `[a-zA-Z_-]+`
+      didn't match target names containing digits (e.g. `test-e2e`), so it silently vanished from
+      `make help`; pattern now includes `0-9`.
+- Developer ran `make deploy-mse` (succeeded) and `make test-e2e` (initially failed), surfacing two
+  real issues, both fixed and re-verified against the live deployed site:
+    - `MSE_DEPLOY_URL` no longer needs to be set by hand each run. `Makefile.gh-pages` now owns
+      `GH_PAGES_BASE_URL` (`https://noodnik2.github.io`); `mse-spa/Makefile` composes
+      `MSE_DEPLOY_URL ?= $(GH_PAGES_BASE_URL)/$(DEPLOY_SUBFOLDER)/` from that plus its own
+      `DEPLOY_SUBFOLDER`, so single ownership is preserved (no literal URL duplicated), and still
+      overridable via `MSE_DEPLOY_URL=... make test-e2e` (used for local `vite preview` verification).
+      `playwright.config.ts` still throws if the var is genuinely unset — a safety net for anyone
+      running `npx playwright test` directly, bypassing `make`.
+    - The smoke spec's `page.goto('/')` was a real bug, not the Makefile: with a subfolder `baseURL`,
+      a leading-slash relative URL resolves against the *origin root* (WHATWG URL join semantics), not
+      the subfolder — so the test was silently hitting `https://noodnik2.github.io/` (the pre-existing
+      unrelated "Noodnik2's Corner" static site, no `#root` div at all) instead of
+      `.../music-session-explorer/`. Fixed to `page.goto('./')`. Re-verified passing against the real
+      live deployment.
+- Milestone 1b complete and verified end-to-end against the live site; ready to commit.
 
-
-## Completed
-
-The sets of issues below have been addressed and are being left in this file for a period of time to allow
-re-review in case of need for any further corrections or clarifications, and to help inform those new and
-possibly related (leftover?) issues arising in the near future.  As they age and become less relevant, they
-should be deleted.
-
-### 2026-08-12
+#### Batch 1
 
 I reviewed CLAUDE.md, everything under docs/, and everything under .claude/ (skills + settings). Two of the findings below touch
 content in your currently-uncommitted diff, so they're actionable on work already in flight.

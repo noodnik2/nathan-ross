@@ -2,6 +2,7 @@ TARGET_REPO_SSH   := git@github.com:noodnik2/noodnik2.github.io.git
 TARGET_REPO_HTTPS := https://x-access-token:$(TARGET_TOKEN)@github.com/noodnik2/noodnik2.github.io.git
 TMP_DIR           := /tmp/gh-pages-noodnik2
 BRANCH            := main
+GH_PAGES_BASE_URL := https://noodnik2.github.io
 
 # TARGET_TOKEN is unused today — no CI wiring exists; deploy targets are developer-run only.
 ifdef TARGET_TOKEN
