@@ -29,8 +29,8 @@ for Makefile-driven build/deploy conventions and source folder layout).
 
 The MSE owns a provider-agnostic domain model — the Music Catalog Domain (MCD) — so that its UI
 and API layers never depend on the shape of any specific external data source. Entities
-(`Artist`, `Recording`, `RecordingLink`, ...) and the `Provider`/`ProviderFactory` interfaces
-that populate them from external services are fully specified in
+(`Artist`, `Recording`, `RecordingLink`, ...) and the `Provider` interface that populates them
+from external services are fully specified in
 [the MCD model](./models/mse-model.md); consult it when adding or modifying domain entities,
 provider interfaces, or the entity-ID scheme.
 
