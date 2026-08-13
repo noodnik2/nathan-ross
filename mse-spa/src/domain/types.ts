@@ -8,3 +8,8 @@ export interface Recording {
   title: string
   date: string
 }
+
+export interface RecordingLink {
+  id: string
+  url: string
+}

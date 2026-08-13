@@ -1,4 +1,4 @@
-import type { Artist, Recording } from '../domain/types'
+import type { Artist, Recording, RecordingLink } from '../domain/types'
 
 const MOCK_RECORDINGS: Recording[] = [
   { id: 'mock:1', title: 'What a Wonderful World', date: '1967-09-07' },
@@ -34,4 +34,21 @@ export function buildMockCatalog(artistName: string): { artist: Artist; recordin
     name: artistName,
   }
   return { artist, recordings: MOCK_RECORDINGS }
+}
+
+export function findMockRecordingById(id: string): Recording | undefined {
+  return MOCK_RECORDINGS.find((recording) => recording.id === id)
+}
+
+const MOCK_RECORDING_LINKS: RecordingLink[] = [
+  { id: 'mock-link:1', url: 'https://open.spotify.com/track/4uLU6hMCjMI75M1A2tKUQC' },
+  { id: 'mock-link:2', url: 'https://music.apple.com/us/album/mock-album/1440857781' },
+  { id: 'mock-link:3', url: 'https://www.youtube.com/watch?v=VqhCQZaH4Vs' },
+  { id: 'mock-link:4', url: 'https://www.deezer.com/track/125001272' },
+  { id: 'mock-link:5', url: 'https://www.secondhandsongs.com/performance/12345' },
+  { id: 'mock-link:6', url: 'https://www.discogs.com/release/249504' },
+]
+
+export function buildMockRecordingLinks(): RecordingLink[] {
+  return MOCK_RECORDING_LINKS
 }

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { buildMockCatalog } from './mockCatalog'
+import { buildMockCatalog, buildMockRecordingLinks, findMockRecordingById } from './mockCatalog'
 
 describe('buildMockCatalog', () => {
   it("sets the artist's name to the given artist name", () => {
@@ -31,5 +31,33 @@ describe('buildMockCatalog', () => {
     const a = buildMockCatalog('Helen Sight')
     const b = buildMockCatalog('Someone Else')
     expect(b.recordings).toEqual(a.recordings)
+  })
+})
+
+describe('findMockRecordingById', () => {
+  it('returns the matching recording for a known id', () => {
+    const recording = findMockRecordingById('mock:1')
+    expect(recording?.title).toBe('What a Wonderful World')
+  })
+
+  it('returns undefined for an unknown id', () => {
+    expect(findMockRecordingById('mock:does-not-exist')).toBeUndefined()
+  })
+})
+
+describe('buildMockRecordingLinks', () => {
+  it('returns 6 mock recording links, each with a non-empty id and url', () => {
+    const links = buildMockRecordingLinks()
+    expect(links).toHaveLength(6)
+    for (const link of links) {
+      expect(link.id).toBeTruthy()
+      expect(link.url).toBeTruthy()
+    }
+  })
+
+  it('gives every link a unique id and a unique url', () => {
+    const links = buildMockRecordingLinks()
+    expect(new Set(links.map((link) => link.id)).size).toBe(links.length)
+    expect(new Set(links.map((link) => link.url)).size).toBe(links.length)
   })
 })

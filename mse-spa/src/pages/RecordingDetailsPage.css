@@ -1,0 +1,52 @@
+.recording-details {
+  padding: 1.5rem;
+}
+
+.recording-details__grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.recording-details__fields {
+  margin: 1rem 0;
+}
+
+.recording-details__field {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.35rem 0;
+}
+
+.recording-details__field dt {
+  font-weight: 700;
+  width: 9rem;
+}
+
+.recording-details__field dd {
+  margin: 0;
+}
+
+.recording-details__links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recording-details__links li {
+  padding: 0.35rem 0;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.recording-details__info-box {
+  background-color: #eef2ff;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin-top: 1rem;
+}
+
+.recording-details__info-box-title {
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}

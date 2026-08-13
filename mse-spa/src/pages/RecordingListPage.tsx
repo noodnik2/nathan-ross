@@ -1,4 +1,4 @@
-import { useSearchParams } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { AppHeader } from '../components/AppHeader'
 import { Pagination } from '../components/Pagination'
 import { pageCount, paginate } from '../lib/paginate'
@@ -59,7 +59,9 @@ export function RecordingListPage() {
             {visibleRecordings.map((recording, index) => (
               <tr key={recording.id}>
                 <td>{firstRowNumber + index}</td>
-                <td>{recording.title}</td>
+                <td>
+                  <Link to={`/recordings/${encodeURIComponent(recording.id)}`}>{recording.title}</Link>
+                </td>
                 <td>{recording.date}</td>
               </tr>
             ))}

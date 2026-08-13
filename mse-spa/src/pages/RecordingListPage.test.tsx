@@ -28,6 +28,13 @@ describe('RecordingListPage', () => {
     expect(screen.queryByText('Stardust')).not.toBeInTheDocument()
   })
 
+  it('links each recording title to its recording details page using a percent-encoded id', () => {
+    renderAt('/?artist=Helen+Sight')
+
+    const link = screen.getByRole('link', { name: 'What a Wonderful World' })
+    expect(link).toHaveAttribute('href', '/recordings/mock%3A1')
+  })
+
   it('advances to the next page of recordings and updates the page query param when Next is clicked', async () => {
     renderAt('/?artist=Helen+Sight')
 
