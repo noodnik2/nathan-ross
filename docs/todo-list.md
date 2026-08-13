@@ -16,6 +16,27 @@ re-review in case of need for any further corrections or clarifications, and to 
 possibly related (leftover?) issues arising in the near future.  As they age and become less relevant, they
 should be deleted.
 
+### 2026-08-13
+
+- `docs/milestones.md` split into `docs/milestones/milestone{1..5}.md` (index + per-Milestone files) to
+  reduce context load when working a single Milestone; cross-references in CLAUDE.md and the TDD skill
+  updated to point at the right file/depth.
+- Milestone 3 ("Strawman Recording Links") requirements finalized after review of the "recording details"
+  page against the concept mockup:
+  - Dropped the mockup's breadcrumb trail and "by {artist}" byline from scope — the "recording list" →
+    "recording details" hyperlink carries no artist context, and reintroducing it would have required
+    either a new artist-id-based route or a query param, plus fixing `Artist.id` (currently a lossy
+    slug, not reversible to a display name) and resolving that `mockCatalog.ts`'s recording list is one
+    static array shared by every artist name, so a recording `id` alone can't identify which artist's
+    copy was clicked. Sidestepped by not needing artist context on this page at all.
+  - "Recording MBID" → "Recording ID" (shows the internal `Recording.id`, not a real MBID); "First/Last
+    Recording Date" collapsed to a single "Recording Date" (matches the single `Recording.date` field).
+  - Dropped the "may appear on multiple releases" note box — no MCD "release" concept exists to back it.
+  - Added a requirement to percent-encode/decode recording ids in the URL path, since mock ids contain a
+    colon (e.g. `mock:1`).
+  - "MusicBrainz" wording in the neutralized info boxes → "Mock Provider" (developer's call).
+  - Sad paths (e.g., an `id` in the URL matching no known recording) explicitly marked out of scope.
+
 ### 2026-08-12
 
 #### Batch 2

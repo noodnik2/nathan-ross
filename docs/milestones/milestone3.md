@@ -4,14 +4,27 @@ This milestone is aimed at allowing users to navigate to a newly created "record
 a particular recording that was listed on the "recording list" page created in the previous Milestone.
 
 The look and feel for the "recording details" page is given in a "concept" mockup of this page referenced
-in the "User Interface" section of the [MSE documentation](../music-session-explorer-spa.md).
+in the "User Interface" section of the [MSE documentation](../music-session-explorer-spa.md). The mockup's
+breadcrumb trail and "by {artist}" byline are intentionally not reproduced for this Milestone — the
+"recording details" page shows only the clicked recording's own info; no artist-navigation context is
+carried over from the "recording list" page.
 
 ## Requirements
 - Construct the "recording details" page by analyzing and closely reproducing the one in the "concept"
-  example mentioned above.
+  example mentioned above, with the following adjustments:
+  - Do not reproduce the concept's breadcrumb trail (e.g., "Louis Armstrong / Recordings / ...") or the
+    "by {artist}" byline under the recording title.
+  - Use a single "Recording Date" label (instead of separate "First Recording Date"/"Last Recording Date"
+    labels), sourced from the existing `Recording.date` field.
+  - Use a "Recording ID" label (instead of "Recording MBID"), displaying the `Recording.id` value as-is —
+    this is our own internal MCD identifier, not a MusicBrainz MBID.
+  - Do not reproduce the "This recording may appear on multiple releases" note box — there's no MCD
+    concept of "releases" for it to describe.
 - Set up the page routing so that recording titles appearing in the "recording list" page become hyperlinks
   used to invoke the new "recording details" page for the specific recording.  Use the `id` value in each
-  entry's `Recording` entity as a URL path parameter for this hyperlink.
+  entry's `Recording` entity as a URL path parameter for this hyperlink. Mock recording `id` values contain
+  a colon (e.g., `mock:1`); percent-encode the id when building the URL path segment and decode it when
+  reading it back out, rather than assuming it's already URL-safe.
 - During initialization of the "recording details" page, get the identifier of the recording from the URL path.
 - Construct a list of mock MCD `RecordingLink` entities with realistic-looking but meaningless `.id` and `.url`
   values (note: these mocked values will have nothing to do with the recording identifier, as they will be determined
@@ -25,7 +38,7 @@ in the "User Interface" section of the [MSE documentation](../music-session-expl
 - Render and present the mocked `RecordingLink` entities in the "recording details" page.  Only the entity's
   `.url` value should be used to construct the hyperlinks.
 - Reproduce the concept's "info boxes" below the tables for layout fidelity but neutralize their wording so
-  they don't misrepresent mock data as coming from MusicBrainz: drop the "Data from MusicBrainz" claim.
+  they don't misrepresent mock data as coming from MusicBrainz.  Instead of "MusicBrainz", use "Mock Provider."
 
 ## User Stories
 
@@ -39,5 +52,9 @@ Demonstration of the following user story will confirm completion of Milestone 3
   than the change to convert the titles into hyperlinks, no other functional change to the "recording list"
   page is expected.
 - A user clicks on a recording title from within the "recording list" for an artist.
-- The user sees the "recording details" page for that particular recording containing a (mock) list of
-  hyperlinks ostensibly linking to an external page containing a particular set of details for that recording.
+- The user sees the "recording details" page for that particular recording, showing the recording's own
+  title, Recording Date, and Recording ID, along with a (mock) list of hyperlinks ostensibly linking to
+  an external page containing a particular set of details for that recording.
+
+### Sad Paths
+- No sad paths are in scope for this milestone.
