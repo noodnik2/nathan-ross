@@ -16,9 +16,6 @@ these entities (the only ones needed so far); `Provider` and `RecordingLink` are
 
 The MCD domain entities are:
 
-- `Provider`
-  - `id` - unique internal identifier.
-  - `name` - UI display name.
 - `Artist`
   - `id` - unique internal identifier.
   - `name` - UI display name.
@@ -30,26 +27,26 @@ The MCD domain entities are:
   - `id` - unique internal identifier.
   - `url` - URL to the associated recording details.
 
-## MCD Provider interfaces
+## MCD Provider Interface
 
-- `ProviderFactory`
-  - `Provider getProviderBySpec(providerId)`
-  - `Provider getProviderForArtist(Artist)`
-  - `Provider getProviderForRecording(Recording)`
-  - `Provider getProviderForRecordingLink(RecordingLink)`
+The following operations are exposed by the MCD `Provider` interface:
+
 - `Provider`
   - `List[Artist] findArtists(artistSpec)`
   - `List[Recording] findRecordingsForArtist(Artist)`
   - `List[RecordingLink] findRecordingLinks(Recording)`
 
-As of this writing, the only anticipated `providerId` value is `MusicBrainz`.
+An `artistSpec` is a string that may be used to search for an `Artist` by name.
 
 ## Provider ⇔ Domain Entity IDs
 
-To avoid the need for a database lookup, whenever possible, identifiers of domain entities directly corresponding
-to Provider objects are constructed by concatenating the Provider name to the Provider-specific
-identifier followed by a colon (i.e., `:`) character.  This will allow unique identification of domain
-entities across different Providers.
+To avoid database lookups, domain entity IDs include the Provider that created them.
+
+Each ID is built from three parts:
+
+1. a Provider-specific prefix
+2. a colon (`:`)
+3. the Provider’s own identifier for the object
 
 Examples:
 
@@ -58,7 +55,6 @@ Examples:
 - When formulating MusicBrainz API call involving the MCD `Artist` entity returned in the example above,
   the MusicBrainz `Provider` implementation must strip that `mbid:` prefix off of its MCD identifier
   to formulate the correct API call.
-- A `Provider` implementation can use the identifier prefix to distinguish and route between different sub Providers.
 
 ## Future Providers
 
@@ -69,11 +65,14 @@ The first expected Provider is MusicBrainz.  Possible future Provider implementa
 - Spotify
 - Apple Music
 
+Precise usage scenarios related to multiple Providers are currently unclear; however, configuration for which
+Provider to use or support for multiple Providers (such as via delegation through a "super Provider" instance)
+is under consideration. 
+
 ## User Interface
 
 Application / UI (e.g., React) components consume only domain entities.
 
 Never Provider (e.g., MusicBrainz) responses.
 
-New Providers may be added at any time and must not break the existing UI.  In particular, a
-"super Provider" may be implemented that delegates to a set of "sub Providers."
+New Providers may be added at any time and must not break the existing UI.
