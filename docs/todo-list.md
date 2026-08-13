@@ -11,11 +11,17 @@ The following issues are currently being worked on.
   to explicitly also cover `deploy-mse` pushing to the external `noodnik2.github.io` remote — currently
   only reads as covering this repo. Now concrete, not hypothetical: `test-e2e` assumes a prior `deploy-mse`
   (per developer decision), so that push is a real, deliberate action that will actually happen.
-- Milestone 1a (SPA skeleton + Makefile) implemented: `mse-spa/` scaffolded with Vite+React+TS,
-  Vitest/RTL/MSW configured via Vitest's `projects` feature (splits `test-unit`/`test-component` by
-  `.test.ts` vs `.test.tsx`), demonstration tests added, root `Makefile` with `build`/`test-unit`/
-  `test-component`/`test`/`help` targets — verified via `make test` and `make build`. Not yet committed.
-- Next actual step: Milestone 1b (deploy-mse + Playwright e2e) — design proposal not yet drafted.
+- Milestone 1a (SPA skeleton + Makefile) implemented and committed (`c149da3`): `mse-spa/` scaffolded
+  with Vite+React+TS, Vitest/RTL/MSW configured via Vitest's `projects` feature (splits `test-unit`/
+  `test-component` by `.test.ts` vs `.test.tsx`), demonstration tests added.
+- Root `Makefile` refactored to delegate to a new `mse-spa/Makefile`: root now owns only the public
+  target names (`build`/`test-unit`/`test-component`/`test`/`help`) and forwards via `$(MAKE) -C
+  mse-spa`; `mse-spa/Makefile` owns the actual npm mechanics (`node_modules`/`package-lock.json`
+  dependency, `npm run` invocations). One-off refactor, not a Milestone — done so Milestone 1b's new
+  `deploy-mse`/`test-e2e` targets land directly in the right place instead of being added to root and
+  relocated afterward. Verified via `make help`, `make build`, `make test`.
+- Next actual step: Milestone 1b (deploy-mse + Playwright e2e) — design proposal drafted in
+  conversation, not yet implemented.
 
 
 ## Completed
