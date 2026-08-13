@@ -23,8 +23,9 @@ Do not attempt to write code without executing these sequential steps:
      it's a toolchain gap, and no amount of application code closes it. Do not attempt to "fix" it by writing
      production code.
      - If the folder is `mse-spa/`: scaffolding the harness is Milestone 1's own deliverable — see its
-       Requirements in [Milestones](../../../docs/milestones.md) for what to set up. Propose the scaffold as
-       a design per CLAUDE.md's "Design before code" Guardrail, get the developer's approval, then set it up.
+       Requirements in [Milestone 1](../../../docs/milestones/milestone1.md) for what to set up. Propose the
+       scaffold as a design per CLAUDE.md's "Design before code" Guardrail, get the developer's approval,
+       then set it up.
      - If the folder is `packages/` (or anywhere else with no Milestone yet defining its test tooling): STOP
        and ask the developer how it should be set up rather than assuming it mirrors `mse-spa/`.
      Only move to Phase 1 once `npx vitest run` genuinely executes for that folder — even against a

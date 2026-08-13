@@ -49,10 +49,12 @@ enough reason to open one "just in case":
 * [Static Assets](./docs/static-assets.md) — trigger: any file under `static/`, the Nathan Ross
   biography/chronology pages, image or `.webp` handling, or the `noodnik2.github.io` deploy target
   for the static site specifically.
-* [Milestones](./docs/milestones.md) — trigger: "what's in scope," acceptance criteria, or
-  Milestone 1-5 sequencing/requirements. Milestones 2-5 do not yet have Requirements or User
-  Stories written — if you land here and the section you need is empty or cut off, STOP and ask
-  the developer to define it; do not infer or invent scope to fill the gap.
+* [Milestones](./docs/milestones.md) — trigger: "what's in scope," acceptance criteria, or Milestone
+  sequencing. This index links onward to per-Milestone files under [docs/milestones/](./docs/milestones/)
+  — open only the specific `milestoneN.md` the current task needs, and only if you land here first and
+  need that depth. Milestones 3-5 do not yet have Requirements or User Stories written — if the detail
+  you need is missing from the file you open, STOP and ask the developer to define it; do not infer or
+  invent scope to fill the gap.
 * [Developer Notes](./docs/developer-notes.md) — trigger: "which folder does X belong in" or
   source-folder layout in general, Makefile targets, build/deploy procedure questions,
   Jupyter/notebook setup, or project terminology (Developer / AI Agent / User / SPA).
