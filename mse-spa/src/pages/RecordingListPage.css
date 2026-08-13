@@ -1,0 +1,31 @@
+.recording-list {
+  padding: 1.5rem;
+}
+
+.recording-list__summary {
+  color: #555;
+}
+
+.recording-list__info-box {
+  background-color: #eef2ff;
+  border-radius: 6px;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.recording-list__info-box-title {
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid #e0e0e0;
+}

@@ -11,6 +11,9 @@ The APIs exposed by the MSE application only use the MCD entities.
 
 ## MCD Entities
 
+As of Milestone 2, `mse-spa/src/domain/types.ts` implements the `Artist` and `Recording` subset of
+these entities (the only ones needed so far); `Provider` and `RecordingLink` are not yet implemented.
+
 The MCD domain entities are:
 
 - `Provider`
