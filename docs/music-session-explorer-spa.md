@@ -15,9 +15,12 @@ The MSE application is a separate Vite+React SPA web application written in Type
 deployed to its own folder within the GitHub Pages site where it will be accessed by end users at
 https://noodnik2.github.io/music-session-explorer.
 
-Client-side page routing (introduced in Milestone 2) uses `react-router-dom`, mounted with a `basename`
-derived from Vite's `BASE_URL` so routes resolve correctly both in local dev and under the GitHub Pages
-subfolder path.
+Client-side page routing (introduced in Milestone 2) uses `react-router-dom`'s `HashRouter` (routes live
+after a `#`, e.g. `.../music-session-explorer/#/recordings/<id>`) so that direct loads, refreshes, and
+bookmarks of any in-app route work without any server-side routing support — GitHub Pages is a plain
+static file host and never sees the hash portion of the URL. The artist-name invocation parameter is
+therefore also carried inside the hash (e.g. `.../music-session-explorer/#/?artist=<name>`), not as a
+top-level query string.
 
 The testing framework used for the MSE application leverages the latest compatible versions of
 Vitest + RTL + MSW for unit/component tests (mocking the external API calls), and Playwright for the

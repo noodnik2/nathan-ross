@@ -21,3 +21,11 @@ using the format suggested by [Keep a Changelog](https://keepachangelog.com/en/1
   instead of a mock catalog: showing the recording's title, release date (when known), and "Listen / View
   on" links. The page now resolves entirely from the recording ID in its own URL, so it no longer depends
   on having come from the recording list page — it also works on a direct visit or a page refresh.
+
+### Changed
+- Switched client-side routing from `react-router-dom`'s `BrowserRouter` to `HashRouter` (routes now
+  live after a `#`, e.g. `.../music-session-explorer/#/recordings/<id>`). GitHub Pages has no
+  server-side routing support, so a direct load, refresh, or new-tab open of a recording details URL
+  under `BrowserRouter` 404'd; `HashRouter` avoids the problem entirely since the hash portion of a
+  URL is never sent to the server. The artist-name invocation parameter now lives inside the hash too
+  (e.g. `.../music-session-explorer/#/?artist=<name>`).

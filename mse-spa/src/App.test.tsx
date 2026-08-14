@@ -18,19 +18,19 @@ describe('App', () => {
   })
 
   afterEach(() => {
-    window.history.pushState({}, '', '/')
+    window.history.pushState({}, '', '/#/')
   })
 
   it('routes the home page to the recording list for a given artist', async () => {
     vi.mocked(musicBrainzProvider.findArtists).mockResolvedValue([{ id: 'mbid:test-artist', name: 'Test Artist' }])
     vi.mocked(musicBrainzProvider.findRecordingsForArtist).mockResolvedValue([])
-    window.history.pushState({}, '', '/?artist=Test+Artist')
+    window.history.pushState({}, '', '/#/?artist=Test+Artist')
     render(<App />)
     expect(await screen.findByRole('heading', { name: 'Recordings by Test Artist' })).toBeInTheDocument()
   })
 
   it('routes the home page to the error page when no artist is given', () => {
-    window.history.pushState({}, '', '/')
+    window.history.pushState({}, '', '/#/')
     render(<App />)
     expect(screen.getByText('No artist name was specified.')).toBeInTheDocument()
   })
