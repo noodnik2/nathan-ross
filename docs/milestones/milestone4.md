@@ -14,7 +14,7 @@ Demonstration of the following user stories will confirm completion of Milestone
 
 ### Happy Path
 - A user browses to the MSE application with a URL Query parameter specifying the name of an artist
-  that us found in MusicBrainz.
+  that is found in MusicBrainz.
 - The user sees the "recording list" page with the actual list of recordings for the given artist.
 
 ### Sad Path 1: Missing Artist or Artist Not Found
