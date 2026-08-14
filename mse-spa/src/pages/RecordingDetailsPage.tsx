@@ -1,54 +1,85 @@
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { AppHeader } from '../components/AppHeader'
-import { buildMockRecordingLinks, findMockRecordingById } from '../mocks/mockCatalog'
+import type { RecordingDetails } from '../domain/types'
+import { formatFetchError } from '../lib/formatFetchError'
+import { musicBrainzProvider } from '../providers/musicbrainz/MusicBrainzProvider'
 import { ErrorPage } from './ErrorPage'
 import './RecordingDetailsPage.css'
 
 export function RecordingDetailsPage() {
   const { recordingId } = useParams()
-  const recording = findMockRecordingById(decodeURIComponent(recordingId ?? ''))
+  const id = decodeURIComponent(recordingId ?? '')
 
-  if (!recording) {
-    return <ErrorPage message="Recording not found." />
+  const [details, setDetails] = useState<RecordingDetails | null>(null)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    let cancelled = false
+    setDetails(null)
+    setError(null)
+
+    async function load() {
+      try {
+        const result = await musicBrainzProvider.findRecordingDetails({ id, title: '', date: '' })
+        if (!cancelled) {
+          setDetails(result)
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(formatFetchError(err))
+        }
+      }
+    }
+
+    void load()
+
+    return () => {
+      cancelled = true
+    }
+  }, [id])
+
+  if (error) {
+    return <ErrorPage message={error} />
   }
 
-  const links = buildMockRecordingLinks()
+  if (!details) {
+    return (
+      <div>
+        <AppHeader />
+      </div>
+    )
+  }
 
   return (
     <div>
       <AppHeader />
       <main className="recording-details">
-        <h1>{recording.title}</h1>
+        <h1>{details.title}</h1>
         <div className="recording-details__grid">
           <section>
             <dl className="recording-details__fields">
-              <div className="recording-details__field">
-                <dt>Recording Date</dt>
-                <dd>{recording.date}</dd>
-              </div>
+              {details.releaseDate && (
+                <div className="recording-details__field">
+                  <dt>Release Date</dt>
+                  <dd>{details.releaseDate}</dd>
+                </div>
+              )}
               <div className="recording-details__field">
                 <dt>Recording ID</dt>
-                <dd>{recording.id}</dd>
+                <dd>{id}</dd>
               </div>
             </dl>
-            <div className="recording-details__info-box">
-              <p className="recording-details__info-box-title">Data from Mock Provider</p>
-              <p>Recording dates reflect known sessions and database information.</p>
-            </div>
           </section>
           <aside>
             <h2>Listen / View on</h2>
             <ul className="recording-details__links">
-              {links.map((link) => (
+              {details.links.map((link) => (
                 <li key={link.id}>
                   <a href={link.url}>{link.url}</a>
                 </li>
               ))}
             </ul>
-            <div className="recording-details__info-box">
-              <p className="recording-details__info-box-title">Links provided by Mock Provider</p>
-              <p>Availability may vary by region.</p>
-            </div>
           </aside>
         </div>
       </main>

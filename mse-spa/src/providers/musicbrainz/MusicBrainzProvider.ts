@@ -1,4 +1,4 @@
-import type { Artist, Provider, Recording, RecordingLink } from '../../domain/types'
+import type { Artist, Provider, Recording, RecordingDetails } from '../../domain/types'
 import { MusicBrainzClient, musicBrainzClient } from './musicBrainzClient'
 
 const MBID_PREFIX = 'mbid:'
@@ -14,6 +14,7 @@ interface MusicBrainzRelation {
   'target-type'?: string
   begin?: string | null
   recording?: { id: string; title: string }
+  url?: { id: string; resource: string }
 }
 
 export class MusicBrainzProvider implements Provider {
@@ -56,8 +57,29 @@ export class MusicBrainzProvider implements Provider {
       }))
   }
 
-  async findRecordingLinks(): Promise<RecordingLink[]> {
-    throw new Error('MusicBrainzProvider.findRecordingLinks is not implemented — see Milestone 5.')
+  async findRecordingDetails(recording: Recording): Promise<RecordingDetails> {
+    const mbid = stripMbidPrefix(recording.id)
+    const data = (await this.client.get(`recording/${mbid}`, { inc: 'url-rels' })) as {
+      title: string
+      'first-release-date'?: string
+      relations?: MusicBrainzRelation[]
+    }
+
+    const relations = data.relations ?? []
+    const links = relations
+      .filter((relation): relation is MusicBrainzRelation & { url: { id: string; resource: string } } =>
+        relation['target-type'] === 'url' && !!relation.url,
+      )
+      .map((relation) => ({
+        id: MBID_PREFIX + relation.url.id,
+        url: relation.url.resource,
+      }))
+
+    return {
+      title: data.title,
+      ...(data['first-release-date'] ? { releaseDate: data['first-release-date'] } : {}),
+      links,
+    }
   }
 }
 

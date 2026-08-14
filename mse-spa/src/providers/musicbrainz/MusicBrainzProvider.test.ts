@@ -95,9 +95,86 @@ describe('MusicBrainzProvider', () => {
     })
   })
 
-  describe('findRecordingLinks', () => {
-    it('is not yet implemented (Milestone 5)', async () => {
-      await expect(fastProvider().findRecordingLinks()).rejects.toThrow()
+  describe('findRecordingDetails', () => {
+    it('strips the mbid: prefix to build the lookup URL and requests url-rels', async () => {
+      let seenPath: string | null = null
+      let seenInc: string | null = null
+      server.use(
+        http.get(`${BASE_URL}/recording/:mbid`, ({ request, params }) => {
+          seenPath = params.mbid as string
+          seenInc = new URL(request.url).searchParams.get('inc')
+          return HttpResponse.json({ title: 'A Blossom Fell', relations: [] })
+        }),
+      )
+
+      await fastProvider().findRecordingDetails({
+        id: 'mbid:601a8791-3e90-49ea-884a-0b49bd5a38fd',
+        title: 'A Blossom Fell',
+        date: '1954-12-20',
+      })
+
+      expect(seenPath).toBe('601a8791-3e90-49ea-884a-0b49bd5a38fd')
+      expect(seenInc).toBe('url-rels')
+    })
+
+    it('maps title and first-release-date, and maps url relations to RecordingLinks', async () => {
+      server.use(
+        http.get(`${BASE_URL}/recording/:mbid`, () =>
+          HttpResponse.json({
+            title: 'A Blossom Fell',
+            'first-release-date': '1955-04-11',
+            relations: [
+              {
+                type: 'free streaming',
+                'target-type': 'url',
+                url: { id: 'babca188-8b67-42d0-8a2b-c3b2df4da8cb', resource: 'https://open.spotify.com/track/2d78J2bnQWINeQj4tk3Ix2' },
+              },
+              {
+                type: 'secondhandsongs',
+                'target-type': 'url',
+                url: { id: '69dc347f-6415-42f2-a6b3-6b5382be1b3a', resource: 'https://secondhandsongs.com/performance/420396' },
+              },
+              {
+                type: 'instrument',
+                'target-type': 'artist',
+                begin: '1999-01-01',
+              },
+            ],
+          }),
+        ),
+      )
+
+      const details = await fastProvider().findRecordingDetails({
+        id: 'mbid:601a8791-3e90-49ea-884a-0b49bd5a38fd',
+        title: 'A Blossom Fell',
+        date: '',
+      })
+
+      expect(details).toEqual({
+        title: 'A Blossom Fell',
+        releaseDate: '1955-04-11',
+        links: [
+          { id: 'mbid:babca188-8b67-42d0-8a2b-c3b2df4da8cb', url: 'https://open.spotify.com/track/2d78J2bnQWINeQj4tk3Ix2' },
+          { id: 'mbid:69dc347f-6415-42f2-a6b3-6b5382be1b3a', url: 'https://secondhandsongs.com/performance/420396' },
+        ],
+      })
+    })
+
+    it('omits releaseDate (not just leaves it undefined) when first-release-date is absent, and returns an empty links list when there are no url relations', async () => {
+      server.use(
+        http.get(`${BASE_URL}/recording/:mbid`, () =>
+          HttpResponse.json({ title: 'Untitled Session', relations: [] }),
+        ),
+      )
+
+      const details = await fastProvider().findRecordingDetails({
+        id: 'mbid:601a8791-3e90-49ea-884a-0b49bd5a38fd',
+        title: 'Untitled Session',
+        date: '',
+      })
+
+      expect(details).toEqual({ title: 'Untitled Session', links: [] })
+      expect('releaseDate' in details).toBe(false)
     })
   })
 })

@@ -17,3 +17,7 @@ using the format suggested by [Keep a Changelog](https://keepachangelog.com/en/1
   listing the recordings they're credited on as an instrument performer. Shows the "not found" error
   page when MusicBrainz has no matching artist, or a general error page when the MusicBrainz service
   can't be reached.
+- Music Session Explorer "recording details" page now fetches real data from the MusicBrainz web service
+  instead of a mock catalog: showing the recording's title, release date (when known), and "Listen / View
+  on" links. The page now resolves entirely from the recording ID in its own URL, so it no longer depends
+  on having come from the recording list page — it also works on a direct visit or a page refresh.

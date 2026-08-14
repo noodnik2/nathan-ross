@@ -11,7 +11,7 @@ vi.mock('../providers/musicbrainz/MusicBrainzProvider', () => ({
   musicBrainzProvider: {
     findArtists: vi.fn(),
     findRecordingsForArtist: vi.fn(),
-    findRecordingLinks: vi.fn(),
+    findRecordingDetails: vi.fn(),
   },
 }))
 

@@ -3,10 +3,10 @@ import { Link, useSearchParams } from 'react-router-dom'
 import { AppHeader } from '../components/AppHeader'
 import { Pagination } from '../components/Pagination'
 import type { Artist, Recording } from '../domain/types'
+import { formatFetchError } from '../lib/formatFetchError'
 import { pageCount, paginate } from '../lib/paginate'
 import { resolveArtistQuery } from '../lib/resolveArtistQuery'
 import { musicBrainzProvider } from '../providers/musicbrainz/MusicBrainzProvider'
-import { MusicBrainzRequestError } from '../providers/musicbrainz/musicBrainzClient'
 import { ErrorPage } from './ErrorPage'
 import './RecordingListPage.css'
 
@@ -15,14 +15,6 @@ const PAGE_SIZE = 10
 interface CatalogData {
   artist: Artist
   recordings: Recording[]
-}
-
-function formatFetchError(err: unknown): string {
-  if (err instanceof MusicBrainzRequestError) {
-    const detail = err.status !== undefined ? ` (HTTP ${err.status} at ${err.url})` : ` (${err.url})`
-    return `Unable to reach the MusicBrainz service.${detail}`
-  }
-  return 'Unable to reach the MusicBrainz service.'
 }
 
 export function RecordingListPage() {

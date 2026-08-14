@@ -1,7 +1,27 @@
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
-import { describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
+import type { RecordingDetails } from '../domain/types'
+import { musicBrainzProvider } from '../providers/musicbrainz/MusicBrainzProvider'
+import { MusicBrainzRequestError } from '../providers/musicbrainz/musicBrainzClient'
 import { RecordingDetailsPage } from './RecordingDetailsPage'
+
+vi.mock('../providers/musicbrainz/MusicBrainzProvider', () => ({
+  musicBrainzProvider: {
+    findArtists: vi.fn(),
+    findRecordingsForArtist: vi.fn(),
+    findRecordingDetails: vi.fn(),
+  },
+}))
+
+const DETAILS: RecordingDetails = {
+  title: 'A Blossom Fell',
+  releaseDate: '1955-04-11',
+  links: [
+    { id: 'mbid:link-1', url: 'https://open.spotify.com/track/2d78J2bnQWINeQj4tk3Ix2' },
+    { id: 'mbid:link-2', url: 'https://secondhandsongs.com/performance/420396' },
+  ],
+}
 
 function renderAt(path: string) {
   return render(
@@ -14,40 +34,74 @@ function renderAt(path: string) {
 }
 
 describe('RecordingDetailsPage', () => {
-  it('shows the title, Recording Date, and Recording ID for the recording matching the (percent-encoded) route id', () => {
-    renderAt('/recordings/mock%3A1')
-
-    expect(screen.getByRole('heading', { name: 'What a Wonderful World' })).toBeInTheDocument()
-    expect(screen.getByText('Recording Date')).toBeInTheDocument()
-    expect(screen.getByText('1967-09-07')).toBeInTheDocument()
-    expect(screen.getByText('Recording ID')).toBeInTheDocument()
-    expect(screen.getByText('mock:1')).toBeInTheDocument()
+  beforeEach(() => {
+    vi.mocked(musicBrainzProvider.findRecordingDetails).mockReset()
   })
 
-  it('does not render a breadcrumb', () => {
-    renderAt('/recordings/mock%3A1')
+  it('fetches details using only the recording ID from the route and renders title, release date, Recording ID, and links', async () => {
+    vi.mocked(musicBrainzProvider.findRecordingDetails).mockResolvedValue(DETAILS)
 
+    renderAt('/recordings/mbid%3A601a8791-3e90-49ea-884a-0b49bd5a38fd')
+
+    expect(await screen.findByRole('heading', { name: 'A Blossom Fell' })).toBeInTheDocument()
+    expect(screen.getByText('Release Date')).toBeInTheDocument()
+    expect(screen.getByText('1955-04-11')).toBeInTheDocument()
+    expect(screen.getByText('Recording ID')).toBeInTheDocument()
+    expect(screen.getByText('mbid:601a8791-3e90-49ea-884a-0b49bd5a38fd')).toBeInTheDocument()
+
+    const link = screen.getByRole('link', { name: DETAILS.links[0].url })
+    expect(link).toHaveAttribute('href', DETAILS.links[0].url)
+    expect(screen.getAllByRole('link')).toHaveLength(2)
+
+    expect(vi.mocked(musicBrainzProvider.findRecordingDetails)).toHaveBeenCalledWith({
+      id: 'mbid:601a8791-3e90-49ea-884a-0b49bd5a38fd',
+      title: '',
+      date: '',
+    })
+  })
+
+  it('does not render a breadcrumb', async () => {
+    vi.mocked(musicBrainzProvider.findRecordingDetails).mockResolvedValue(DETAILS)
+    renderAt('/recordings/mbid%3A601a8791-3e90-49ea-884a-0b49bd5a38fd')
+
+    await screen.findByRole('heading', { name: 'A Blossom Fell' })
     expect(screen.queryByTestId('breadcrumb')).not.toBeInTheDocument()
   })
 
-  it('renders each mock recording link as an anchor whose text and href are both the link url', () => {
-    renderAt('/recordings/mock%3A1')
+  it('omits the Release Date field when releaseDate is absent', async () => {
+    vi.mocked(musicBrainzProvider.findRecordingDetails).mockResolvedValue({
+      title: 'Untitled Session',
+      links: [],
+    })
 
-    const link = screen.getByRole('link', { name: 'https://open.spotify.com/track/4uLU6hMCjMI75M1A2tKUQC' })
-    expect(link).toHaveAttribute('href', 'https://open.spotify.com/track/4uLU6hMCjMI75M1A2tKUQC')
-    expect(screen.getAllByRole('link')).toHaveLength(6)
+    renderAt('/recordings/mbid%3Asome-id')
+
+    await screen.findByRole('heading', { name: 'Untitled Session' })
+    expect(screen.queryByText('Release Date')).not.toBeInTheDocument()
   })
 
-  it('shows "Mock Provider" wording in the info boxes', () => {
-    renderAt('/recordings/mock%3A1')
+  it('renders no links, without an error, when the links list is empty', async () => {
+    vi.mocked(musicBrainzProvider.findRecordingDetails).mockResolvedValue({
+      title: 'Untitled Session',
+      links: [],
+    })
 
-    expect(screen.getByText('Data from Mock Provider')).toBeInTheDocument()
-    expect(screen.getByText('Links provided by Mock Provider')).toBeInTheDocument()
+    renderAt('/recordings/mbid%3Asome-id')
+
+    await screen.findByRole('heading', { name: 'Untitled Session' })
+    expect(screen.queryAllByRole('link')).toHaveLength(0)
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument()
   })
 
-  it('shows an error message for an unknown recording id', () => {
-    renderAt('/recordings/mock%3Adoes-not-exist')
+  it('shows a general error page (with status and URL) when the MusicBrainz service is unreachable', async () => {
+    vi.mocked(musicBrainzProvider.findRecordingDetails).mockRejectedValue(
+      new MusicBrainzRequestError('boom', 'https://musicbrainz.org/ws/2/recording/x', 404),
+    )
 
-    expect(screen.getByText('Recording not found.')).toBeInTheDocument()
+    renderAt('/recordings/mbid%3Adoes-not-exist')
+
+    expect(
+      await screen.findByText('Unable to reach the MusicBrainz service. (HTTP 404 at https://musicbrainz.org/ws/2/recording/x)'),
+    ).toBeInTheDocument()
   })
 })

@@ -14,8 +14,14 @@ export interface RecordingLink {
   url: string
 }
 
+export interface RecordingDetails {
+  title: string
+  releaseDate?: string
+  links: RecordingLink[]
+}
+
 export interface Provider {
   findArtists(artistSpec: string): Promise<Artist[]>
   findRecordingsForArtist(artist: Artist): Promise<Recording[]>
-  findRecordingLinks(recording: Recording): Promise<RecordingLink[]>
+  findRecordingDetails(recording: Recording): Promise<RecordingDetails>
 }
