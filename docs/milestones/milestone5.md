@@ -1,13 +1,17 @@
-# Milestone 5: MusicBrainz Recording Links Fetch
+# Milestone 5: MusicBrainz Recording Details Fetch
 
 The goal of this milestone is to render the "recording details" page using the MusicBrainz online service.
 
 ## Requirements
 
-- Implement the `MusicBrainzProvider.findRecordingLinks` method using the `MusicBrainz` API by using the
-  approach specified in the [MusicBrainz Client](../providers/musicbrainz/client.md) documentation.
-- Modify the `RecordingDetailsPage` component to retrieve and use the fetched MusicBrainz recording details
-  through calls to the newly implemented `findRecordingLinks` method (created above).
+- Implement the `MusicBrainzProvider.findRecordingDetails` method using the `MusicBrainz` API by using the
+  approach specified in the [MusicBrainz Client](../providers/musicbrainz/client.md) documentation. This
+  supersedes the `findRecordingLinks` method named in earlier drafts of this Milestone — see
+  [MCD Provider Interface](../models/mse-model.md#mcd-provider-interface) for the current shape.
+- Modify the `RecordingDetailsPage` component to retrieve and render the recording's title, release date (when
+  available), and links entirely from `findRecordingDetails`, called with only the recording ID from the route —
+  it must not depend on the `Artist` or recording list data still being available (e.g. after a direct page
+  load or a refresh).
 
 ## User Stories
 

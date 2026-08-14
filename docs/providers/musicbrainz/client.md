@@ -46,11 +46,20 @@ A brief overview of the mappings between the MCD domain types and the MusicBrain
 - Recording.title ← recording title
 - Recording.date ← recording begin
 
-### findRecordingLinks(Recording) -> List[RecordingLink]
-- Find URLs linked to the `Recording` via `/recording/{mbid}?inc=url-rels`, returning one `RecordingLink` per URL,
-  or an empty list if none are found.
-- RecordingLink.id ← "mbid:" + url MBID
-- RecordingLink.url ← url resource
+### findRecordingDetails(Recording) -> RecordingDetails
+- Look up the `Recording` via `/recording/{mbid}?inc=url-rels`. Only `Recording.id` is used to make this call —
+  no `Artist` context is needed, so this can run from nothing but a recording ID (e.g. a `RecordingDetailsPage`
+  reached directly, not only via a click-through from the recording list).
+- RecordingDetails.title ← the response's own `title` field (a base field on the recording lookup, present
+  regardless of `inc=` — see the `musicbrainz-api` skill's `references/entity_fields.md`). This is independent
+  of, and takes precedence over, whatever title the input `Recording` carried.
+- RecordingDetails.releaseDate ← the response's `first-release-date` field, when present; omit the property
+  otherwise. Do not confuse this with a relationship's `begin`/`end` (used for `Recording.date` elsewhere) —
+  it's the recording's own release date, not tied to any one artist's relationship to it.
+- RecordingDetails.links ← one `RecordingLink` per relation in the response where `target-type === 'url'`, or an
+  empty list if none are found.
+  - RecordingLink.id ← "mbid:" + relation's url MBID (`relation.url.id`)
+  - RecordingLink.url ← the url resource (`relation.url.resource`)
 - The UI loads recording details lazily — only call this once the user drills into a specific recording, not as
   part of the initial recording list.
 

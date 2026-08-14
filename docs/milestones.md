@@ -21,6 +21,6 @@ until after the completion of the MSE application.
 - [Milestone 2: Strawman Recording List](./milestones/milestone2.md)
 - [Milestone 3: Strawman Recording Links](./milestones/milestone3.md)
 - [Milestone 4: MusicBrainz Recording List Fetch](./milestones/milestone4.md)
-- [Milestone 5: MusicBrainz Recording Links Fetch](./milestones/milestone5.md)
+- [Milestone 5: MusicBrainz Recording Details Fetch](./milestones/milestone5.md)
 
 For current implementation status of each, see [TODOs](./todo-list.md) rather than this index.

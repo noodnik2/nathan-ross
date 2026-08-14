@@ -13,22 +13,22 @@ Source docs (for anything not covered here): [MusicBrainz API](https://musicbrai
 MusicBrainz models music as a graph of these entity types, each with its own `/ws/2/<entity>`
 endpoint:
 
-| Entity | Endpoint | What it represents |
-|---|---|---|
-| artist | `/ws/2/artist` | A person or group (performer, composer, producer, etc.) |
-| release | `/ws/2/release` | A specific issued product (an album/single/EP as sold — a "release" of a release-group) |
-| release-group | `/ws/2/release-group` | The abstract "work" a release belongs to (e.g. all editions/reissues of an album) |
-| recording | `/ws/2/recording` | A distinct audio recording (roughly: one performance/take of one song) |
-| work | `/ws/2/work` | The abstract composition (the song/piece itself, independent of any specific recording) |
-| label | `/ws/2/label` | A record label / imprint |
-| area | `/ws/2/area` | A geographic region (country, city, etc.) |
-| place | `/ws/2/place` | A physical venue or location |
-| event | `/ws/2/event` | A specific concert/festival/performance event |
-| series | `/ws/2/series` | An ordered sequence of releases, events, recordings, etc. |
-| instrument | `/ws/2/instrument` | A musical instrument (used in relationship attributes/credits) |
-| genre | `/ws/2/genre` | A genre tag |
-| url | `/ws/2/url` | An external URL as a first-class entity (so it can carry its own relationships) |
-| annotation | `/ws/2/annotation` | Free-text annotations attached to other entities |
+| Entity        | Endpoint              | What it represents                                                                      |
+|---------------|-----------------------|-----------------------------------------------------------------------------------------|
+| artist        | `/ws/2/artist`        | A person or group (performer, composer, producer, etc.)                                 |
+| release       | `/ws/2/release`       | A specific issued product (an album/single/EP as sold — a "release" of a release-group) |
+| release-group | `/ws/2/release-group` | The abstract "work" a release belongs to (e.g. all editions/reissues of an album)       |
+| recording     | `/ws/2/recording`     | A distinct audio recording (roughly: one performance/take of one song)                  |
+| work          | `/ws/2/work`          | The abstract composition (the song/piece itself, independent of any specific recording) |
+| label         | `/ws/2/label`         | A record label / imprint                                                                |
+| area          | `/ws/2/area`          | A geographic region (country, city, etc.)                                               |
+| place         | `/ws/2/place`         | A physical venue or location                                                            |
+| event         | `/ws/2/event`         | A specific concert/festival/performance event                                           |
+| series        | `/ws/2/series`        | An ordered sequence of releases, events, recordings, etc.                               |
+| instrument    | `/ws/2/instrument`    | A musical instrument (used in relationship attributes/credits)                          |
+| genre         | `/ws/2/genre`         | A genre tag                                                                             |
+| url           | `/ws/2/url`           | An external URL as a first-class entity (so it can carry its own relationships)         |
+| annotation    | `/ws/2/annotation`    | Free-text annotations attached to other entities                                        |
 
 Recordings vs. works vs. releases trips people up: a **work** is the song itself, a
 **recording** is one captured performance of it, and a **release** is a product (album,

@@ -11,8 +11,9 @@ The APIs exposed by the MSE application only use the MCD entities.
 
 ## MCD Entities
 
-As of Milestone 4, `mse-spa/src/domain/types.ts` implements all of `Artist`, `Recording`,
-`RecordingLink`, and the `Provider` interface below.
+As of Milestone 4, `mse-spa/src/domain/types.ts` implements `Artist`, `Recording`,
+`RecordingLink`, and the `Provider` interface below. Milestone 5 adds `RecordingDetails`
+and reshapes the `Provider` method that fetches a recording's links.
 
 The MCD domain entities are:
 
@@ -22,10 +23,18 @@ The MCD domain entities are:
 - `Recording`
   - `id` - unique internal identifier.
   - `title` - UI display name.
-  - `date` - date associated with the recording
+  - `date` - date associated with the recording. Sourced from the Artist ↔ Recording
+    relationship (e.g. when this artist's performance on it began) — not a property of the
+    recording itself and not guaranteed to match any release date the recording may have.
 - `RecordingLink`
   - `id` - unique internal identifier.
   - `url` - URL to the associated recording details.
+- `RecordingDetails`
+  - `title` - UI display name for the recording, sourced directly from the recording
+    itself (independent of any `Artist` relationship, unlike `Recording.date` above).
+  - `releaseDate` - optional; the earliest known release date for the recording. Omitted
+    when the Provider has no such date.
+  - `links` - `List[RecordingLink]`
 
 ## MCD Provider Interface
 
@@ -34,7 +43,7 @@ The following operations are exposed by the MCD `Provider` interface:
 - `Provider`
   - `List[Artist] findArtists(artistSpec)`
   - `List[Recording] findRecordingsForArtist(Artist)`
-  - `List[RecordingLink] findRecordingLinks(Recording)`
+  - `RecordingDetails findRecordingDetails(Recording)`
 
 An `artistSpec` is a string that may be used to search for an `Artist` by name.
 

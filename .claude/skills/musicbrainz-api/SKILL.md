@@ -17,11 +17,14 @@ and a query string. The whole skill is really three small, composable ideas:
    lookup call and then use as MBIDs for the *next* lookup. Chaining these traversals
    (artist → recording → url, or artist → work → release, etc.) is the core skill.
 
-Read `references/api_reference.md` for the endpoint/entity/search-syntax cheat sheet and
+Read `references/api_reference.md` for the endpoint/entity/search-syntax cheat sheet,
 `references/relationships.md` for how relationships and their attributes are shaped in
-the JSON. Skim both before writing calls you're not sure about — the field names (e.g.
-`source-credit`, `target-type`, `attribute-values`) are easy to get subtly wrong from
-memory alone.
+the JSON, and `references/entity_fields.md` for what a plain lookup already returns on
+the entity itself (independent of any `inc=`). Skim all three before writing calls you're
+not sure about — the field names (e.g. `source-credit`, `target-type`, `attribute-values`)
+are easy to get subtly wrong from memory alone, and it's just as easy to assume a field
+isn't available and reach for an extra `inc=` or a second call when it was already sitting
+unread in a response you're already making.
 
 ## The two non-negotiable client rules
 
@@ -126,6 +129,12 @@ encoding of the whole query string.
 
 ## Common pitfalls
 
+- **Claiming a field is unavailable without checking the base lookup response.** A lookup
+  always returns the entity's own base fields (e.g. a recording's `title`,
+  `first-release-date`, `length`) regardless of which `inc=` you requested — `inc=` adds
+  relations *on top*, it doesn't gate the base object. See `references/entity_fields.md`.
+  Don't reach for an extra `inc=`, a second endpoint, or a different entity to get
+  something that's already in the response you're making.
 - **Treating search as exact-match.** It's a relevance-ranked index search, not a
   lookup — always expect (and handle) zero, one, or many results.
 - **Forgetting `target-type` checks.** An `inc=recording-rels` response can still contain
