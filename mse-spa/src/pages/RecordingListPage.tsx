@@ -1,23 +1,92 @@
+import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import { AppHeader } from '../components/AppHeader'
 import { Pagination } from '../components/Pagination'
+import type { Artist, Recording } from '../domain/types'
 import { pageCount, paginate } from '../lib/paginate'
 import { resolveArtistQuery } from '../lib/resolveArtistQuery'
-import { buildMockCatalog } from '../mocks/mockCatalog'
+import { musicBrainzProvider } from '../providers/musicbrainz/MusicBrainzProvider'
+import { MusicBrainzRequestError } from '../providers/musicbrainz/musicBrainzClient'
 import { ErrorPage } from './ErrorPage'
 import './RecordingListPage.css'
 
 const PAGE_SIZE = 10
 
+interface CatalogData {
+  artist: Artist
+  recordings: Recording[]
+}
+
+function formatFetchError(err: unknown): string {
+  if (err instanceof MusicBrainzRequestError) {
+    const detail = err.status !== undefined ? ` (HTTP ${err.status} at ${err.url})` : ` (${err.url})`
+    return `Unable to reach the MusicBrainz service.${detail}`
+  }
+  return 'Unable to reach the MusicBrainz service.'
+}
+
 export function RecordingListPage() {
   const [searchParams, setSearchParams] = useSearchParams()
-
   const resolved = resolveArtistQuery(searchParams)
+  const artistName = resolved.ok ? resolved.artistName : null
+
+  const [data, setData] = useState<CatalogData | null>(null)
+  const [error, setError] = useState<string | null>(null)
+
+  useEffect(() => {
+    if (artistName === null) {
+      return
+    }
+
+    let cancelled = false
+    setData(null)
+    setError(null)
+
+    async function load() {
+      try {
+        const artists = await musicBrainzProvider.findArtists(artistName as string)
+        if (artists.length === 0) {
+          if (!cancelled) {
+            setError(`Artist '${artistName}' was not found.`)
+          }
+          return
+        }
+
+        const recordings = await musicBrainzProvider.findRecordingsForArtist(artists[0])
+        if (!cancelled) {
+          setData({ artist: artists[0], recordings })
+        }
+      } catch (err) {
+        if (!cancelled) {
+          setError(formatFetchError(err))
+        }
+      }
+    }
+
+    void load()
+
+    return () => {
+      cancelled = true
+    }
+  }, [artistName])
+
   if (!resolved.ok) {
     return <ErrorPage message={resolved.message} />
   }
 
-  const { artist, recordings } = buildMockCatalog(resolved.artistName)
+  if (error) {
+    return <ErrorPage message={error} />
+  }
+
+  if (!data) {
+    return (
+      <div>
+        <AppHeader />
+      </div>
+    )
+  }
+
+  const { artist, recordings } = data
   const totalPages = pageCount(recordings.length, PAGE_SIZE)
   const requestedPage = Number.parseInt(searchParams.get('page') ?? '1', 10)
   const currentPage = Number.isFinite(requestedPage)
@@ -43,10 +112,6 @@ export function RecordingListPage() {
         <p className="recording-list__summary">
           Showing {firstRowNumber}-{lastRowNumber} of {recordings.length} recordings
         </p>
-        <div className="recording-list__info-box">
-          <p className="recording-list__info-box-title">Mock Data</p>
-          <p>Recordings shown here are sample data for demonstration purposes.</p>
-        </div>
         <table>
           <thead>
             <tr>

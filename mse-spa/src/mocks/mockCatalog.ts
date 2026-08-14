@@ -1,4 +1,4 @@
-import type { Artist, Recording, RecordingLink } from '../domain/types'
+import type { Recording, RecordingLink } from '../domain/types'
 
 const MOCK_RECORDINGS: Recording[] = [
   { id: 'mock:1', title: 'What a Wonderful World', date: '1967-09-07' },
@@ -27,14 +27,6 @@ const MOCK_RECORDINGS: Recording[] = [
   { id: 'mock:24', title: 'Wonderful Town', date: '1957-03-22' },
   { id: 'mock:25', title: 'Ramona', date: '1954-08-09' },
 ]
-
-export function buildMockCatalog(artistName: string): { artist: Artist; recordings: Recording[] } {
-  const artist: Artist = {
-    id: `mock:${artistName.trim().toLowerCase().replace(/\s+/g, '-')}`,
-    name: artistName,
-  }
-  return { artist, recordings: MOCK_RECORDINGS }
-}
 
 export function findMockRecordingById(id: string): Recording | undefined {
   return MOCK_RECORDINGS.find((recording) => recording.id === id)

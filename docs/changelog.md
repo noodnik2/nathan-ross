@@ -12,3 +12,8 @@ using the format suggested by [Keep a Changelog](https://keepachangelog.com/en/1
 - Music Session Explorer "recording details" page: clicking a recording title in the recording list
   navigates to a details page showing the recording's own title, date, and ID, along with a mocked
   list of "Listen / View on" links.
+- Music Session Explorer "recording list" page now fetches real data from the MusicBrainz web service
+  instead of a mock catalog: searching for the artist given via the `artist` URL query parameter, then
+  listing the recordings they're credited on as an instrument performer. Shows the "not found" error
+  page when MusicBrainz has no matching artist, or a general error page when the MusicBrainz service
+  can't be reached.

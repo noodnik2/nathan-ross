@@ -21,9 +21,4 @@ describe('resolveArtistQuery', () => {
     const result = resolveArtistQuery(new URLSearchParams('artist=%20%20'))
     expect(result).toEqual({ ok: false, message: 'No artist name was specified.' })
   })
-
-  it('resolves a not-found error for the simulated "Phil Inblank" case', () => {
-    const result = resolveArtistQuery(new URLSearchParams('artist=Phil+Inblank'))
-    expect(result).toEqual({ ok: false, message: "Artist 'Phil Inblank' was not found." })
-  })
 })
