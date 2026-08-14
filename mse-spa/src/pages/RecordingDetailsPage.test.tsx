@@ -51,6 +51,8 @@ describe('RecordingDetailsPage', () => {
 
     const link = screen.getByRole('link', { name: DETAILS.links[0].url })
     expect(link).toHaveAttribute('href', DETAILS.links[0].url)
+    expect(link).toHaveAttribute('target', '_blank')
+    expect(link).toHaveAttribute('rel', 'noopener noreferrer')
     expect(screen.getAllByRole('link')).toHaveLength(2)
 
     expect(vi.mocked(musicBrainzProvider.findRecordingDetails)).toHaveBeenCalledWith({

@@ -76,7 +76,9 @@ export function RecordingDetailsPage() {
             <ul className="recording-details__links">
               {details.links.map((link) => (
                 <li key={link.id}>
-                  <a href={link.url}>{link.url}</a>
+                  <a href={link.url} target="_blank" rel="noopener noreferrer">
+                    {link.url}
+                  </a>
                 </li>
               ))}
             </ul>
