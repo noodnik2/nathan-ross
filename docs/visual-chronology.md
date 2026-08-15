@@ -1,4 +1,4 @@
-![violinist-nathan-ross](../static/images/violinist-nathan-ross.webp =100x20)
+![violinist-nathan-ross](../static/images/violinist-nathan-ross.webp)
 
 # Visual Chronology
 
