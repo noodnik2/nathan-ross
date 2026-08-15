@@ -1,15 +1,15 @@
-![violinist-nathan-ross](../static/images/violinist-nathan-ross.webp)
+![violinist-nathan-ross](../static/nathan-ross/images/violinist-nathan-ross.webp)
 
 # Visual Chronology
 
-![lil-nacy-with-mom-n-sibs](../static/images/lil-nacy-with-mom-n-sibs.webp)
+![lil-nacy-with-mom-n-sibs](../static/nathan-ross/images/lil-nacy-with-mom-n-sibs.webp)
 
-![portrait-young-violinist.webp](../static/images/portrait-young-violinist.webp)
+![portrait-young-violinist.webp](../static/nathan-ross/images/portrait-young-violinist.webp)
 
-![newsclip-violinist-study-in-south](../static/images/newsclip-violinist-study-in-south.webp)
+![newsclip-violinist-study-in-south](../static/nathan-ross/images/newsclip-violinist-study-in-south.webp)
 
-![newsclip-kitsilano-violinist-earns-us-award](../static/images/newsclip-kitsilano-violinist-earns-us-award.webp)
+![newsclip-kitsilano-violinist-earns-us-award](../static/nathan-ross/images/newsclip-kitsilano-violinist-earns-us-award.webp)
 
-![concertmaster-nbc-symphony](../static/images/concertmaster-nbc-symphony.webp)
+![concertmaster-nbc-symphony](../static/nathan-ross/images/concertmaster-nbc-symphony.webp)
 
-![lucky-bastards-club](../static/images/lucky-bastards-club.webp)
+![lucky-bastards-club](../static/nathan-ross/images/lucky-bastards-club.webp)
