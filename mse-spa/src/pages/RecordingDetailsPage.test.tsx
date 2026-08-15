@@ -49,10 +49,11 @@ describe('RecordingDetailsPage', () => {
     expect(screen.getByText('Recording ID')).toBeInTheDocument()
     expect(screen.getByText('mbid:601a8791-3e90-49ea-884a-0b49bd5a38fd')).toBeInTheDocument()
 
-    const link = screen.getByRole('link', { name: DETAILS.links[0].url })
+    const link = screen.getByRole('link', { name: 'Spotify' })
     expect(link).toHaveAttribute('href', DETAILS.links[0].url)
     expect(link).toHaveAttribute('target', '_blank')
     expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+    expect(screen.getByRole('link', { name: 'SecondHandSongs' })).toHaveAttribute('href', DETAILS.links[1].url)
     expect(screen.getAllByRole('link')).toHaveLength(2)
 
     expect(vi.mocked(musicBrainzProvider.findRecordingDetails)).toHaveBeenCalledWith({
@@ -80,6 +81,21 @@ describe('RecordingDetailsPage', () => {
 
     await screen.findByRole('heading', { name: 'Untitled Session' })
     expect(screen.queryByText('Release Date')).not.toBeInTheDocument()
+  })
+
+  it('renders an unrecognized link as its raw URL, alongside recognized-service links', async () => {
+    const unrecognizedUrl = 'https://example.com/some-recording'
+    vi.mocked(musicBrainzProvider.findRecordingDetails).mockResolvedValue({
+      title: 'A Blossom Fell',
+      links: [...DETAILS.links, { id: 'mbid:link-3', url: unrecognizedUrl }],
+    })
+
+    renderAt('/recordings/mbid%3A601a8791-3e90-49ea-884a-0b49bd5a38fd')
+
+    const link = await screen.findByRole('link', { name: unrecognizedUrl })
+    expect(link).toHaveAttribute('href', unrecognizedUrl)
+    expect(screen.getByRole('link', { name: 'Spotify' })).toBeInTheDocument()
+    expect(screen.getAllByRole('link')).toHaveLength(3)
   })
 
   it('renders no links, without an error, when the links list is empty', async () => {

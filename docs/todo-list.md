@@ -1,12 +1,13 @@
 # TODOs
 
+## Future Work Needed
+
+The following issues are thought to be needed and are "parked" here for future cycles:
+
+
 ## In Progress
 
-The following issues are currently being worked on.
-
-### 2026-08-12
-
-- Complete the Milestones and their stories.
+The following issues are currently being worked on:
 
 
 ## Completed
@@ -15,6 +16,31 @@ The sets of issues below have been addressed and are being left in this file for
 re-review in case of need for any further corrections or clarifications, and to help inform those new and
 possibly related (leftover?) issues arising in the near future.  As they age and become less relevant, they
 should be deleted.
+
+### 2026-08-14
+
+- Complete the Milestones and their stories.
+  - MVP Milestones were completed on 2026-08-13; additional Milestones are TBD.
+
+- Milestone 6 ("Recognized-Service Link Presentation & App Icon") implemented, not yet committed:
+  - `mse-spa/src/lib/knownServices.ts` (`matchKnownService`) maps a `RecordingLink.url`'s hostname to a
+    known service (Spotify, Apple Music via `music.apple.com` specifically, YouTube, Deezer,
+    SecondHandSongs, Discogs); unrecognized hostnames and malformed URLs return `undefined` so
+    `RecordingDetailsPage` falls back to the Milestone 3 raw-URL rendering, per requirement.
+  - `mse-spa/src/components/ServiceIcon.tsx` renders a small `aria-hidden` inline-SVG glyph per known
+    service; `RecordingDetailsPage.tsx` renders it + the service name in place of the raw URL for
+    recognized links.
+  - `mse-spa/public/mse-icon.svg` (dark-navy "♫" mark, matching `AppHeader`) replaces the default
+    `vite.svg`; `index.html`'s favicon link uses Vite's `%BASE_URL%` templating so it resolves under both
+    local dev and the GitHub Pages subfolder base path — verified via `npm run build`'s `dist/index.html`.
+  - Verified against live MusicBrainz data (Ed Sheeran's "Shape of You" recording,
+    `mbid:d7500dd6-b815-4299-88c6-3fbda358f1fc`): YouTube/Spotify/Deezer links render as icon+name, Tidal
+    links (unrecognized) render as raw URLs alongside them, at both desktop and narrow (380px) viewport
+    widths.
+  - Fixed a narrow-viewport overflow of long unrecognized-link URLs surfaced during that manual check:
+    `.recording-details__grid`'s children lacked `min-width: 0`, so a grid item wouldn't shrink below its
+    unbroken-text content's intrinsic width; added that plus `overflow-wrap: anywhere` on
+    `.recording-details__link`.
 
 ### 2026-08-13
 

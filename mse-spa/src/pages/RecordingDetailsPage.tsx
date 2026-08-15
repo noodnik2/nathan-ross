@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { AppHeader } from '../components/AppHeader'
+import { ServiceIcon } from '../components/ServiceIcon'
 import type { RecordingDetails } from '../domain/types'
 import { formatFetchError } from '../lib/formatFetchError'
+import { matchKnownService } from '../lib/knownServices'
 import { musicBrainzProvider } from '../providers/musicbrainz/MusicBrainzProvider'
 import { ErrorPage } from './ErrorPage'
 import './RecordingDetailsPage.css'
@@ -74,13 +76,28 @@ export function RecordingDetailsPage() {
           <aside>
             <h2>Listen / View on</h2>
             <ul className="recording-details__links">
-              {details.links.map((link) => (
-                <li key={link.id}>
-                  <a href={link.url} target="_blank" rel="noopener noreferrer">
-                    {link.url}
-                  </a>
-                </li>
-              ))}
+              {details.links.map((link) => {
+                const service = matchKnownService(link.url)
+                return (
+                  <li key={link.id}>
+                    <a
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="recording-details__link"
+                    >
+                      {service ? (
+                        <>
+                          <ServiceIcon serviceId={service.id} />
+                          <span>{service.name}</span>
+                        </>
+                      ) : (
+                        link.url
+                      )}
+                    </a>
+                  </li>
+                )
+              })}
             </ul>
           </aside>
         </div>

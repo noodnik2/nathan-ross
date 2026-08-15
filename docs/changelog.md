@@ -21,6 +21,11 @@ using the format suggested by [Keep a Changelog](https://keepachangelog.com/en/1
   instead of a mock catalog: showing the recording's title, release date (when known), and "Listen / View
   on" links. The page now resolves entirely from the recording ID in its own URL, so it no longer depends
   on having come from the recording list page — it also works on a direct visit or a page refresh.
+- Music Session Explorer "recording details" page now shows each recognized "Listen / View on" link
+  (Spotify, Apple Music, YouTube, Deezer, SecondHandSongs, Discogs) as a service icon and name instead
+  of the raw URL; links to any other service still show as their raw URL. The application's
+  browser-tab icon was also replaced with one designed for the MSE application, in place of the
+  default Vite scaffold icon.
 
 ### Changed
 - Switched client-side routing from `react-router-dom`'s `BrowserRouter` to `HashRouter` (routes now

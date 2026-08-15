@@ -9,6 +9,10 @@
   align-items: start;
 }
 
+.recording-details__grid > * {
+  min-width: 0;
+}
+
 .recording-details__fields {
   margin: 1rem 0;
 }
@@ -37,4 +41,12 @@
 .recording-details__links li {
   padding: 0.35rem 0;
   border-bottom: 1px solid #e0e0e0;
+}
+
+.recording-details__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 100%;
+  overflow-wrap: anywhere;
 }
