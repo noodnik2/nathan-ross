@@ -1,4 +1,5 @@
 MSE_SPA_DIR := mse-spa
+STATIC_DIR  := static
 
 .DEFAULT_GOAL := help
 
@@ -22,6 +23,10 @@ test-component: ## Run the MSE SPA component test suite
 .PHONY: deploy-mse
 deploy-mse: ## Deploy the built MSE SPA to GitHub Pages
 	$(MAKE) -C $(MSE_SPA_DIR) deploy
+
+.PHONY: deploy-static-assets
+deploy-static-assets: ## Deploy the Nathan Ross static assets to GitHub Pages
+	$(MAKE) -C $(STATIC_DIR) deploy
 
 .PHONY: test-e2e
 test-e2e: ## Run the MSE SPA end-to-end smoke suite against the deployed site (assumes prior deploy-mse; override target with MSE_DEPLOY_URL)

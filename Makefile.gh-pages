@@ -22,7 +22,7 @@ _setup_target:
 _push_target:
 	@echo "Staging files and pushing..."
 	cd $(TMP_DIR) && git add .
-	cd $(TMP_DIR) && git diff-index --quiet HEAD || git commit -m "Deploy MSE SPA via Makefile workflow"
+	cd $(TMP_DIR) && git diff-index --quiet HEAD || git commit -m "Deploy via Makefile workflow"
 	cd $(TMP_DIR) && git push origin $(BRANCH)
 	@echo "Cleaning up workspace..."
 	rm -rf $(TMP_DIR)

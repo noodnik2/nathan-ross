@@ -19,6 +19,26 @@ should be deleted.
 
 ### 2026-08-14
 
+- Milestone 7 ("Strawman Static Assets Deployment") implemented, not yet committed or deployed:
+  - New `static/Makefile` (`deploy` target) follows the `mse-spa/Makefile` pattern: includes the shared
+    `../Makefile.gh-pages` helpers and copies `static/nathan-ross/*` into a `nathan-ross` subfolder of the
+    cloned `noodnik2.github.io` target repo, then pushes. No build step — the source files are deployed
+    as-is.
+  - Root `Makefile` gets a `deploy-static-assets` target delegating to `$(MAKE) -C static deploy`, matching
+    `deploy-mse`'s delegation pattern; adds a `STATIC_DIR` var alongside the existing `MSE_SPA_DIR`.
+  - `Makefile.gh-pages`'s shared `_push_target` commit message generalized from "Deploy MSE SPA via
+    Makefile workflow" to "Deploy via Makefile workflow", since it's now shared by two independent deploy
+    targets and the old wording would mislabel a static-assets-only deploy.
+  - Verified via `make help` (both root and `static/`) and `make -C static -n deploy` (dry run) — target
+    wiring and command sequence look correct. Not run for real: pushing to `noodnik2.github.io` is a
+    developer-run action per established convention (same as `deploy-mse`), so the actual round-trip
+    deploy/verify against the live `https://noodnik2.github.io/nathan-ross` URL is still pending the
+    developer running `make deploy-static-assets`.
+  - Explicitly out of scope for this Milestone (per its Requirements and "strawman" framing): making
+    `static/nathan-ross/index.html` conform to the target site's Forty-template skeleton, and linking it
+    from the target repo's own root `index.html` (that file lives in `noodnik2.github.io`, not this repo).
+    Both are called out as later-iteration work.
+
 - Complete the Milestones and their stories.
   - MVP Milestones were completed on 2026-08-13; additional Milestones are TBD.
 
