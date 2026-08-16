@@ -7,12 +7,29 @@ help: ## Show available targets
 
 include ../Makefile.gh-pages
 
-DEPLOY_SUBFOLDER := nathan-ross
+SOURCE_DIR        := nathan-ross
+DEPLOY_SUBFOLDER  := nathan-ross
+BUILD_DIR         := $(SOURCE_DIR)/dist
+
+node_modules: package-lock.json
+	npm ci
+
+.PHONY: build
+build: node_modules ## Render Markdown page sources to HTML for the Nathan Ross static assets
+	node scripts/render.mjs $(SOURCE_DIR) $(SOURCE_DIR)/pages.json templates/layout.html $(BUILD_DIR)
 
 .PHONY: deploy
-deploy: ## Deploy the Nathan Ross static assets to the GitHub Pages target repo
+deploy: build ## Deploy the Nathan Ross static assets to the GitHub Pages target repo
 	$(MAKE) _setup_target
 	mkdir -p $(TMP_DIR)/$(DEPLOY_SUBFOLDER)
 	rm -rf $(TMP_DIR)/$(DEPLOY_SUBFOLDER)/*
-	cp -r nathan-ross/* $(TMP_DIR)/$(DEPLOY_SUBFOLDER)/
+	cp -r $(BUILD_DIR)/* $(TMP_DIR)/$(DEPLOY_SUBFOLDER)/
 	$(MAKE) _push_target
+
+.PHONY: clean
+clean: ## Remove generated build output
+	rm -rf $(BUILD_DIR)
+
+.PHONY: clean-deep
+clean-deep: clean ## Remove build output and installed dependencies
+	rm -rf node_modules
