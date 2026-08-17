@@ -30,6 +30,14 @@ function mockFoundArtist(recordings: Recording[]) {
   vi.mocked(musicBrainzProvider.findRecordingsForArtist).mockResolvedValue(recordings)
 }
 
+function deferred<T>() {
+  let resolve!: (value: T) => void
+  const promise = new Promise<T>((res) => {
+    resolve = res
+  })
+  return { promise, resolve }
+}
+
 function LocationDisplay() {
   const location = useLocation()
   return <div data-testid="location">{location.search}</div>
@@ -48,6 +56,27 @@ describe('RecordingListPage', () => {
   beforeEach(() => {
     vi.mocked(musicBrainzProvider.findArtists).mockReset()
     vi.mocked(musicBrainzProvider.findRecordingsForArtist).mockReset()
+  })
+
+  it('shows a "Finding artist…" status while the artist search is in flight', () => {
+    const artistSearch = deferred<Artist[]>()
+    vi.mocked(musicBrainzProvider.findArtists).mockReturnValue(artistSearch.promise)
+    renderAt('/?artist=Helen+Sight')
+
+    expect(screen.getByRole('status')).toHaveTextContent('Finding artist…')
+    expect(screen.queryByTestId('breadcrumb')).not.toBeInTheDocument()
+  })
+
+  it('shows the breadcrumb, heading, loading status, and skeleton rows once the artist is found but recordings are still loading', async () => {
+    vi.mocked(musicBrainzProvider.findArtists).mockResolvedValue([ARTIST])
+    const recordingsFetch = deferred<Recording[]>()
+    vi.mocked(musicBrainzProvider.findRecordingsForArtist).mockReturnValue(recordingsFetch.promise)
+    renderAt('/?artist=Helen+Sight')
+
+    expect(await screen.findByRole('heading', { name: 'Recordings by Helen Sight' })).toBeInTheDocument()
+    expect(screen.getByTestId('breadcrumb')).toHaveTextContent('Helen Sight / Recordings')
+    expect(screen.getByRole('status')).toHaveTextContent('Loading recordings…')
+    expect(screen.getAllByTestId('recording-list-skeleton-row')).toHaveLength(10)
   })
 
   it('shows the recording list heading and first page of recordings once the fetch resolves', async () => {

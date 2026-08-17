@@ -17,3 +17,31 @@ td {
   padding: 0.5rem 0.75rem;
   border-bottom: 1px solid #e0e0e0;
 }
+
+.recording-list__status {
+  color: #555;
+}
+
+.recording-list__skeleton-bar {
+  display: block;
+  height: 0.9rem;
+  border-radius: 0.25rem;
+  background: linear-gradient(90deg, #e8e8e8 25%, #f2f2f2 37%, #e8e8e8 63%);
+  background-size: 400% 100%;
+  animation: recording-list-skeleton-shimmer 1.4s ease infinite;
+}
+
+@keyframes recording-list-skeleton-shimmer {
+  0% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .recording-list__skeleton-bar {
+    animation: none;
+  }
+}

@@ -12,9 +12,39 @@ import './RecordingListPage.css'
 
 const PAGE_SIZE = 10
 
-interface CatalogData {
-  artist: Artist
-  recordings: Recording[]
+type LoadState =
+  | { phase: 'searching-artist' }
+  | { phase: 'loading-recordings'; artist: Artist }
+  | { phase: 'ready'; artist: Artist; recordings: Recording[] }
+  | { phase: 'error'; message: string }
+
+function RecordingListSkeleton() {
+  return (
+    <table aria-hidden="true">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Recording Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {Array.from({ length: PAGE_SIZE }, (_, index) => (
+          <tr key={index} className="recording-list__skeleton-row" data-testid="recording-list-skeleton-row">
+            <td>
+              <span className="recording-list__skeleton-bar" />
+            </td>
+            <td>
+              <span className="recording-list__skeleton-bar" />
+            </td>
+            <td>
+              <span className="recording-list__skeleton-bar" />
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  )
 }
 
 export function RecordingListPage() {
@@ -22,8 +52,7 @@ export function RecordingListPage() {
   const resolved = resolveArtistQuery(searchParams)
   const artistName = resolved.ok ? resolved.artistName : null
 
-  const [data, setData] = useState<CatalogData | null>(null)
-  const [error, setError] = useState<string | null>(null)
+  const [state, setState] = useState<LoadState>({ phase: 'searching-artist' })
 
   useEffect(() => {
     if (artistName === null) {
@@ -31,26 +60,30 @@ export function RecordingListPage() {
     }
 
     let cancelled = false
-    setData(null)
-    setError(null)
+    setState({ phase: 'searching-artist' })
 
     async function load() {
       try {
         const artists = await musicBrainzProvider.findArtists(artistName as string)
         if (artists.length === 0) {
           if (!cancelled) {
-            setError(`Artist '${artistName}' was not found.`)
+            setState({ phase: 'error', message: `Artist '${artistName}' was not found.` })
           }
           return
         }
 
+        if (cancelled) {
+          return
+        }
+        setState({ phase: 'loading-recordings', artist: artists[0] })
+
         const recordings = await musicBrainzProvider.findRecordingsForArtist(artists[0])
         if (!cancelled) {
-          setData({ artist: artists[0], recordings })
+          setState({ phase: 'ready', artist: artists[0], recordings })
         }
       } catch (err) {
         if (!cancelled) {
-          setError(formatFetchError(err))
+          setState({ phase: 'error', message: formatFetchError(err) })
         }
       }
     }
@@ -66,19 +99,39 @@ export function RecordingListPage() {
     return <ErrorPage message={resolved.message} />
   }
 
-  if (error) {
-    return <ErrorPage message={error} />
+  if (state.phase === 'error') {
+    return <ErrorPage message={state.message} />
   }
 
-  if (!data) {
+  if (state.phase === 'searching-artist') {
     return (
       <div>
         <AppHeader />
+        <main className="recording-list">
+          <p className="recording-list__status" role="status">
+            Finding artist…
+          </p>
+        </main>
       </div>
     )
   }
 
-  const { artist, recordings } = data
+  if (state.phase === 'loading-recordings') {
+    return (
+      <div>
+        <AppHeader breadcrumb={`${state.artist.name} / Recordings`} />
+        <main className="recording-list">
+          <h1>Recordings by {state.artist.name}</h1>
+          <p className="recording-list__status" role="status">
+            Loading recordings…
+          </p>
+          <RecordingListSkeleton />
+        </main>
+      </div>
+    )
+  }
+
+  const { artist, recordings } = state
   const totalPages = pageCount(recordings.length, PAGE_SIZE)
   const requestedPage = Number.parseInt(searchParams.get('page') ?? '1', 10)
   const currentPage = Number.isFinite(requestedPage)
