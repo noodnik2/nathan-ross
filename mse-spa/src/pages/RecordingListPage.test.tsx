@@ -68,6 +68,15 @@ describe('RecordingListPage', () => {
     expect(link).toHaveAttribute('href', '/recordings/mbid%3Arecording-1')
   })
 
+  it('opens the recording details link in a new tab without granting it window.opener access', async () => {
+    mockFoundArtist(makeRecordings(1))
+    renderAt('/?artist=Helen+Sight')
+
+    const link = await screen.findByRole('link', { name: 'Recording 1' })
+    expect(link).toHaveAttribute('target', '_blank')
+    expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+  })
+
   it('advances to the next page of recordings and updates the page query param when Next is clicked', async () => {
     mockFoundArtist(makeRecordings(25))
     renderAt('/?artist=Helen+Sight')

@@ -117,7 +117,13 @@ export function RecordingListPage() {
               <tr key={recording.id}>
                 <td>{firstRowNumber + index}</td>
                 <td>
-                  <Link to={`/recordings/${encodeURIComponent(recording.id)}`}>{recording.title}</Link>
+                  <Link
+                    to={`/recordings/${encodeURIComponent(recording.id)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {recording.title}
+                  </Link>
                 </td>
                 <td>{recording.date}</td>
               </tr>
