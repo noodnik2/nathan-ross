@@ -9,6 +9,38 @@ import { musicBrainzProvider } from '../providers/musicbrainz/MusicBrainzProvide
 import { ErrorPage } from './ErrorPage'
 import './RecordingDetailsPage.css'
 
+const SKELETON_FIELD_COUNT = 2
+const SKELETON_LINK_COUNT = 6
+
+function RecordingDetailsSkeleton() {
+  return (
+    <main className="recording-details" aria-hidden="true">
+      <span className="recording-details__skeleton-bar recording-details__skeleton-title" />
+      <div className="recording-details__grid">
+        <section>
+          <dl className="recording-details__fields">
+            {Array.from({ length: SKELETON_FIELD_COUNT }, (_, index) => (
+              <div key={index} className="recording-details__field" data-testid="recording-details-skeleton-field">
+                <span className="recording-details__skeleton-bar" />
+              </div>
+            ))}
+          </dl>
+        </section>
+        <aside>
+          <h2>Listen / View on</h2>
+          <ul className="recording-details__links">
+            {Array.from({ length: SKELETON_LINK_COUNT }, (_, index) => (
+              <li key={index} data-testid="recording-details-skeleton-link">
+                <span className="recording-details__skeleton-bar" />
+              </li>
+            ))}
+          </ul>
+        </aside>
+      </div>
+    </main>
+  )
+}
+
 export function RecordingDetailsPage() {
   const { recordingId } = useParams()
   const id = decodeURIComponent(recordingId ?? '')
@@ -49,6 +81,10 @@ export function RecordingDetailsPage() {
     return (
       <div>
         <AppHeader />
+        <p className="recording-details__status" role="status">
+          Loading recording…
+        </p>
+        <RecordingDetailsSkeleton />
       </div>
     )
   }

@@ -23,6 +23,14 @@ const DETAILS: RecordingDetails = {
   ],
 }
 
+function deferred<T>() {
+  let resolve!: (value: T) => void
+  const promise = new Promise<T>((res) => {
+    resolve = res
+  })
+  return { promise, resolve }
+}
+
 function renderAt(path: string) {
   return render(
     <MemoryRouter initialEntries={[path]}>
@@ -36,6 +44,18 @@ function renderAt(path: string) {
 describe('RecordingDetailsPage', () => {
   beforeEach(() => {
     vi.mocked(musicBrainzProvider.findRecordingDetails).mockReset()
+  })
+
+  it('shows a "Loading recording…" status and skeleton while the fetch is in flight', () => {
+    const detailsFetch = deferred<RecordingDetails>()
+    vi.mocked(musicBrainzProvider.findRecordingDetails).mockReturnValue(detailsFetch.promise)
+
+    renderAt('/recordings/mbid%3A601a8791-3e90-49ea-884a-0b49bd5a38fd')
+
+    expect(screen.getByRole('status')).toHaveTextContent('Loading recording…')
+    expect(screen.getAllByTestId('recording-details-skeleton-field')).toHaveLength(2)
+    expect(screen.getAllByTestId('recording-details-skeleton-link')).toHaveLength(6)
+    expect(screen.queryByRole('heading')).not.toBeInTheDocument()
   })
 
   it('fetches details using only the recording ID from the route and renders title, release date, Recording ID, and links', async () => {
