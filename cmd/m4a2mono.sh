@@ -1,7 +1,6 @@
 
-
-input_file="$1.png"
-output_file="$1.webp"
+input_file="$1.m4a"
+output_file="$1-mono.m4a"
 
 fatal() {
   echo "fatal: $*" >&2
@@ -11,5 +10,4 @@ fatal() {
 [ -e "$output_file" ] && fatal "output file already exists: $output_file"
 [ ! -f "$input_file" ] && fatal "input file does not exist: $input_file"
 
-cwebp -q 75 -resize 1920 0 "$input_file" -o "$output_file"
-
+ffmpeg -i "$input_file" -c:a aac_at -b:a 96k -ac 1 "$output_file"

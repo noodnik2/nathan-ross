@@ -1,7 +1,7 @@
 
 
-input_file="static/images/$1.heic"
-output_file="static/images/$1.jpg"
+input_file="$1.heic"
+output_file="$1.jpg"
 
 fatal() {
   echo "fatal: $*" >&2
