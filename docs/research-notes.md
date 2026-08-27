@@ -1,6 +1,6 @@
 # Research
 
-Here are some notes related to my research.
+Here are some notes related to my research and development.
 
 ## Sources
 
@@ -12,6 +12,18 @@ Here are some notes related to my research.
     - Quotes Nathan as one of his students
   - [Baroque Players - 1963](https://cdnc.ucr.edu/?a=d&d=PASO19630116.2.53&srpos=4&e=------196-en--20--1--txt-txIN-%22Nathan+Ross%22-------)
     - Article with picture of Nathan
+
+- https://www.worldradiohistory.com/Archive-Radio-Life/50s/54/Radio-TV-Life-1954-01-15.pdf
+- https://tile.loc.gov/storage-services/service/gdc/gdcfindingaidpdfs/mu012007/mu012007.pdf
+- https://discography.bloggingtonybennett.com/sessions/
+- http://abar.net/fbvisupdate.htm
+- https://www.rocktimes.info/Archiv/gesamt/s/frank_sinatra/songs_for_swingin_lovers.html
+- https://www.commodorestudio.com/transferring-your-audio/
+
+## Toolset
+
+- [Cloudflare Dashboard](https://dash.cloudflare.com/login)
+
 
 ## Ideas
 
