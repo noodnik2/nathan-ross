@@ -2,11 +2,6 @@
 
 ![normans-painting-cropped](../static/nathan-ross/images/normans-painting-cropped.webp)
 
-> **Draft — first pass.** The paragraphs below are a candidate narrative, written to connect these
-> images into a single story. Nothing here is claimed as verified fact where it isn't already
-> printed on the source document itself; ages and dates inferred from context are called out as
-> estimates. Please correct, cut, or redirect anything that doesn't match what you know.
-
 This is a story of my father, Nathan Ross — born Nathan Rothstein, a first generation citizen in
 the New World (Canada) — as told through a chronology of some artifacts left behind: an oil portrait
 of him hanging in my office painted by his cousin Norman Pelman, some photos, newspaper clippings,
@@ -31,7 +26,7 @@ Being a violinist himself, Max became Nathan's first teacher.
 
 ![violinist-nathan-ross](../static/nathan-ross/images/violinist-nathan-ross.webp)
 
-The photo above showcases the outward-facing title role he held the longest, and is the focus of many
+The photo above showcases the outward-facing title role Nathan held the longest, and is the focus of many
 of the artifacts below.
 
 ![nathan-practicing-ataround5or6](../static/nathan-ross/images/nathan-practicing-ataround5or6.webp)

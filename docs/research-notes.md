@@ -12,3 +12,17 @@ Here are some notes related to my research.
     - Quotes Nathan as one of his students
   - [Baroque Players - 1963](https://cdnc.ucr.edu/?a=d&d=PASO19630116.2.53&srpos=4&e=------196-en--20--1--txt-txIN-%22Nathan+Ross%22-------)
     - Article with picture of Nathan
+
+## Ideas
+
+### UI Improvements
+
+#### Static Pages
+
+The UI needs to be improved.  Most importantly, a long list of large images interspersed with text is not very
+readable, and is too old-fashioned and plain.  How about:
+
+- [Image Slider UI](https://collectui.com/designs/image-slider-ui-design-inspiration)
+  - I like the "Image Slider" design, imagining the horizontal scroll through the visual chronology, either
+    with the mouse or the left/right arrows.  The text associated with each image is displayed below the image.
+
