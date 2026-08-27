@@ -2,19 +2,18 @@
 
 error() {
   echo "$@" >&2
-  exit 1
 }
 
 fatal() {
-  error "fatal: $@"
+  error "fatal: $*"
   exit 1
 }
 
 process() {
   [ $# -ne 1 ] && fatal "invalid number of arguments specified"
 
-  input_file="$1" # e.g., "<filename>.heic"
-  output_file="$1.jpg"
+  input_file="$1"
+  output_file="${input_file%.*}.webp"
 
   if [ -e "$output_file" ]; then
     error "output file already exists: $output_file"
@@ -26,7 +25,7 @@ process() {
     return
   fi
 
-  magick "$input_file" -resize 2048x2048 -quality 85 -strip "$output_file"
+  cwebp -q 75 -resize 1920 0 "$input_file" -o "$output_file"
 }
 
 for file in "$@"; do

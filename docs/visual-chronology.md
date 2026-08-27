@@ -1,176 +1,263 @@
-![violinist-nathan-ross](../static/nathan-ross/images/violinist-nathan-ross.webp)
+# Nathan Ross – My Dad
 
-# Visual Chronology
+![normans-painting-cropped](../static/nathan-ross/images/normans-painting-cropped.webp)
 
 > **Draft — first pass.** The paragraphs below are a candidate narrative, written to connect these
 > images into a single story. Nothing here is claimed as verified fact where it isn't already
 > printed on the source document itself; ages and dates inferred from context are called out as
 > estimates. Please correct, cut, or redirect anything that doesn't match what you know.
 
-This is the story of my father, Nathan Ross — born Nathan Rothstein — told through the paper he
-left behind: newspaper clippings, programs, a diploma, a discharge certificate, a letter from a
-future President. Piece by piece, they trace a life that ran from child prodigy on a Vancouver
-stage, to gunner and radio operator aboard a B-17 over Germany, to concertmaster's chair in
-Hollywood's studio orchestras. The photo above — violinist, in the title role he held longest — is
-where the story starts.
+This is a story of my father, Nathan Ross — born Nathan Rothstein, a first generation citizen in
+the New World (Canada) — as told through a chronology of some artifacts left behind: an oil portrait
+of him hanging in my office painted by his cousin Norman Pelman, some photos, newspaper clippings,
+concert programs, diplomas, an army discharge certificate, and a letter from a future President.
+
+Piece by piece, these keepsakes trace a life that ran from child prodigy on a Vancouver stage,
+to radio operator and gunner aboard a B-17 over Germany, to concertmaster's chair in Hollywood's
+studio orchestras, to ... well, my dad. 
+
+## Little Nacy
+
+Before he was "Nathan Ross" he was just the littlest one in this portrait — the curly-haired boy
+propped up on the table at left, flanked by his mother and older siblings in Vancouver.
 
 ![lil-nacy-with-mom-n-sibs](../static/nathan-ross/images/lil-nacy-with-mom-n-sibs.webp)
 
-Before he was "Nathan Ross" he was just the littlest one in this portrait — the curly-haired boy
-propped up on the table at left, flanked by his mother and older siblings in Vancouver. Studio
-portraits like this one were an occasion; whatever else this family didn't have, they had this
-photographer's afternoon, and a small boy who hadn't yet picked up a violin.
+The story goes that not long after the picture above was taken, his father Max noticed him strumming
+a rubber band stretched around a ruler and took this as a sign that he was meant to become a violinist.
+Being a violinist himself, Max became Nathan's first teacher.
 
-![portrait-young-violinist.webp](../static/nathan-ross/images/portrait-young-violinist.webp)
+## Violinist
 
-By the time this portrait was taken he had. According to the NBC Symphony biography that appears
-later in this chronology, his first teacher was his own father, and he made his concert debut at
-age six at the British Columbia Musical Festival — winning first prize for the most talented child
-under ten. This photograph, violin already tucked under his chin, likely dates from somewhere in
-that early stretch of study.
+![violinist-nathan-ross](../static/nathan-ross/images/violinist-nathan-ross.webp)
+
+The photo above showcases the outward-facing title role he held the longest, and is the focus of many
+of the artifacts below.
+
+![nathan-practicing-ataround5or6](../static/nathan-ross/images/nathan-practicing-ataround5or6.webp)
+
+Nathan had already achieved some mastery over his instrument by the time the portrait above was taken. 
+
+He made his concert debut at age six at the British Columbia Musical Festival — winning first prize
+for the most talented child under ten.
+
+![portrait-young-violinist](../static/nathan-ross/images/portrait-young-violinist.webp)
+
+Four years after that first prize, the same Festival named Nathan its most talented competitor under
+nineteen. By fourteen, he was no longer a novelty act — he had a real instrument, a real stance, and
+the flower boutonnière of a young man being presented, not just exhibited.
 
 ![nathan-violinist-at14](../static/nathan-ross/images/nathan-violinist-at14.webp)
-
-Four years after that first prize, the same Festival named him its most talented competitor under
-nineteen. By fourteen he was no longer a novelty act — he had a real instrument, a real stance, and
-the flower boutonniere of a young man being presented, not just exhibited.
-
-![newsclip-symphony-program-at14](../static/nathan-ross/images/newsclip-symphony-program-at14.webp)
-
-And here is the proof: a program note announcing "Nathan Rothstein, brilliant boy violinist of
-Vancouver" as guest soloist with the Vancouver Symphony at the Malkin Memorial Shell in Stanley
-Park, playing the first and fourth movements of Lalo's *Symphonie Espagnole* — the same piece he'd
-go on playing, in one form or another, for years. The clipping still uses his birth name; the
-newspapers writing about him a few years later would call him "Ross."
-
-![heard-in-recital-at14](../static/nathan-ross/images/heard-in-recital-at14.webp)
 
 A critic's account of a solo recital that same year, at Kitsilano Junior High — the honest kind of
 review, praising his "excellent elasticity in bowing" while also noting where the playing still
 fell short. It's a useful corrective to the scrapbook instinct to keep only the raves: the family
 kept this one too.
 
+![heard-in-recital-at14](../static/nathan-ross/images/heard-in-recital-at14.webp)
+
+Shortly following the recital, the program note below for a larger stage announces: "Nathan Rothstein,
+brilliant boy violinist of Vancouver will be the guest artist at the next concert of the Vancouver Symphony
+orchestra in Stanley Park."
+
+![symphony-program-buzzer_1937_07_23](../static/nathan-ross/images/symphony-program-buzzer_1937_07_23.webp)
+
+Another clipping from the same Stanley Park engagement. Vancouver's music community was small enough
+that a fourteen-year-old's progress was news and thorough enough that the paper printed the pedigree.
+
 ![symphony-soloist-at14](../static/nathan-ross/images/symphony-soloist-at14.webp)
 
-Another clipping from the same Stanley Park engagement, this one naming his teachers — Arthur
-Gramm, and, "latterly," Jean de Rimanoczy. Vancouver's music community was small enough that a
-fourteen-year-old's progress was news, and thorough enough that the paper printed the pedigree.
+That concert proved to be a fortunate event for Nathan and represented a turning point in his musical
+career.  [Isaac Stern](https://en.wikipedia.org/wiki/Isaac_Stern), another up-and-comining violinist,
+was also present at that concert.  Isaac was so impressed with Nathan's playing that he put in a good
+word to his teacher [Naoum Blinder](https://en.wikipedia.org/wiki/Naoum_Blinder), who extended a full
+three-year scholarship to Nathan to come study with him in San Francisco.
 
-![awarded-scholarship](../static/nathan-ross/images/awarded-scholarship.webp)
-
-The turning point: a full scholarship from Naoum Blinder, concertmaster of the San Francisco
-Symphony — the same teacher, the clipping notes, who trained Isaac Stern. Stern himself, having
-heard young Rothstein play during a Vancouver visit, was the one who put in the word. Blinder
-predicted "a brilliant career... provided his future education is properly cared for."
+- _BTW, while writing this, I thought to listen to the pieces he played both at the recital and in
+  Stanley Park with the Vancouver Symphony.  I found a recording of Isaac playing the Lalo pieces on Apple Music
+  [here](https://music.apple.com/us/album/symphonie-espagnole-in-d-minor-op-21-ii-scherzando/1563679982?i=1563680347)
+  in case you want to hear it too._
 
 ![newsclip-violinist-study-in-south](../static/nathan-ross/images/newsclip-violinist-study-in-south.webp)
 
-So he went south, to study with Blinder in San Francisco — the beginning of the life away from
-Vancouver that would, eventually, take him to Los Angeles and never fully bring him back. The
-later NBC biography adds a detail this clipping doesn't: he and Stern, studying under the same
-teacher, ended up rooming together and practicing together in San Francisco.
+So he went south at age 14 to live as a guest in the Stern residence in San Francisco.  Having the same
+teachers, Isaac and Nathan practiced together and received formal education to the college entrance level
+from private tutors.  To support himself, Nathan played violin with the San Francisco Symphony Orchestra.
 
----
+![awarded-scholarship](../static/nathan-ross/images/awarded-scholarship.webp)
 
-The next stretch of the story is military, not musical — though, as the images ahead show, it
-never entirely stopped being both.
+Though he returned periodically to Vancouver during his scholarship, it turned out that Nathan's move to
+California was essentially permanent.  
+
+## World War II
+
+After the attack on Pearl Harbor, Nathan faced a brutal choice. He could sign an exemption from the
+American draft, which would permanently bar him from citizenship and risk deportation. Alternatively,
+he could return to Canada, a move that meant relinquishing his budding footing in the American classical
+music scene to face mandatory enlistment in the Canadian draft.
+
+So, Nathan took control of his fate.  Under wartime law, foreign nationals who honorably served in 
+the U.S. Armed Forces were granted a streamlined, rapid pathway to American citizenship.
+
+![army-technical-school-diploma](../static/nathan-ross/images/army-technical-school-diploma.webp)
+
+As evidenced in the diploma (above) from Army Air Forces Technical School at Sioux Falls Field, South
+Dakota, "Pfc Nathan Rothstein" received training as a Radio Operator / Mechanic.  This training set
+him up as the radio operator / machine gunner in a B-17 bomber over Germany less than a year later.
+
+![hero-musician-accolades](../static/nathan-ross/images/hero-musician-accolades.webp)
+
+I've always found it enigmatic that my father chose to interrupt his career so totally and at such risk
+to his own life. My best explanation is for a foreign national living as a guest, the psychological need
+to "prove" one's loyalty to an adopted home and peers (and maybe one's self?) would have been overwhelming.
+Enlisting in a highly dangerous, combat-heavy role was the ultimate statement of assimilation and bravery.
+
+Nathan stood at a crossroads where his scholarship had ended, his legal status in America was precarious,
+and a global war had shattered normal life.  To protect his dream of an American future, avoid the stigma
+of being a "draft dodger," and perhaps caught up in the romantic patriotism of the era, he chose the ultimate
+test of courage. He didn't just accept citizenship; he paid for it in the freezing, thin air over Germany,
+surviving 35 missions in a glass box target.  It was an incredibly dangerous path, but it speaks clearly
+of Nathan's resolve: he was a man willing to risk everything to secure the life, the citizenship, and the
+future career he wanted.
+
+![hero-airman-homecoming](../static/nathan-ross/images/hero-airman-homecoming.webp)
+![lucky-bastards-club](../static/nathan-ross/images/lucky-bastards-club.webp)
+
+By the time the clippings below ran, Nathan's life looked quite different.  He had not only participated in,
+but had _survived_ dozens of live combat missions over Germany, had been awarded an Air Medal for courage,
+earned his path towards naturalization as a U.S. Citizen, and also legally changed his surname to "Ross"
+(less jewish-sounding) on the advice of Mr. Blinder towards his future career in Hollywood.
 
 ![yuma-airfield-newpaper-cover](../static/nathan-ross/images/yuma-airfield-newpaper-cover.webp)
 ![yuma-airfield-paper-cover-note](../static/nathan-ross/images/yuma-airfield-paper-cover-note.webp)
 
 The cover of the *Airfoneer*, the base newspaper of Yuma Army Air Field, June 1945 — with T/Sgt.
 Nathan Ross on the front, headphones on, introducing records over the base's radio station, KGI.
-The violinist's ear and the entertainer's instinct clearly didn't go to waste in uniform; even
-between combat postings, he ended up back in front of a microphone.
-
-![army-technical-school-diploma](../static/nathan-ross/images/army-technical-school-diploma.webp)
-
-Further back in the timeline: his diploma from Army Air Forces Technical School at Sioux Falls
-Field, South Dakota, dated September 28, 1943 — "Pfc Nathan Rothstein" completing the course for
-Radio Operators and Mechanics. The training that would put him at a transmitter over Germany less
-than a year later started here, under his birth name still.
-
-![hero-airman-homecoming](../static/nathan-ross/images/hero-airman-homecoming.webp)
-
-By the time these clippings ran, the byline had changed to "Nathan Ross," and the story had gotten
-considerably more serious: radio operator and gunner on an 8th Air Force B-17, twice awarded the
-Air Medal with Oak Leaf Clusters "for courage, coolness and skill," cited by President Roosevelt
-for his bombardment group's raid on the Messerschmitt works at Regensburg. He came home on leave
-after completing thirty-five combat missions. San Francisco's musical community, one clipping
-notes, sent its best wishes to "T/Sgt. Nathan Ross, artist and soldier."
+The violinist's ear and the entertainer's instinct didn't go to waste in uniform; even between
+combat postings, he ended up back in front of a microphone.
 
 ![army-honorable-discharge](../static/nathan-ross/images/army-honorable-discharge.webp)
 
 And the discharge itself: Fort MacArthur, California, October 3, 1945 — "awarded as a testimonial
 of Honest and Faithful Service to this country." The war was over, and so, for Nathan Ross, was
-the Army. What came next was building a career in a city he hadn't grown up in, among people he
-hadn't yet met.
+the Army. 
+
+## Los Angeles
+
+Nathan resumed his career as a classical violinist in his postwar re-entry into professional life.
+His first few roles included first violinist for the Los Angeles Philharmonic under Alfred Wallenstein,
+and concert master for the NBC Symphony Orchestra under Henry Russel.
+
+What came next was building a new life in a city he hadn't grown up in, among people he hadn't yet met.
+
+![nathan-anne-connie-beach-party](../static/nathan-ross/images/nathan-anne-connie-beach-party.webp)
+
+A mutual friend, playing matchmaker, intentionally brought my parents together by organizing a beach outing
+for them. You can see the two of them on the right side of the photograph above—standing less than a mile
+from where they would eventually settle down to raise our family.
+
+They hit it off at that meeting on the beach.  Because they traveled in Hollywood circles (as my to-be mom
+was a fashion model), we have pictures of them together in fashionable places such as the one below.
 
 ![nathan-anne-party-date](../static/nathan-ross/images/nathan-anne-party-date.webp)
 
-A restaurant table, candles, a young couple caught mid-glance rather than posed — Nathan and, I
-believe, Anne, the woman later named as his wife in his obituary. *(I don't have independent
-confirmation of the date or occasion of this photograph — if you know the story behind it, it
-belongs here.)*
+## Postwar Homecoming
 
-![scores-at-pop-concert](../static/nathan-ross/images/scores-at-pop-concert.webp)
+After dating my future mother for a while, Nathan returned to Vancouver to visit his family and was
+welcomed in a hero's homecoming.
 
-Vancouver again — a homecoming, this time as the returning star rather than the local boy. Billed
-now as "outstanding American violinist of the San Francisco Orchestra," he came back as guest
+![home-for-plaudits-soup](../static/nathan-ross/images/home-for-plaudits-soup.webp)
+
+Billed as an "outstanding American violinist of the San Francisco Orchestra," he performed as guest
 soloist with the Vancouver Symphony under Jacques Singer, playing the Bruch G-minor Concerto. The
 critic who'd covered him as a boy was still there to cover him as a man: "From a very stocky little
 boy he has grown into a handsome young man nearly six feet in height."
 
+![scores-at-pop-concert](../static/nathan-ross/images/scores-at-pop-concert.webp)
+![charms-1500-pop-goers](../static/nathan-ross/images/charms-1500-pop-goers.webp)
+
+Towards the end of his visit in the town he grew up in, Nathan faced another personal dilemma.
+You can read his own words about his heartfelt identity crisis in
+[the letter to his future wife](../static/nathan-ross/images/1948-jul31-letter-to-anne.pdf).
+
+The long trip home gave Nathan the time he needed to reflect. By the time he returned to Hollywood,
+his mind was made up: he was going to marry my mother. Both of them were rebels in their own families,
+choosing to follow their hearts rather than bow to the expectations and preplanned futures their parents
+had laid out for them.
+
+After his parents learned of — and learned to accept — the marriage, Nathan's dad wrote him
+[this touching letter](../static/nathan-ross/images/1950-april4-letter-from-max.pdf)
+which I find to be incredibly heartwarming and validating for my own sake.
+
+## Hollywood Here we Come!
+
 ![concertmaster-nbc-symphony](../static/nathan-ross/images/concertmaster-nbc-symphony.webp)
 
-The fullest single account of his career appears here, written when he was twenty-seven and
+The fullest single account of Nathan's career appears here, written when he was twenty-seven and
 concertmaster of the NBC Symphony Orchestra in Los Angeles: the father who first taught him, the
-child prodigy years, the Blinder scholarship and the friendship with Stern, the thirty-five
+child prodigy years, the Blinder scholarship and the friendship with Stern, the B-17 bombing
 missions over Germany, and — after the war — first violinist with the Los Angeles Philharmonic
-under Alfred Wallenstein, then, a year later, the NBC concertmaster post itself. *(If age 27 here
-is accurate, it places his birth year at roughly 1922 — I haven't confirmed that independently.)*
+under Alfred Wallenstein, then, a year later, the NBC concertmaster post itself.
 
-[Bekins Orchestra Radio Clip](https://pub-cade15fc7c0b4b1da577523fe86c83c7.r2.dev/bekins-full-broadcast-mono.m4a)
-
-A recording from that Los Angeles studio-orchestra world — the broadcast work that, alongside the
-concert stage, became the backbone of a working musician's career in postwar Hollywood.
-
-![lucky-bastards-club](../static/nathan-ross/images/lucky-bastards-club.webp)
-
-*(This certificate is dated December 15, 1944 — during his combat tour, before several of the
-images already shown above. I've kept it in the position it appeared in the source list rather
-than resequencing it; let me know if you'd like it moved earlier for strict chronology.)* The
-"Lucky Bastard Club" certificate, awarded by his squadron on completing twenty-five sorties over
-Germany and back — gallows humor as a coping mechanism, framed with the same care as the discharge
-papers. The handwritten postscript: "P.S. HE COMPLETED 33. 8 FOR JIMMY" — a line whose meaning I'd
-like to understand better before writing anything more about it.
+- _[Listen to the Bekins Orchestra Radio clip](https://pub-cade15fc7c0b4b1da577523fe86c83c7.r2.dev/bekins-full-broadcast-mono.m4a)_
 
 ![jfk-thanks](../static/nathan-ross/images/jfk-thanks.webp)
 
-A letter dated March 19, 1960, on "John F. Kennedy for President" letterhead, thanking Nathan Ross
-— by then living at 557 Toyopa Drive, Pacific Palisades — for his help making the recording of
-"High Hopes," Frank Sinatra's Kennedy campaign anthem. A small, specific window into the studio-
-musician life the NBC biography only gestured at: this is what "concertmaster of the NBC Symphony"
-turned into, day to day, in Los Angeles session work.
+Above is a letter dated March 19, 1960, on "John F. Kennedy for President" letterhead, thanking Nathan Ross
+for his help making the recording of "High Hopes," Frank Sinatra's Kennedy campaign anthem. A small, specific
+window into the studio-musician life the NBC biography only gestured at: this is what "concertmaster of the NBC
+Symphony" turned into, day to day, in Los Angeles session work.
 
 ![with-so-and-so](../static/nathan-ross/images/with-so-and-so.webp)
 
-*(This is the image you asked me to research separately — see my note below. I don't have a
-confirmed identification for the other three men or the occasion, so I've left this paragraph
-short rather than guess.)* A curtain call after a performance, white tie, four men on stage —
-Nathan Ross, violin still in hand, looking down and to his right while a conductor raises an arm to
-the applause.
+I thought this was a cool picture, so I decided to include it.  However, I have no idea where it
+was taken or who is in it besides Nathan.  If you can identify these folks, please let me know!
 
-[L.A. County Museum Concert: Chausson Concerto Op. 21](https://pub-cade15fc7c0b4b1da577523fe86c83c7.r2.dev/chausson-concerto-op21.m4a)
+## Studio Recordings
 
-A recording of Nathan performing the Chausson *Poème* (Op. 21) at the Los Angeles County Museum —
-concert work continuing alongside the studio broadcasts, decades after the Vancouver stages where
-this all began.
+There were a number of factors that influenced Nathan's decision to join the recording industry in 
+Los Angeles instead of continuing to pursue concertizing and staying in the classical music scene.
+
+First, the war interrupted his prime time to "launch" his solo career.  After the war, he was older
+than the typical "up-and-coming young artist" and by this time had nobody to sponsor (finance) the
+necessary concert tour of Europe.  Mostly though (according to my mom), "Nathan was so thankful to
+come through the war alive and unmaimed that he just wanted a simple, regular home and family life,
+free of the stresses of constant travel and career pressures."
+
+- [Listen to some well-known recordings in which Nathan Ross played violin](https://noodnik2.github.io/music-session-explorer/#/?artist=Nathan+Ross)
+
+## Continuing in The Classical Music Scene
+
+As much as Nathan enjoyed the predictability and the relatively high pay and other benefits of working
+primarily in the recording industry, most often for popular artists, he didn't always like the music he
+was playing there.  I remember he would come home often and ask us to "turn down that music – it's what
+I hear in my headphones all day at work!"
+
+Nathan was able to continue performing and enjoying his connection to classical music through intimate
+chamber music gatherings both at our house and at nearby colleagues' homes; or by filling in when needed
+in the Los Angeles Philharmonic; or by participating in various local classical organizations such as the
+[Los Angeles Baroque Players](https://cdnc.ucr.edu/?a=d&d=BMTN19630116.1.5&e=-------en--20--1--txt-txIN--------),
+the Los Angeles County Museum Chamber Music Society, the Southern California Chamber Music Society,
+the Musical Arts Society of LaJolla, and others.
+
+I fondly remember family trips abroad to watch my dad perform in famous venues like La Scala and Royal Albert Hall.
+
+One of my favorite recordings of Nathan's is one my mother taped from a radio broadcast of Chausson's _Concert for
+Violin, Piano, and String Quartet_ (Op. 21) at the Los Angeles County Museum of Art. I'm happy to have found the
+cassette and been able to digitize and upload it; click the link to hear it:
+
+- [Listen to L.A. County Museum Concert: Chausson Concerto Op. 21](https://pub-cade15fc7c0b4b1da577523fe86c83c7.r2.dev/chausson-concerto-op21.m4a)
+
+## Obituary
+
+Nathan had a lot of dental work during his life and had many fillings.  While servicing one of those fillings in
+the early 1980s, a suspicious infection was found by the dentist and later confirmed to be from a malignancy.
+
+An aggressive form of small-cell cancer eventually led to his rapid deterioration and untimely death in 1984.
 
 ![sheldon-sanov-obit](../static/nathan-ross/images/sheldon-sanov-obit.webp)
 
-And the close of the story, in the words of a colleague rather than his own: Sheldon Sanov's
-tribute in the Recording Musicians Association newsletter, marking Nathan's death on March 2,
-[year not shown in this clipping — the surrounding issue is dated April 1984]. "Nate was truly a
-musicians' musician in his love and dedication to the art." He is survived, the tribute says, by
-his wife Ann and family — the same Anne, I believe, from the restaurant table decades earlier.
+And the close of the story, in the words of a colleague rather than his own: Sheldon Sanov's tribute in the
+Recording Musicians Association newsletter, marking Nathan's death on March 2, 1984. "Nate was truly a
+musicians' musician in his love and dedication to the art."
+

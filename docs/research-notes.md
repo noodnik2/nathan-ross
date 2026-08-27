@@ -1,0 +1,14 @@
+# Research
+
+Here are some notes related to my research.
+
+## Sources
+
+- [UCR's California Digital Newspaper Collection](https://cdnc.ucr.edu/)
+  - [National Enterprises](https://cdnc.ucr.edu/?a=d&d=VTNH19480612.1.14&srpos=9&e=------194-en--20--1--txt-txIN-%22Nathan+Ross%22-------)
+    - Apparently, Nathan and several others (including Nelson Riddle and Henry Russel) created a business under
+      the fictitious name of "National Enterprises" at the end of May 29th, 1948, and these are the records.
+  - [Naoum Blinder Dies](https://cdnc.ucr.edu/?a=d&d=OT19651122.1.61&srpos=14&e=------196-en--20--1--txt-txIN-%22Nathan+Ross%22-------)
+    - Quotes Nathan as one of his students
+  - [Baroque Players - 1963](https://cdnc.ucr.edu/?a=d&d=PASO19630116.2.53&srpos=4&e=------196-en--20--1--txt-txIN-%22Nathan+Ross%22-------)
+    - Article with picture of Nathan
