@@ -4,6 +4,12 @@
 
 The following issues are thought to be needed and are "parked" here for future cycles:
 
+### Ideas
+
+- Load the detail links for recordings in the background when on the "recordings list"
+  page, and as they're retrieved, display their count in parentheses alongside each.
+  - Cache those links (fixed size LRU) so they can be displayed immediately.
+- Display a link to Provider(s) on the main page so that users can go explore on their own. 
 
 ## In Progress
 

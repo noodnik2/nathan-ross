@@ -24,5 +24,6 @@ until after the completion of the MSE application.
 - [Milestone 5: MusicBrainz Recording Details Fetch](./milestones/milestone5.md)
 - [Milestone 6: Recognized-Service Link Presentation & App Icon](./milestones/milestone6.md)
 - [Milestone 7: Strawman "Static Assets" Deployment](./milestones/milestone7.md)
+- [Milestone 8: Slider UI Alternative for "Static Assets" Deployment](./milestones/milestone8.md)
 
 For the current implementation status of each, see [TODOs](./todo-list.md) rather than this index.
