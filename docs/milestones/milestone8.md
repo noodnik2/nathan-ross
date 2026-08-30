@@ -49,13 +49,12 @@ Also:
 - For anything but simple gists of UI logic expressed in Javascript, Typescript should be used as the
   source format, and standard build and deployment mechanisms and frameworks should be employed.
 
-## Design Discussion Notes (In Progress — Not Yet Fully Approved)
+## Design Discussion Notes (Approved)
 
-**Status:** design has been discussed across several rounds with the developer; most pieces are
-agreed, but there has been no single "yes, build this" confirmation covering the complete,
-consolidated picture yet (per CLAUDE.md's "Design before code" guardrail), and the developer had
-"some lesser important questions" still queued when this section was written. Resume by presenting
-one consolidated summary of everything below and getting explicit go-ahead before starting TDD.
+**Status:** design was discussed across several rounds with the developer; a consolidated summary
+of the complete picture was presented and the developer gave explicit go-ahead to start TDD. Only
+one cosmetic, non-blocking item remains open (item 2 under Open Items below) and does not gate
+implementation.
 
 ### Full navigability guarantee (hard constraint)
 
@@ -77,8 +76,18 @@ choices below, in particular:
   break a naive index-based mapping between slide position and anchor if not accounted for.
 - **Enlarged/zoomed image view:** must not silently swallow left/right/up/down input such that the
   user feels stuck — see Open Items below (pending decision).
-- **Touch/mobile:** the guarantee applies to touch input too, not just mouse/keyboard — see Open
-  Items below (pending decision on whether mobile layout is in scope for this Milestone).
+- **Touch/mobile:** the guarantee applies to touch input too, not just mouse/keyboard. In scope for
+  this Milestone (decided below) — carousel swipe (Swiper handles natively) and text-panel
+  touch-scroll (native), plus a layout that reflows sanely on narrow screens.
+
+**Decided:**
+- Carousel does **not** loop — stops at the first/last slide (simpler, safe index-to-anchor
+  mapping; standard disabled/hidden-arrow affordance signals the boundary).
+- Swiper's default `pageUpDown: true` stays as-is — Page Up/Down drives the carousel, same as
+  Left/Right.
+- The enlarged/zoomed image view is non-blocking — left/right/up/down keep navigating underneath
+  it (closing/updating the zoom as needed); nothing captures input until a manual dismissal.
+- Touch/mobile and narrow-viewport layout are in scope for this Milestone, not deferred.
 
 ### Content model — deriving slides from `docs/visual-chronology.md`
 
@@ -244,19 +253,11 @@ now-superseded proposal).
 ### Open items
 
 1. ~~Developer had further, lower-priority questions still queued when this section was written —
-   ask directly before finalizing.~~ Resolved this round: full-navigability guarantee, "any heading
-   level" for the context strip, and Swiper license/effect-swap flexibility — see the new
-   subsections above.
+   ask directly before finalizing.~~ Resolved: full-navigability guarantee, "any heading level" for
+   the context strip, Swiper license/effect-swap flexibility, loop behavior, `pageUpDown`, zoom
+   input-capture, and mobile scope — see subsections above.
 2. Visual treatment of the text-only "card" slides is described conceptually but not specified.
    Non-blocking — cosmetic, can be resolved during implementation.
-3. Whether Swiper's default `pageUpDown: true` should stay as-is or be reserved for the text panel.
-4. Carousel boundary behavior: loop (wrap around at the ends) vs. stop at the first/last slide —
-   also affects how carousel-index-to-anchor mapping is kept valid (see Full navigability
-   guarantee above).
-5. Whether the enlarged/zoomed image view should let left/right/up/down keep navigating underneath
-   it, or capture input until dismissed (Escape/click-away) — relevant to the full-navigability
-   guarantee.
-6. Whether touch/mobile and narrow-viewport layout are in scope for this Milestone, or explicitly
-   desktop-first with mobile refinement deferred.
-7. Non-blocking aside: what tool/process originally produced the `.webp` images (for reference only).
-8. No single consolidated approval yet — see Status above.
+3. ~~Non-blocking aside: what tool/process originally produced the `.webp` images (for reference
+   only).~~ Answered: [`cmd/cp2webp.sh`](../../cmd/cp2webp.sh) — `cwebp -q 75 -resize 1920 0`
+   (see [`cmd/README.md`](../../cmd/README.md) for the rest of the image/media toolset).
