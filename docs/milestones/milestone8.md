@@ -57,6 +57,29 @@ consolidated picture yet (per CLAUDE.md's "Design before code" guardrail), and t
 "some lesser important questions" still queued when this section was written. Resume by presenting
 one consolidated summary of everything below and getting explicit go-ahead before starting TDD.
 
+### Full navigability guarantee (hard constraint)
+
+Every slide and every piece of source text in `docs/visual-chronology.md` must always be reachable
+by the user — never blocked by a corner case of keyboard (left/right for the carousel, up/down for
+the text), mouse (click/swipe/scroll-wheel over either region), or touch. This governs the design
+choices below, in particular:
+
+- **Text-panel scroll-clamp edge case:** the scrollspy model (see Sync Mechanism) marks a slide
+  active when its anchor paragraph's top crosses the top of the text-panel viewport. For an anchor
+  near the *end* of the document, there may not be enough trailing content to scroll that anchor all
+  the way to the top of the viewport — which would leave the last slide(s) permanently unreachable
+  from the text panel. Planned fix: pad the bottom of the text panel by roughly one viewport-height
+  (or clamp: treat "scrolled to its maximum" as equivalent to the final anchor being active), so the
+  last anchor can always reach the top. No symmetric issue exists at the start — position 0 trivially
+  satisfies "first anchor at top."
+- **Carousel index/anchor mapping must stay valid** regardless of whether the carousel loops (see
+  Tech Stack decision, pending) — Swiper's loop mode clones slide DOM nodes internally, which can
+  break a naive index-based mapping between slide position and anchor if not accounted for.
+- **Enlarged/zoomed image view:** must not silently swallow left/right/up/down input such that the
+  user feels stuck — see Open Items below (pending decision).
+- **Touch/mobile:** the guarantee applies to touch input too, not just mouse/keyboard — see Open
+  Items below (pending decision on whether mobile layout is in scope for this Milestone).
+
 ### Content model — deriving slides from `docs/visual-chronology.md`
 
 No forked/duplicated content: both `/nathan-ross` (existing) and `/nathan-ross-carousel` (new)
@@ -103,9 +126,13 @@ consistent by hand.)
   second slide of a cluster is carousel-navigation-only (arrow key/swipe/wheel-over-carousel). The
   developer explicitly accepted this ("to the extent possible") as a reasonable compromise.
 - **Section-header context strip:** a small persistent UI element above the text panel shows the
-  nearest preceding `##` heading text for whatever's currently in view, updated by the same sync
-  logic. For the intro content (before any `##` heading — the H1 + its lead paragraphs), the strip
-  defaults to showing the H1 title ("Nathan Ross – My Dad") rather than staying empty.
+  nearest preceding heading text — at *any* Markdown heading level (H1–H6), not just H2 — for
+  whatever's currently in view, updated by the same sync logic. (The current document only has H1
+  and H2 headings, so this is a forward-looking generalization, not yet observable in output; it's
+  unrelated to the H2-scoped rule for synthetic zero-image card slides below, which stays H2-only
+  by design since it governs structural chunking, not the header strip's display text.) For the
+  intro content (before any heading at all), the strip defaults to showing the H1 title ("Nathan
+  Ross – My Dad") rather than staying empty.
 
 ### Input handling — no click-to-focus needed
 
@@ -151,6 +178,15 @@ now-superseded proposal).
   [API docs](https://swiperjs.com/swiper-api), MIT licensed, TypeScript-typed) as the carousel
   library — its `EffectCoverflow` module (matches the "Coverflow Carousel" example linked above),
   plus `Keyboard`, `Mousewheel`, and `Lazy` modules.
+  - **Confirmed free:** MIT license, no paid tier — full commercial use permitted, verified against
+    the project's own LICENSE file (not just marketing copy).
+  - **Confirmed effect-swap flexibility:** all effect modules (`Coverflow`, `Cards`, `Cube`, `Fade`,
+    `Flip`, `Creative`) are selected via the single `effect` option plus an effect-specific options
+    object (e.g. `coverflowEffect`); interaction modules (`Keyboard`, `Mousewheel`, `Lazy`) are
+    independent of which effect is active and need no reconfiguration when switching. Practical
+    implication for our code: as long as we don't hardcode Coverflow-specific options outside the
+    carousel's own setup/config call, switching to a different effect (or a plugin) later stays a
+    localized change.
 - **Vite + TypeScript**, matching the convention already used by `mse-spa/`, rather than the plain-JS
   approach used by the *existing* Markdown→HTML static-assets renderer — per this milestone's own
   instruction that non-trivial UI logic gets TypeScript and standard tooling.
@@ -207,9 +243,20 @@ now-superseded proposal).
 
 ### Open items
 
-1. Developer had further, lower-priority questions still queued when this section was written —
-   ask directly before finalizing.
+1. ~~Developer had further, lower-priority questions still queued when this section was written —
+   ask directly before finalizing.~~ Resolved this round: full-navigability guarantee, "any heading
+   level" for the context strip, and Swiper license/effect-swap flexibility — see the new
+   subsections above.
 2. Visual treatment of the text-only "card" slides is described conceptually but not specified.
+   Non-blocking — cosmetic, can be resolved during implementation.
 3. Whether Swiper's default `pageUpDown: true` should stay as-is or be reserved for the text panel.
-4. Non-blocking aside: what tool/process originally produced the `.webp` images (for reference only).
-5. No single consolidated approval yet — see Status above.
+4. Carousel boundary behavior: loop (wrap around at the ends) vs. stop at the first/last slide —
+   also affects how carousel-index-to-anchor mapping is kept valid (see Full navigability
+   guarantee above).
+5. Whether the enlarged/zoomed image view should let left/right/up/down keep navigating underneath
+   it, or capture input until dismissed (Escape/click-away) — relevant to the full-navigability
+   guarantee.
+6. Whether touch/mobile and narrow-viewport layout are in scope for this Milestone, or explicitly
+   desktop-first with mobile refinement deferred.
+7. Non-blocking aside: what tool/process originally produced the `.webp` images (for reference only).
+8. No single consolidated approval yet — see Status above.
