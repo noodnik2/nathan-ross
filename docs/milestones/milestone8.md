@@ -2,8 +2,8 @@
 
 The UI currently serving as the "front-end" for the Nathan Ross "static" website's primary page (i.e., a
 transformation of the [Visual Chronology](../../docs/visual-chronology.md) document) needs improvement.
-A single scrollable document with large, fixed-size images interspersed with plain text is not as readable,
-interactive or modern as is desired. 
+What we have now - a single scrollable document with large, fixed-size images interspersed with plain 
+ext - is not as readable, interactive or modern as is desired. 
 
 In this Milestone, we'd like to plan and implement an "Image Slider UI" alternative for viewing this chronology.
 The user will continue to be able to scroll forward and backward across the images and related text using (for
@@ -37,3 +37,14 @@ Also:
   forwards and backwards by interacting with either the text area or the image carousel.
 - Desired: the standard, reduced-side images seen in the carousel can be enlarged to their full size e.g., 
   when the user clicks on the image, or maybe even when the user hovers over the image in focus.
+
+## Functional Points To Consider
+
+- The new UI should be accessed via the `/nathan-ross-carousel` URI path.  The existing `/nathan-ross`
+  URI path should continue to function without change.
+- The `static/Makefile` targets `build` and `deploy` should be augmented to build and deploy both UIs.
+- To the extent that CSS or Javascript (or other) source artifacts are used in the solution, they should
+  be stored under the appropriate subfolder within `static/nathan-ross`, as idiomatic for the paradigm
+  or framework in which they're used.
+- For anything but simple gists of UI logic expressed in Javascript, Typescript should be used as the
+  source format, and standard build and deployment mechanisms and frameworks should be employed.
