@@ -48,3 +48,168 @@ Also:
   or framework in which they're used.
 - For anything but simple gists of UI logic expressed in Javascript, Typescript should be used as the
   source format, and standard build and deployment mechanisms and frameworks should be employed.
+
+## Design Discussion Notes (In Progress — Not Yet Fully Approved)
+
+**Status:** design has been discussed across several rounds with the developer; most pieces are
+agreed, but there has been no single "yes, build this" confirmation covering the complete,
+consolidated picture yet (per CLAUDE.md's "Design before code" guardrail), and the developer had
+"some lesser important questions" still queued when this section was written. Resume by presenting
+one consolidated summary of everything below and getting explicit go-ahead before starting TDD.
+
+### Content model — deriving slides from `docs/visual-chronology.md`
+
+No forked/duplicated content: both `/nathan-ross` (existing) and `/nathan-ross-carousel` (new)
+render from this single Markdown file.
+
+- Every image in the document becomes one carousel slide. Adjacent images are never merged into one
+  slide, even when there's no text between them.
+- **Anchor definition** (a starting point, expected to evolve as an implementation detail): each
+  slide's anchor is the single paragraph immediately preceding its image (back to the previous
+  image/heading).
+  - When two images have no distinct preceding paragraph between them — in the current file: lines
+    118–119 (`hero-airman-homecoming`/`lucky-bastards-club`), 126–127 (the two Yuma airfield images),
+    171–172 (`scores-at-pop-concert`/`charms-1500-pop-goers`) — both slides share the same anchor.
+    This is intentional (see Sync Mechanism below for the consequence), not a bug.
+  - The very first image (line 3, before any heading or paragraph) has no preceding paragraph; its
+    anchor is document start (top of document / the H1).
+- Any `##` (H2) section containing **zero** images gets a synthetic text-only "card" slide in the
+  carousel (title only, no photo), anchored at that heading. In the current document this applies to
+  exactly two sections: "Studio Recordings" and "Continuing in The Classical Music Scene." This is a
+  general, deterministic rule — any future zero-image H2 section gets one automatically — not a
+  one-off special case for these two. Rationale: gives the sync mechanism a checkpoint instead of one
+  long, image-static scroll region between `with-so-and-so` and the obituary photo. The visual
+  treatment of these card slides is not yet specified.
+- The text panel renders the same Markdown with images stripped out of the HTML (they're already
+  shown in the carousel) — headings, paragraphs, and inline links (PDF letters, MusicBrainz/audio
+  links, Wikipedia links, etc.) render normally and stay live/clickable.
+
+### Sync mechanism
+
+One canonical mapping function drives both directions: **the anchor paragraph's top aligns to the
+top of the text-panel viewport.** This is a standard "scrollspy" model — the active slide is
+whichever anchor paragraph has most recently crossed the top of the text-panel viewport. (An earlier
+draft of this design proposed bottom-alignment; that was corrected during review — top-alignment is
+what makes text→slide and slide→text the same function instead of two that must be kept
+consistent by hand.)
+
+- **Slide → text:** navigating the carousel scrolls the text panel so the active slide's anchor
+  paragraph is at the top.
+- **Text → slide:** scrolling the text panel updates the active slide via the same scrollspy check.
+- **Feedback-loop guard:** sync updates are one-directional per user gesture — the region that
+  originated an interaction is never redundantly re-scrolled by its own resulting update.
+- **Consequence of shared anchors:** text-driven scrolling can only ever resolve to the *first*
+  slide of a same-anchor cluster (both images map to the same scrollspy position). Reaching the
+  second slide of a cluster is carousel-navigation-only (arrow key/swipe/wheel-over-carousel). The
+  developer explicitly accepted this ("to the extent possible") as a reasonable compromise.
+- **Section-header context strip:** a small persistent UI element above the text panel shows the
+  nearest preceding `##` heading text for whatever's currently in view, updated by the same sync
+  logic. For the intro content (before any `##` heading — the H1 + its lead paragraphs), the strip
+  defaults to showing the H1 title ("Nathan Ross – My Dad") rather than staying empty.
+
+### Input handling — no click-to-focus needed
+
+Verified against Swiper's own docs (see Tech Stack below): Swiper's Keyboard module listens
+globally whenever the carousel is in the viewport (default `onlyInViewport: true`) — it does **not**
+require a click/DOM-focus step first. Decision: mirror that same "always listening, no activation
+gesture" pattern for the text panel too, rather than a tabindex/click-to-focus model (an earlier,
+now-superseded proposal).
+
+- **Carousel:** Swiper's Keyboard module handles Left/Right globally out of the box.
+- **Text panel:** a small custom global keydown listener for Up/Down scrolls the text panel
+  (hand-rolled — a plain scrollable `<div>` doesn't get "always listening" arrow-key behavior
+  natively; native arrow-key scrolling only applies to whatever element currently holds DOM focus,
+  a different, focus-gated mechanism).
+- **Mousewheel:** purely pointer-position-based, needs no special handling — Swiper's Mousewheel
+  module already only fires when hovering the carousel container; the browser's native wheel scroll
+  handles the text panel when hovering it. These never contend for the same events.
+- Net effect: the user never has to click into either control. There is no "active region" concept
+  in the final design.
+- Minor open/non-blocking note: Swiper's `pageUpDown` option defaults to `true`, binding Page
+  Up/Down to carousel navigation too. Left as default unless the developer wants those keys reserved
+  for the text panel instead.
+
+### Images
+
+- `/nathan-ross-carousel` references the existing images via a relative path back to the existing
+  folder (e.g. `../images/...` from within `static/nathan-ross/carousel/`) rather than duplicating
+  them — one copy of each asset shared between both deployed pages.
+- Sizing is CSS-only: reduced/thumbnail size for the carousel display, full natural size in the
+  click/hover-expanded view. No resize/optimize build step planned initially.
+- Swiper's Lazy module renders only nearby slides' real `<img src>` at a time, so the ~50 originals
+  (each up to ~1MB, up to 1920×2560px) aren't all fetched at once.
+- No existing in-repo tooling was found for generating resized/optimized image variants (searched for
+  sharp/imagemagick/cwebp/PIL references — none present; the checked-in `.webp` files appear to be
+  the only artifacts). A responsive `srcset` step is a deferred follow-up if real performance issues
+  surface, not built speculatively now.
+- Open/non-blocking question for the developer: what external tool/process was originally used to
+  produce the `.webp` files? Not needed for this design, asked only for reference.
+
+### Tech stack & architecture
+
+- **[Swiper](https://swiperjs.com/)** ([GitHub](https://github.com/nolimits4web/swiper),
+  [API docs](https://swiperjs.com/swiper-api), MIT licensed, TypeScript-typed) as the carousel
+  library — its `EffectCoverflow` module (matches the "Coverflow Carousel" example linked above),
+  plus `Keyboard`, `Mousewheel`, and `Lazy` modules.
+- **Vite + TypeScript**, matching the convention already used by `mse-spa/`, rather than the plain-JS
+  approach used by the *existing* Markdown→HTML static-assets renderer — per this milestone's own
+  instruction that non-trivial UI logic gets TypeScript and standard tooling.
+- **Source location:** nested under the *existing* component folder per this milestone's explicit
+  instruction ("stored under the appropriate subfolder within `static/nathan-ross`") — i.e.
+  `static/nathan-ross/carousel/` (its own `package.json`, `vite.config.ts`, `src/`), **not** a new
+  sibling folder like `static/nathan-ross-carousel/`. This nesting is also what makes the relative
+  reference to the shared images natural.
+- The Markdown→slide-model derivation logic (the anchor algorithm above) should be a plain
+  TypeScript module co-located under `static/nathan-ross/carousel/src/lib/` (e.g.
+  `chronologyModel.ts`), unit-tested with Vitest — the natural TDD/Red-phase starting point, since
+  it's pure/functional with no DOM dependency. Tests should assert structure (slide count, which
+  slides share an anchor, where text-card slides land, ordering) against the real
+  `docs/visual-chronology.md`, not literal prose content, since the chronology text is expected to
+  keep changing.
+- A small build-time script (run via `vite-node`/`tsx`, not a hand-written `.mjs` like today's
+  `render.mjs`, since this parsing logic is non-trivial rather than "a simple gist") invokes that TS
+  module against `docs/visual-chronology.md` at build time and writes the generated slide data
+  consumed by the Vite build.
+- **Look & feel:** reuse the target site's (noodnik2.github.io) color palette and typography loosely
+  for visual consistency, but the carousel stays a self-contained bundle — not the full jQuery/Forty
+  wrapper/header/nav/footer skeleton — matching what's already true of the *existing* `/nathan-ross`
+  page today (which itself doesn't implement that skeleton, despite `docs/static-assets.md`'s
+  Conformance section nominally calling for it). Developer is flexible here: keep a consistent look
+  and build atop what's there where practical, but deviate where that would meaningfully restrict
+  implementation choices, as long as the end result doesn't look out of place next to the rest of
+  the target GitHub Pages site.
+
+### Deployment / Makefile
+
+- `static/Makefile`'s `build` and `deploy` targets become multi-component: still **one**
+  `_setup_target` clone and **one** `_push_target` commit+push per `make deploy` invocation (from
+  `../Makefile.gh-pages`), but the copy step copies both build outputs — `nathan-ross/dist` → target
+  `nathan-ross/` subfolder, and `nathan-ross/carousel/dist` → target `nathan-ross-carousel/`
+  subfolder — into the same clone before the single push.
+- This single-clone/single-push structure is important, not incidental: it's what guarantees the
+  sibling-image relative reference always resolves correctly in the published output regardless of
+  deploy history/ordering.
+- `/nathan-ross-carousel` is a new URL path; `/nathan-ross` continues to function unchanged.
+
+### Explicitly superseded/rejected ideas (do not resurrect without new reasoning)
+
+- Merging adjacent same-anchor images into a single multi-image slide — rejected; each image is
+  always its own slide.
+- Bottom-aligning the anchor paragraph in the text viewport — corrected to top-alignment (see Sync
+  Mechanism).
+- Click-to-focus/tabindex-based routing of keyboard input between the two controls — superseded once
+  Swiper's default global-listening behavior was confirmed against its own docs.
+- Defensively scoping Swiper's Mousewheel module "to prevent conflict" with the text panel — turned
+  out unnecessary; it's inherently hover-scoped already.
+- A separate `slides.json`/duplicated-content data source for the carousel — rejected in favor of
+  deriving everything from `docs/visual-chronology.md` via the deterministic parser, to preserve a
+  single source of truth.
+
+### Open items
+
+1. Developer had further, lower-priority questions still queued when this section was written —
+   ask directly before finalizing.
+2. Visual treatment of the text-only "card" slides is described conceptually but not specified.
+3. Whether Swiper's default `pageUpDown: true` should stay as-is or be reserved for the text panel.
+4. Non-blocking aside: what tool/process originally produced the `.webp` images (for reference only).
+5. No single consolidated approval yet — see Status above.
