@@ -57,6 +57,72 @@ of the complete picture was presented and the developer gave explicit go-ahead t
 one cosmetic, non-blocking item remains open (item 2 under Open Items below) and does not gate
 implementation.
 
+## Implementation Status (read this first when resuming)
+
+**Working end-to-end right now:** a real Swiper coverflow carousel, showing real chronology images
+in the correct order, keyboard-navigable. Verified live via `make run-local` (see below) plus a
+headless-browser screenshot — not just "tests pass."
+
+**Built so far, all under `static/nathan-ross/carousel/`** (own `package.json`/`vite.config.ts`/
+`tsconfig.json`/`Makefile`, nested inside the existing `static/nathan-ross/` component per the design
+above; 16 Vitest tests passing across 3 files):
+
+- **`src/lib/relativePath.ts`** — `rebasePath(rawPath, sourceDir, targetDir)`, pure string-based POSIX
+  path math with **no dependency on Node's `path` module** (deliberate: it runs both at build/test
+  time in Node and at runtime in the browser, since `deriveSlides` is currently called client-side —
+  see `main.ts` below). Rewrites the chronology doc's `../static/nathan-ross/images/...` references
+  (relative to `docs/`) into `../images/...` (relative to wherever the carousel page is served from).
+- **`src/lib/chronologyModel.ts`** — `deriveSlides(markdown, rebaseImageSrc?)`. Full TDD history is in
+  git; the load-bearing points to know before touching this file again:
+  - `ImageSlide`/`CardSlide` both carry `anchorId` and `sectionHeading` (nearest preceding heading at
+    *any* level, per the developer's clarification — naturally defaults to the H1 title for intro
+    content with no special-casing needed, since heading tracking starts at the H1).
+  - **Anchor ids are minted exactly once, directly onto the markdown-it tokens** (`token.attrSet('id',
+    ...)`), not recomputed from a parallel counter. **This is a hard constraint on the next piece of
+    work (the text-panel renderer): it must render from these same annotated tokens, not re-parse the
+    raw Markdown and recompute its own ids** — two independent id-minting implementations will drift
+    (a real, previously-caught bug class — see the softbreak fix below) and silently break the
+    scrollspy sync mechanism, since the text panel's element ids and the slides' `anchorId`s would stop
+    matching. `deriveSlides` doesn't yet expose the annotated tokens publicly (no test has needed that
+    yet) — add that surface, driven by a test, when building the text renderer.
+  - A paragraph holding only images joined by a markdown-it `softbreak` (two image lines with no blank
+    line between them) is deliberately excluded from anchor-minting — an earlier version of this code
+    let such a paragraph mint a "phantom" anchor id that no real text paragraph would ever get, which
+    could hand a later image an id matching nothing in the rendered text. Covered by a regression test;
+    don't reintroduce the bug by simplifying the `hasTextContent` check.
+  - `rebaseImageSrc` is an injected callback (default identity), not hardcoded — keeps this module
+    decoupled from any specific directory layout. Tested both via synthetic fixtures and against the
+    real `docs/visual-chronology.md` (confirms every image slide's `src` matches `^\.\./images/`).
+- **`index.html` + `src/main.ts` + `src/style.css` + `src/vite-env.d.ts`** — the app shell.
+  `main.ts` imports `docs/visual-chronology.md` via Vite's `?raw` suffix and calls `deriveSlides`
+  client-side (no build-time script yet — the design's build-time-script idea is deferred, not
+  abandoned; importing the raw Markdown was the shortest path to a first visible result and remains a
+  valid approach, revisit only if there's a concrete reason to precompute at build time instead).
+  Renders slides into a Swiper instance (`EffectCoverflow` + `Keyboard` + `Mousewheel` modules).
+  **Not yet built:** the text panel, the scrollspy sync mechanism, the header/section-context strip,
+  click/hover-to-zoom, and visual styling for card slides (tracked as Open Item 2 below).
+- **`vite.config.ts`** — `base: '/nathan-ross/carousel/'` (see the revised URI path above), plus a
+  small custom `serveSharedImages` plugin (hooked into both `configureServer` and
+  `configurePreviewServer`) that serves `static/nathan-ross/images/` under the `/nathan-ross/images/…`
+  URL prefix, since that relative image reference reaches outside the carousel's own project root and
+  neither `vite dev` nor `vite preview` serve outside-root files by default. This is what makes
+  `make run-local` show real images.
+- **Makefile wiring, verified working end to end:** `static/nathan-ross/carousel/Makefile`
+  (`help`/`test-unit`/`test`/`run-local`/`clean-deep`, mirrors `mse-spa/Makefile`'s pattern — no
+  `build`/`deploy` targets yet, since there's no build-time script or `dist/` output to wire yet) ←
+  `static/Makefile` (`test-unit`/`test` delegate in; `clean-deep` delegates too) ← root `Makefile`
+  (`test-unit`/`test` now cover both `mse-spa` and this package). Confirmed with a clean invocation of
+  `make test-unit` from the repo root.
+
+**How to see it:** `cd static/nathan-ross/carousel && make run-local`, then open the URL Vite prints
+(`http://localhost:5173/nathan-ross/carousel/` — note the path, `base` is set to match the deployed
+location, so it is *not* served at the bare root).
+
+**Suggested next step:** the text-panel renderer — Markdown rendered to HTML with images stripped,
+consuming the same annotated tokens `deriveSlides` produces (see the anchor-id contract above), then
+the scrollspy sync mechanism and header strip on top of that. Zoom and card-slide styling can come
+after; neither blocks the sync mechanism.
+
 ### Full navigability guarantee (hard constraint)
 
 Every slide and every piece of source text in `docs/visual-chronology.md` must always be reachable
@@ -262,11 +328,11 @@ now-superseded proposal).
 - Because the shared-image reference is a plain relative path (`../images/...`) that reaches outside
   the carousel's own project root, neither `npm run dev` nor `vite preview` serve it by default — both
   only serve files inside the carousel package's own folder. A small addition to
-  `static/nathan-ross/carousel/vite.config.ts` (`server.fs.allow` plus a small dev/preview server
-  alias exposing the sibling `../images/` directory at the matching URL path) fixes this for both, so
-  local iteration shows real images without any separate preview process, temp directory, or network
-  call. To be added once the app shell exists (nothing to wire yet — the pure `chronologyModel.ts`
-  module built so far has no dev server).
+  `static/nathan-ross/carousel/vite.config.ts` (a small custom `serveSharedImages` Vite plugin, hooked
+  into both `configureServer` and `configurePreviewServer`) fixes this for both, so local iteration
+  shows real images without any separate preview process, temp directory, or network call. **Done** —
+  built alongside the app shell; verified live (`make run-local` → real coverflow carousel with real
+  images loading, keyboard nav confirmed via a headless-browser screenshot).
 - **Rejected:** a dedicated `make preview` target that would clone the real target repo, assemble a
   merged build tree mirroring deploy layout, and serve it locally before any real push. Superseded
   once the nested URL choice above resolved the actual topology bug it was partly chasing — the
