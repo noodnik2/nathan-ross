@@ -17,16 +17,33 @@ export interface CardSlide {
 
 export type Slide = ImageSlide | CardSlide
 
+export interface ChronologyParse {
+  tokens: Token[]
+  slides: Slide[]
+  // Kept alongside tokens (rather than having renderTextPanelHtml construct
+  // its own MarkdownIt) so a future option/plugin added to parsing doesn't
+  // silently diverge from what's used to render - one instance, one config,
+  // for both the parse that mints ids and the render that must honor them.
+  md: MarkdownIt
+}
+
 // Anchor ids are minted here, once, directly onto the paragraph_open /
 // heading_open tokens they belong to (via each token's own `id` attr) rather
-// than recomputed by a separate counter. A future text-panel HTML renderer
-// must render from these same annotated tokens - not re-derive its own ids
-// from the raw Markdown - so the ids slides reference are guaranteed to match
-// the ids that actually land on elements in the rendered text panel.
+// than recomputed by a separate counter. renderTextPanelHtml() below renders
+// from these same annotated tokens - it never re-parses the raw Markdown or
+// re-derives its own ids - so the ids slides reference are guaranteed to
+// match the ids that actually land on elements in the rendered text panel.
 export function deriveSlides(
   markdown: string,
   rebaseImageSrc: (rawSrc: string) => string = (src) => src,
 ): Slide[] {
+  return parseChronology(markdown, rebaseImageSrc).slides
+}
+
+export function parseChronology(
+  markdown: string,
+  rebaseImageSrc: (rawSrc: string) => string = (src) => src,
+): ChronologyParse {
   const md = new MarkdownIt()
   const tokens = md.parse(markdown, {})
 
@@ -102,7 +119,18 @@ export function deriveSlides(
     }
   }
 
-  return slides
+  return { tokens, slides, md }
+}
+
+// Renders the same tokens parseChronology() minted anchor ids onto, using the
+// same MarkdownIt instance that parsed them, so every id referenced by a
+// Slide's anchorId is guaranteed to appear in this HTML and rendering can
+// never diverge from parsing's options/plugins. Images are stripped (they're
+// already shown in the carousel); headings, paragraphs, and inline links
+// render normally and stay live/clickable.
+export function renderTextPanelHtml(tokens: Token[], md: MarkdownIt): string {
+  md.renderer.rules.image = () => ''
+  return md.renderer.render(tokens, md.options, {})
 }
 
 function mintAnchorId(token: Token, anchorCount: number): string {

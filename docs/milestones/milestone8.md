@@ -94,13 +94,45 @@ above; 16 Vitest tests passing across 3 files):
     decoupled from any specific directory layout. Tested both via synthetic fixtures and against the
     real `docs/visual-chronology.md` (confirms every image slide's `src` matches `^\.\./images/`).
 - **`index.html` + `src/main.ts` + `src/style.css` + `src/vite-env.d.ts`** — the app shell.
-  `main.ts` imports `docs/visual-chronology.md` via Vite's `?raw` suffix and calls `deriveSlides`
+  `main.ts` imports `docs/visual-chronology.md` via Vite's `?raw` suffix and calls `parseChronology`
   client-side (no build-time script yet — the design's build-time-script idea is deferred, not
   abandoned; importing the raw Markdown was the shortest path to a first visible result and remains a
   valid approach, revisit only if there's a concrete reason to precompute at build time instead).
   Renders slides into a Swiper instance (`EffectCoverflow` + `Keyboard` + `Mousewheel` modules).
-  **Not yet built:** the text panel, the scrollspy sync mechanism, the header/section-context strip,
-  click/hover-to-zoom, and visual styling for card slides (tracked as Open Item 2 below).
+  **Text panel: done** — `renderTextPanelHtml(tokens, md)` (see below) renders into a `.text-panel`
+  div below the carousel (vertical stack, `.swiper` fixed at `50vh`, panel `flex: 1` with
+  `overflow-y: auto`), padded `padding-bottom: 50vh` to satisfy the scroll-clamp guarantee (so the
+  last real anchor can still reach the panel viewport's top). Verified live via `make run-local`
+  (developer confirmed 2026-08-30): real chronology text renders, panel scrolls, no images inside it.
+  **Sync mechanism + header strip: done, verified live (2026-08-31)** — `src/lib/scrollSync.ts` holds
+  the pure scrollspy math (`activeAnchorId`, `firstSlideIndexForAnchor`, unit-tested); `main.ts` wires
+  it to Swiper's `slideChange` event and a `.text-panel` scroll listener, each guarded by a boolean
+  flag cleared on the next animation frame so a gesture's own resulting update doesn't re-trigger
+  itself. `.section-strip` shows the active slide's `sectionHeading` (already computed by
+  `deriveSlides` — no separate parsing needed). Verified via headless browser against the real
+  document: keyboard slide→text sync, real-mouse-wheel and programmatic text→slide sync, `doc-start`,
+  a mid-document anchor, a card slide, and the last slide — no oscillation across repeated navigation.
+  Two bugs caught and fixed only by this live check (not visible to the unit tests):
+  - `.text-panel` needed `position: relative` — without it, `el.offsetTop` resolves relative to
+    `<body>`, not the panel's own scroll box, breaking the sync math entirely.
+  - `main.ts`'s anchor-position list must be **filtered to ids actually referenced by some slide's
+    `anchorId`**, not "every minted id in the panel." The real document's last paragraph ("And the
+    close of the story…") comes *after* its last image, so `parseChronology` mints it a real anchor id
+    but no slide ever adopts it. Including it meant scrolling past the last slide's anchor landed in a
+    dead zone that mapped to no slide — silently breaking navigability for the document's tail. Fixed
+    by intersecting the panel's `[id]` elements with `new Set(slides.map(s => s.anchorId))` before
+    building the scrollspy list.
+  **Not yet built:** click/hover-to-zoom and visual styling for card slides (tracked as Open Item 2
+  below).
+- **`src/lib/chronologyModel.ts` — additive surface for the text panel (2026-08-30):**
+  `parseChronology(markdown, rebaseImageSrc?)` now does the one parse+anchor-minting pass and returns
+  `{ tokens, slides, md }` (the `MarkdownIt` instance that parsed, kept alongside `tokens` so rendering
+  can never diverge from parsing's options/plugins — see the code comment). `deriveSlides` is now a
+  thin wrapper returning just `.slides`; all its existing tests are unchanged and still green.
+  `renderTextPanelHtml(tokens, md)` renders those same annotated tokens to HTML with images stripped;
+  headings/paragraphs/links render normally, carrying whatever `id` `parseChronology` minted onto them
+  — satisfies the "must render from the same annotated tokens" hard constraint structurally, not just
+  by convention.
 - **`vite.config.ts`** — `base: '/nathan-ross/carousel/'` (see the revised URI path above), plus a
   small custom `serveSharedImages` plugin (hooked into both `configureServer` and
   `configurePreviewServer`) that serves `static/nathan-ross/images/` under the `/nathan-ross/images/…`
@@ -124,10 +156,9 @@ above; 16 Vitest tests passing across 3 files):
 (`http://localhost:5173/nathan-ross/carousel/` — note the path, `base` is set to match the deployed
 location, so it is *not* served at the bare root).
 
-**Suggested next step:** the text-panel renderer — Markdown rendered to HTML with images stripped,
-consuming the same annotated tokens `deriveSlides` produces (see the anchor-id contract above), then
-the scrollspy sync mechanism and header strip on top of that. Zoom and card-slide styling can come
-after; neither blocks the sync mechanism.
+**Suggested next step:** click/hover-to-zoom for the focused image (see "Images" below), and visual
+styling for the text-only card slides (Open Item 2) — both independent of each other and of
+everything built so far.
 
 ### Full navigability guarantee (hard constraint)
 
