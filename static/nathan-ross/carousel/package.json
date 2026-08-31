@@ -1,0 +1,22 @@
+{
+  "name": "nathan-ross-carousel",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "test:unit": "vitest run --project unit",
+    "test": "npm run test:unit"
+  },
+  "dependencies": {
+    "markdown-it": "^14.1.0",
+    "swiper": "^14.2.0"
+  },
+  "devDependencies": {
+    "@types/markdown-it": "^14.1.2",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5",
+    "vitest": "^4.1.10"
+  }
+}

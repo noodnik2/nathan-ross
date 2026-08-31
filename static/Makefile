@@ -10,6 +10,7 @@ include ../Makefile.gh-pages
 SOURCE_DIR        := nathan-ross
 DEPLOY_SUBFOLDER  := nathan-ross
 BUILD_DIR         := $(SOURCE_DIR)/dist
+CAROUSEL_DIR      := $(SOURCE_DIR)/carousel
 
 node_modules: package-lock.json
 	npm ci
@@ -26,6 +27,13 @@ deploy: build ## Deploy the Nathan Ross static assets to the GitHub Pages target
 	cp -r $(BUILD_DIR)/* $(TMP_DIR)/$(DEPLOY_SUBFOLDER)/
 	$(MAKE) _push_target
 
+.PHONY: test-unit
+test-unit: ## Run the carousel unit test suite
+	$(MAKE) -C $(CAROUSEL_DIR) test-unit
+
+.PHONY: test
+test: test-unit ## Run all test suites in sequence, stopping at the first failure
+
 .PHONY: clean
 clean: ## Remove generated build output
 	rm -rf $(BUILD_DIR)
@@ -33,3 +41,4 @@ clean: ## Remove generated build output
 .PHONY: clean-deep
 clean-deep: clean ## Remove build output and installed dependencies
 	rm -rf node_modules
+	$(MAKE) -C $(CAROUSEL_DIR) clean-deep

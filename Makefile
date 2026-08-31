@@ -13,8 +13,9 @@ build: ## Build the MSE SPA production bundle
 	$(MAKE) -C $(MSE_SPA_DIR) build
 
 .PHONY: test-unit
-test-unit: ## Run the MSE SPA unit test suite
+test-unit: ## Run the MSE SPA and static-assets (carousel) unit test suites
 	$(MAKE) -C $(MSE_SPA_DIR) test-unit
+	$(MAKE) -C $(STATIC_DIR) test-unit
 
 .PHONY: test-component
 test-component: ## Run the MSE SPA component test suite

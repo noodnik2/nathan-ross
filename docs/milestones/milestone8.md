@@ -40,8 +40,9 @@ Also:
 
 ## Functional Points To Consider
 
-- The new UI should be accessed via the `/nathan-ross-carousel` URI path.  The existing `/nathan-ross`
-  URI path should continue to function without change.
+- The new UI should be accessed via the `/nathan-ross/carousel` URI path (revised from the originally
+  stated `/nathan-ross-carousel` — see "Images" and "Deployment / Makefile" below for why). The
+  existing `/nathan-ross` URI path should continue to function without change.
 - The `static/Makefile` targets `build` and `deploy` should be augmented to build and deploy both UIs.
 - To the extent that CSS or Javascript (or other) source artifacts are used in the solution, they should
   be stored under the appropriate subfolder within `static/nathan-ross`, as idiomatic for the paradigm
@@ -167,9 +168,23 @@ now-superseded proposal).
 
 ### Images
 
-- `/nathan-ross-carousel` references the existing images via a relative path back to the existing
-  folder (e.g. `../images/...` from within `static/nathan-ross/carousel/`) rather than duplicating
-  them — one copy of each asset shared between both deployed pages.
+- **URI path revised to `/nathan-ross/carousel` (from `/nathan-ross-carousel`).** Reasoning: the
+  *source* folder nests carousel one level inside the existing component
+  (`static/nathan-ross/carousel/`, sibling of `static/nathan-ross/images/`), so a relative image
+  reference like `../images/foo.webp` is correct there. But the deployed `nathan-ross/dist/` output
+  already contains its own `images/` (confirmed: `static/nathan-ross/dist/images/` exists, copied
+  verbatim by `render.mjs`'s asset-copy step). If the carousel had deployed to a *sibling* top-level
+  `nathan-ross-carousel/` folder (the original plan), that same relative reference would have resolved
+  to a nonexistent `noodnik2.github.io/images/...` — the deploy topology wouldn't have matched the
+  source topology, silently breaking every image. Nesting the deploy output to match
+  (`nathan-ross/carousel/`) keeps source and deploy topology identical, so the same relative path is
+  correct in both, with zero build-time path rewriting needed. (An alternative — root-absolute paths
+  like `/nathan-ross/images/...`, immune to nesting depth entirely — was considered and rejected in
+  favor of this simpler fix, since it would've required extra Vite dev-server plumbing for local
+  images to resolve at all; see Local development fidelity below.)
+- References the existing images via a relative path back to the existing folder (`../images/...`
+  from within `static/nathan-ross/carousel/`) rather than duplicating them — one copy of each asset
+  shared between both deployed pages.
 - Sizing is CSS-only: reduced/thumbnail size for the carousel display, full natural size in the
   click/hover-expanded view. No resize/optimize build step planned initially.
 - Swiper's Lazy module renders only nearby slides' real `<img src>` at a time, so the ~50 originals
@@ -229,12 +244,35 @@ now-superseded proposal).
 - `static/Makefile`'s `build` and `deploy` targets become multi-component: still **one**
   `_setup_target` clone and **one** `_push_target` commit+push per `make deploy` invocation (from
   `../Makefile.gh-pages`), but the copy step copies both build outputs — `nathan-ross/dist` → target
-  `nathan-ross/` subfolder, and `nathan-ross/carousel/dist` → target `nathan-ross-carousel/`
-  subfolder — into the same clone before the single push.
+  `nathan-ross/` subfolder, and `nathan-ross/carousel/dist` → target `nathan-ross/carousel/`
+  subfolder (nested, not a sibling — see Images above) — into the same clone before the single push.
 - This single-clone/single-push structure is important, not incidental: it's what guarantees the
   sibling-image relative reference always resolves correctly in the published output regardless of
   deploy history/ordering.
-- `/nathan-ross-carousel` is a new URL path; `/nathan-ross` continues to function unchanged.
+- `/nathan-ross/carousel` is a new URL path; `/nathan-ross` continues to function unchanged.
+- **Test wiring:** `static/nathan-ross/carousel/` gets its own small `Makefile` mirroring
+  `mse-spa/Makefile`'s pattern — `test-unit` (`npm run test:unit`), `test`, and `run-local`
+  (`npm run dev`) targets. `static/Makefile` gains `test-unit`/`test` targets that delegate into it
+  (mirroring how the root `Makefile` already delegates into `mse-spa/`), and the root `Makefile`'s
+  `test-unit`/`test` targets are extended to also cover the carousel package, so a single `make test`
+  from the repo root continues to exercise everything.
+
+### Local development fidelity
+
+- Because the shared-image reference is a plain relative path (`../images/...`) that reaches outside
+  the carousel's own project root, neither `npm run dev` nor `vite preview` serve it by default — both
+  only serve files inside the carousel package's own folder. A small addition to
+  `static/nathan-ross/carousel/vite.config.ts` (`server.fs.allow` plus a small dev/preview server
+  alias exposing the sibling `../images/` directory at the matching URL path) fixes this for both, so
+  local iteration shows real images without any separate preview process, temp directory, or network
+  call. To be added once the app shell exists (nothing to wire yet — the pure `chronologyModel.ts`
+  module built so far has no dev server).
+- **Rejected:** a dedicated `make preview` target that would clone the real target repo, assemble a
+  merged build tree mirroring deploy layout, and serve it locally before any real push. Superseded
+  once the nested URL choice above resolved the actual topology bug it was partly chasing — the
+  remaining "see it locally" need is fully covered by the Vite dev-server fix above, and "see it after
+  deploying" needs no new tooling at all: run the existing (explicit, developer-run) `make deploy`,
+  then visit the live URL.
 
 ### Explicitly superseded/rejected ideas (do not resurrect without new reasoning)
 
