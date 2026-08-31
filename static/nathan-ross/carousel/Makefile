@@ -8,6 +8,14 @@ help: ## Show available targets
 node_modules: package-lock.json
 	npm ci
 
+dist/.build-stamp: node_modules package.json package-lock.json index.html vite.config.ts tsconfig.json \
+					$(shell find src -type f 2>/dev/null)
+	npm run build
+	touch dist/.build-stamp
+
+.PHONY: build
+build: dist/.build-stamp ## Build the carousel UI production bundle
+
 .PHONY: test-unit
 test-unit: node_modules ## Run the carousel unit test suite
 	npm run test:unit
@@ -19,6 +27,10 @@ test: test-unit ## Run all test suites in sequence, stopping at the first failur
 run-local: node_modules ## Run the carousel UI locally
 	npm run dev
 
+.PHONY: clean
+clean: ## Remove generated build output
+	rm -rf dist
+
 .PHONY: clean-deep
-clean-deep: ## Remove installed dependencies
+clean-deep: clean ## Remove build output and installed dependencies
 	rm -rf node_modules

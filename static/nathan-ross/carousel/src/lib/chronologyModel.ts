@@ -1,4 +1,4 @@
-import MarkdownIt from 'markdown-it'
+import MarkdownIt, { type Token } from 'markdown-it'
 
 export interface ImageSlide {
   kind: 'image'
@@ -37,9 +37,9 @@ export function deriveSlides(
   let currentSectionHeading = ''
   let anchorCount = 0
   let h2SectionIndex = -1
-  let paragraphOpenToken: MarkdownIt.Token | null = null
+  let paragraphOpenToken: Token | null = null
   let inHeadingLevel: number | null = null
-  let headingOpenToken: MarkdownIt.Token | null = null
+  let headingOpenToken: Token | null = null
 
   for (const token of tokens) {
     if (token.type === 'paragraph_open') {
@@ -105,13 +105,13 @@ export function deriveSlides(
   return slides
 }
 
-function mintAnchorId(token: MarkdownIt.Token, anchorCount: number): string {
+function mintAnchorId(token: Token, anchorCount: number): string {
   const id = `anchor-${anchorCount}`
   token.attrSet('id', id)
   return id
 }
 
-function countImagesPerH2Section(tokens: MarkdownIt.Token[]): number[] {
+function countImagesPerH2Section(tokens: Token[]): number[] {
   const counts: number[] = []
   let h2SectionIndex = -1
 
@@ -128,7 +128,7 @@ function countImagesPerH2Section(tokens: MarkdownIt.Token[]): number[] {
   return counts
 }
 
-function imageChildrenOf(token: MarkdownIt.Token): MarkdownIt.Token[] {
+function imageChildrenOf(token: Token): Token[] {
   if (token.type !== 'inline') return []
   return (token.children ?? []).filter((child) => child.type === 'image')
 }

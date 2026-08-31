@@ -108,11 +108,17 @@ above; 16 Vitest tests passing across 3 files):
   neither `vite dev` nor `vite preview` serve outside-root files by default. This is what makes
   `make run-local` show real images.
 - **Makefile wiring, verified working end to end:** `static/nathan-ross/carousel/Makefile`
-  (`help`/`test-unit`/`test`/`run-local`/`clean-deep`, mirrors `mse-spa/Makefile`'s pattern — no
-  `build`/`deploy` targets yet, since there's no build-time script or `dist/` output to wire yet) ←
-  `static/Makefile` (`test-unit`/`test` delegate in; `clean-deep` delegates too) ← root `Makefile`
-  (`test-unit`/`test` now cover both `mse-spa` and this package). Confirmed with a clean invocation of
-  `make test-unit` from the repo root.
+  (`help`/`build`/`test-unit`/`test`/`run-local`/`clean`/`clean-deep`, mirrors `mse-spa/Makefile`'s
+  `dist/.build-stamp` pattern) ← `static/Makefile` (`build` now runs the carousel's own `build` first,
+  then `render.mjs` — which skips the `carousel/` subfolder entirely, since it's a separate Vite app —
+  then copies only `carousel/dist/*` into `nathan-ross/dist/carousel/`; `test-unit`/`test`/`clean`/
+  `clean-deep` all delegate in too) ← root `Makefile` (`test-unit`/`test` cover both `mse-spa` and this
+  package). Confirmed with a clean invocation of `make test-unit` from the repo root, and with
+  `make -C static build` followed by inspecting `static/nathan-ross/dist/carousel/` to confirm it holds
+  only Vite's build output (`index.html`, `assets/`) — no `src/`, `node_modules`, or config files.
+  (This was previously broken: an early `make deploy` ran before this wiring existed, so `render.mjs`'s
+  generic asset-copy step swept the carousel's *source* tree — including whatever `node_modules`
+  happened to be on disk at the time — into the deployed output. Fixed 2026-08-30.)
 
 **How to see it:** `cd static/nathan-ross/carousel && make run-local`, then open the URL Vite prints
 (`http://localhost:5173/nathan-ross/carousel/` — note the path, `base` is set to match the deployed
@@ -306,6 +312,18 @@ now-superseded proposal).
   the target GitHub Pages site.
 
 ### Deployment / Makefile
+
+**Done** (2026-08-30) — implemented exactly as designed below, after the gap was caught in production:
+a `make deploy` run before this wiring existed had `render.mjs` sweep the carousel's *source* tree
+(including whatever `node_modules` was on disk) into the deployed output, since nothing built the
+carousel or excluded it from the generic Markdown-asset copy. Fixed by giving
+`static/nathan-ross/carousel/Makefile` a `build` target (mirroring `mse-spa/Makefile`'s
+`dist/.build-stamp` pattern), having `render.mjs` skip the `carousel/` subfolder entirely, and having
+`static/Makefile`'s `build` target build the carousel first, then copy only its `dist/*` into
+`nathan-ross/dist/carousel/` after `render.mjs` runs (order matters — `render.mjs` wipes its output
+dir). `deploy` itself needed no changes, since it already just copies the combined `nathan-ross/dist`
+tree in one shot. Verified by inspecting `static/nathan-ross/dist/carousel/` after `make -C static
+build`: only `index.html` and `assets/`, no source or config files.
 
 - `static/Makefile`'s `build` and `deploy` targets become multi-component: still **one**
   `_setup_target` clone and **one** `_push_target` commit+push per `make deploy` invocation (from

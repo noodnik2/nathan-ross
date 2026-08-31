@@ -3,7 +3,10 @@
 // Usage: node render.mjs <componentDir> <pagesManifest> <layoutFile> <outDir>
 //
 // <componentDir> is copied verbatim into <outDir> (images, etc.), except for
-// <pagesManifest> itself and any pre-existing <outDir>. Each entry in
+// <pagesManifest> itself, any pre-existing <outDir>, and the carousel/
+// subfolder (a separate Vite app with its own build; its dist/ output is
+// copied into <outDir> as its own step by static/Makefile, not by this
+// script). Each entry in
 // <pagesManifest> (a JSON array of { source, output }) names a Markdown file,
 // resolved relative to the manifest's own location, that gets rendered into
 // <layoutFile> and written to <output> (relative to <outDir>). Image paths in
@@ -36,7 +39,7 @@ for (const page of pages) {
 function copyComponentAssets() {
   fs.rmSync(outDir, { recursive: true, force: true });
   fs.mkdirSync(outDir, { recursive: true });
-  const skip = new Set(['dist', path.basename(pagesManifestPath)]);
+  const skip = new Set(['dist', 'carousel', path.basename(pagesManifestPath)]);
   for (const entry of fs.readdirSync(componentDir, { withFileTypes: true })) {
     if (skip.has(entry.name)) continue;
     fs.cpSync(path.join(componentDir, entry.name), path.join(outDir, entry.name), { recursive: true });

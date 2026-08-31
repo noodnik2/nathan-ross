@@ -16,8 +16,11 @@ node_modules: package-lock.json
 	npm ci
 
 .PHONY: build
-build: node_modules ## Render Markdown page sources to HTML for the Nathan Ross static assets
+build: node_modules ## Render Markdown page sources to HTML and build the carousel UI for the Nathan Ross static assets
+	$(MAKE) -C $(CAROUSEL_DIR) build
 	node scripts/render.mjs $(SOURCE_DIR) $(SOURCE_DIR)/pages.json templates/layout.html $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)/carousel
+	cp -r $(CAROUSEL_DIR)/dist/* $(BUILD_DIR)/carousel/
 
 .PHONY: deploy
 deploy: build ## Deploy the Nathan Ross static assets to the GitHub Pages target repo
@@ -37,6 +40,7 @@ test: test-unit ## Run all test suites in sequence, stopping at the first failur
 .PHONY: clean
 clean: ## Remove generated build output
 	rm -rf $(BUILD_DIR)
+	$(MAKE) -C $(CAROUSEL_DIR) clean
 
 .PHONY: clean-deep
 clean-deep: clean ## Remove build output and installed dependencies
