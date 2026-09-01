@@ -85,3 +85,42 @@ body {
   padding: 1rem;
   box-sizing: border-box;
 }
+
+.swiper-slide-active img {
+  cursor: zoom-in;
+}
+
+.zoom-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 100;
+}
+
+.zoom-overlay[hidden] {
+  display: none;
+}
+
+.zoom-overlay__img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 4px;
+  cursor: zoom-out;
+}
+
+.zoom-overlay__close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: #f2f2f2;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+}

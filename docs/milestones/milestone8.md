@@ -122,8 +122,32 @@ above; 16 Vitest tests passing across 3 files):
     dead zone that mapped to no slide — silently breaking navigability for the document's tail. Fixed
     by intersecting the panel's `[id]` elements with `new Set(slides.map(s => s.anchorId))` before
     building the scrollspy list.
-  **Not yet built:** click/hover-to-zoom and visual styling for card slides (tracked as Open Item 2
-  below).
+  **Click-to-zoom: done, verified live (2026-08-31)** — `src/lib/zoomState.ts` holds the pure
+  open/close/auto-close state machine (`ZoomState`, `openZoom`, `closeZoom`,
+  `zoomAfterSlideChange`), unit-tested with Vitest (6 new tests). `main.ts` wires it to: a click
+  listener on the *active* slide's `<img>` only (side slides aren't clickable) that opens the
+  overlay; a `.zoom-overlay` backdrop click, its `×` button, and Escape to close it; and Swiper's
+  `slideChange` event calling `zoomAfterSlideChange` so the overlay auto-closes if the active slide
+  changes while zoomed (via keyboard/swipe/text-panel sync) rather than trying to track a moving
+  carousel. Per the "full navigability" hard constraint, the overlay only binds Escape — it captures
+  no other key, so Left/Right keep driving the carousel underneath it (verified via a live
+  ArrowRight-while-zoomed check, which auto-closed the overlay as designed). The overlay image is
+  CSS-scaled (`max-width:90vw; max-height:90vh; object-fit:contain`), not shown at true pixel size
+  (some source images are up to 1920×2560). Also gated the open-on-click handler on Swiper's own
+  `allowClick` flag, since `grabCursor: true` plus touch support means a short drag ending on the
+  focused image could otherwise spuriously open the zoom instead of just repositioning the carousel.
+  Verified via headless browser: open on click, close via Escape/backdrop/`×`, and auto-close on
+  ArrowRight navigation — no console errors beyond an unrelated pre-existing missing-favicon 404.
+
+  **Gap found while verifying this, unrelated to zoom itself:** the design's "Input handling"
+  section calls for "a small custom global keydown listener for Up/Down scrolls the text panel" —
+  this was never actually implemented (confirmed by grep: `main.ts` has no `ArrowUp`/`ArrowDown`
+  handling anywhere). Right now Up/Down do nothing at all, zoom open or not — not a zoom regression,
+  but a real hole in the "full navigability" hard constraint that predates this session's work.
+  Not fixed here (separate, independent piece of work) — flagging so it doesn't get lost.
+
+  **Not yet built:** visual styling for card slides (Open Item 2 — cosmetic, non-blocking); the
+  Up/Down text-panel keyboard handler noted above.
 - **`src/lib/chronologyModel.ts` — additive surface for the text panel (2026-08-30):**
   `parseChronology(markdown, rebaseImageSrc?)` now does the one parse+anchor-minting pass and returns
   `{ tokens, slides, md }` (the `MarkdownIt` instance that parsed, kept alongside `tokens` so rendering
@@ -156,9 +180,8 @@ above; 16 Vitest tests passing across 3 files):
 (`http://localhost:5173/nathan-ross/carousel/` — note the path, `base` is set to match the deployed
 location, so it is *not* served at the bare root).
 
-**Suggested next step:** click/hover-to-zoom for the focused image (see "Images" below), and visual
-styling for the text-only card slides (Open Item 2) — both independent of each other and of
-everything built so far.
+**Suggested next step:** visual styling for the text-only card slides (Open Item 2) — the only
+remaining piece, cosmetic and non-blocking.
 
 ### Full navigability guarantee (hard constraint)
 
@@ -288,8 +311,10 @@ now-superseded proposal).
 - References the existing images via a relative path back to the existing folder (`../images/...`
   from within `static/nathan-ross/carousel/`) rather than duplicating them — one copy of each asset
   shared between both deployed pages.
-- Sizing is CSS-only: reduced/thumbnail size for the carousel display, full natural size in the
-  click/hover-expanded view. No resize/optimize build step planned initially.
+- Sizing is CSS-only: reduced/thumbnail size for the carousel display, scaled up (not true pixel-for-
+  pixel natural size, since some sources are up to 1920×2560) to fit the viewport in the click-to-
+  zoom overlay — implemented, see "Implementation Status" above. No resize/optimize build step
+  planned initially.
 - Swiper's Lazy module renders only nearby slides' real `<img src>` at a time, so the ~50 originals
   (each up to ~1MB, up to 1920×2560px) aren't all fetched at once.
 - No existing in-repo tooling was found for generating resized/optimized image variants (searched for

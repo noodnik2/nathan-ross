@@ -8,6 +8,7 @@ import chronologyMarkdown from '../../../../docs/visual-chronology.md?raw'
 import { parseChronology, renderTextPanelHtml, type Slide } from './lib/chronologyModel'
 import { rebasePath } from './lib/relativePath'
 import { activeAnchorId, firstSlideIndexForAnchor, type AnchorPosition } from './lib/scrollSync'
+import { closeZoom, openZoom, zoomAfterSlideChange, type ZoomState } from './lib/zoomState'
 
 const rebaseImageSrc = (rawSrc: string) => rebasePath(rawSrc, 'docs', 'static/nathan-ross/carousel')
 const { tokens, slides, md } = parseChronology(chronologyMarkdown, rebaseImageSrc)
@@ -21,6 +22,10 @@ app.innerHTML = `
     </div>
     <div class="section-strip">${escapeHtml(slides[0]?.sectionHeading ?? '')}</div>
     <div class="text-panel">${textPanelHtml}</div>
+  </div>
+  <div class="zoom-overlay" hidden>
+    <button type="button" class="zoom-overlay__close" aria-label="Close enlarged image">&times;</button>
+    <img class="zoom-overlay__img" alt="" />
   </div>
 `
 
@@ -116,4 +121,59 @@ textPanel.addEventListener('scroll', () => {
     suppressSlideChange = false
   })
   updateSectionStrip(slides[slideIndex].sectionHeading)
+})
+
+// --- Click-to-zoom (focused image only) ----------------------------------
+// See docs/milestones/milestone8.md, click-to-zoom design: non-blocking -
+// the overlay only binds Escape, so it doesn't capture any of the carousel's
+// own input handling (Left/Right, Swiper's Keyboard module) underneath it.
+// The overlay auto-closes rather than tracking the carousel if the active
+// slide changes while zoomed (zoomAfterSlideChange, see zoomState.ts).
+
+const zoomOverlay = app.querySelector<HTMLDivElement>('.zoom-overlay')!
+const zoomImg = zoomOverlay.querySelector<HTMLImageElement>('.zoom-overlay__img')!
+const zoomClose = zoomOverlay.querySelector<HTMLButtonElement>('.zoom-overlay__close')!
+
+let zoom: ZoomState = { openSlideIndex: null }
+
+function renderZoom() {
+  const slide = zoom.openSlideIndex === null ? undefined : slides[zoom.openSlideIndex]
+  zoomOverlay.hidden = slide?.kind !== 'image'
+  if (slide?.kind === 'image') {
+    zoomImg.src = slide.src
+    zoomImg.alt = slide.alt
+  }
+}
+
+function setZoom(next: ZoomState) {
+  zoom = next
+  renderZoom()
+}
+
+swiper.slidesEl.addEventListener('click', (event) => {
+  // swiper.allowClick is false while a drag is/was in progress (Swiper's own
+  // click-vs-drag disambiguation) - without this check, a short drag that
+  // ends on the focused image (grabCursor is enabled) can spuriously open
+  // the zoom overlay instead of just repositioning the carousel.
+  if (!swiper.allowClick) return
+  const target = event.target as HTMLElement
+  const activeSlideEl = swiper.slides[swiper.activeIndex] as HTMLElement | undefined
+  if (!activeSlideEl || !activeSlideEl.contains(target)) return
+  if (!target.closest('img')) return
+  setZoom(openZoom(swiper.activeIndex))
+})
+
+zoomOverlay.addEventListener('click', (event) => {
+  if (event.target === zoomImg) return
+  setZoom(closeZoom())
+})
+
+zoomClose.addEventListener('click', () => setZoom(closeZoom()))
+
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && zoom.openSlideIndex !== null) setZoom(closeZoom())
+})
+
+swiper.on('slideChange', () => {
+  setZoom(zoomAfterSlideChange(zoom, swiper.activeIndex))
 })
