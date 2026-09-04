@@ -18,7 +18,7 @@ propped up on the table at left, flanked by his mother and older siblings in Van
 
 ![lil-nacy-with-mom-n-sibs](../static/nathan-ross/images/lil-nacy-with-mom-n-sibs.webp)
 
-The story goes that not long after the picture above was taken, his father Max noticed him strumming
+The story goes that not long after this picture was taken, Nathan's father Max noticed him strumming
 a rubber band stretched around a ruler and took this as a sign that he was meant to become a violinist.
 Being a violinist himself, Max became Nathan's first teacher.
 
@@ -26,12 +26,12 @@ Being a violinist himself, Max became Nathan's first teacher.
 
 ![violinist-nathan-ross](../static/nathan-ross/images/violinist-nathan-ross.webp)
 
-The photo above showcases the outward-facing title role Nathan held the longest, and is the focus of many
-of the artifacts below.
+This photo showcases the outward-facing title role Nathan held the longest, and is the focus of many
+of the artifacts here.
 
 ![nathan-practicing-ataround5or6](../static/nathan-ross/images/nathan-practicing-ataround5or6.webp)
 
-Nathan had already achieved some mastery over his instrument by the time the portrait above was taken. 
+Nathan had already achieved some mastery over his instrument by the time this portrait was taken. 
 
 He made his concert debut at age six at the British Columbia Musical Festival — winning first prize
 for the most talented child under ten.
@@ -51,8 +51,8 @@ kept this one too.
 
 ![heard-in-recital-at14](../static/nathan-ross/images/heard-in-recital-at14.webp)
 
-Shortly following the recital, the program note below for a larger stage announces: "Nathan Rothstein,
-brilliant boy violinist of Vancouver will be the guest artist at the next concert of the Vancouver Symphony
+Shortly following the recital, a program note for a larger stage announces: "Nathan Rothstein, brilliant
+boy violinist of Vancouver, will be the guest artist at the next concert of the Vancouver Symphony
 orchestra in Stanley Park."
 
 ![symphony-program-buzzer_1937_07_23](../static/nathan-ross/images/symphony-program-buzzer_1937_07_23.webp)
@@ -96,7 +96,7 @@ the U.S. Armed Forces were granted a streamlined, rapid pathway to American citi
 
 ![army-technical-school-diploma](../static/nathan-ross/images/army-technical-school-diploma.webp)
 
-As evidenced in the diploma (above) from Army Air Forces Technical School at Sioux Falls Field, South
+As evidenced in the diploma from Army Air Forces Technical School at Sioux Falls Field, South
 Dakota, "Pfc Nathan Rothstein" received training as a Radio Operator / Mechanic.  This training set
 him up as the radio operator / machine gunner in a B-17 bomber over Germany less than a year later.
 
@@ -118,7 +118,7 @@ future career he wanted.
 ![hero-airman-homecoming](../static/nathan-ross/images/hero-airman-homecoming.webp)
 ![lucky-bastards-club](../static/nathan-ross/images/lucky-bastards-club.webp)
 
-By the time the clippings below ran, Nathan's life looked quite different.  He had not only participated in,
+By the time these clippings ran, Nathan's life looked quite different.  He had not only participated in,
 but had _survived_ dozens of live combat missions over Germany, had been awarded an Air Medal for courage,
 earned his path towards naturalization as a U.S. Citizen, and also legally changed his surname to "Ross"
 (less jewish-sounding) on the advice of Mr. Blinder towards his future career in Hollywood.
@@ -148,11 +148,11 @@ What came next was building a new life in a city he hadn't grown up in, among pe
 ![nathan-anne-connie-beach-party](../static/nathan-ross/images/nathan-anne-connie-beach-party.webp)
 
 A mutual friend, playing matchmaker, intentionally brought my parents together by organizing a beach outing
-for them. You can see the two of them on the right side of the photograph above—standing less than a mile
+for them. You can see the two of them on the right side of this photograph, standing less than a mile
 from where they would eventually settle down to raise our family.
 
 They hit it off at that meeting on the beach.  Because they traveled in Hollywood circles (as my to-be mom
-was a fashion model), we have pictures of them together in fashionable places such as the one below.
+was a fashion model), we have pictures of them together in fashionable places such as this one.
 
 ![nathan-anne-party-date](../static/nathan-ross/images/nathan-anne-party-date.webp)
 
@@ -198,7 +198,7 @@ under Alfred Wallenstein, then, a year later, the NBC concertmaster post itself.
 
 ![jfk-thanks](../static/nathan-ross/images/jfk-thanks.webp)
 
-Above is a letter dated March 19, 1960, on "John F. Kennedy for President" letterhead, thanking Nathan Ross
+Here's a letter dated March 19, 1960, on "John F. Kennedy for President" letterhead, thanking Nathan Ross
 for his help making the recording of "High Hopes," Frank Sinatra's Kennedy campaign anthem. A small, specific
 window into the studio-musician life the NBC biography only gestured at: this is what "concertmaster of the NBC
 Symphony" turned into, day to day, in Los Angeles session work.
@@ -235,7 +235,12 @@ in the Los Angeles Philharmonic; or by participating in various local classical 
 the Los Angeles County Museum Chamber Music Society, the Southern California Chamber Music Society,
 the Musical Arts Society of LaJolla, and others.
 
-I fondly remember family trips abroad to watch my dad perform in famous venues like La Scala and Royal Albert Hall.
+I fondly remember family trips abroad to watch my dad perform in famous venues.  If I'm not mistaken,
+an example of this is when we watched him playing at 
+[La Scala](https://www.teatroallascala.org/en)
+and the
+[Royal Albert Hall](https://www.royalalberthall.com/) during the L.A. Philharmonic's "European tour in 1974", as described in the
+[Six Decades of Zubin Metha](https://www.laphil.com/posts/six-decades-of-zubin-mehta).
 
 One of my favorite recordings of Nathan's is one my mother taped from a radio broadcast of Chausson's _Concert for
 Violin, Piano, and String Quartet_ (Op. 21) at the Los Angeles County Museum of Art. I'm happy to have found the

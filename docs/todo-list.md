@@ -4,12 +4,33 @@
 
 The following issues are thought to be needed and are "parked" here for future cycles:
 
-### Ideas
+### Fix Issues
 
+In decreasing order of priority:
+
+- Fix the static deployment so that it waits for user acknowledgement before actually pushing the changes
+  to the GitHub Pages repo.  The incorrect push to `main` from earlier this week caused a major delay since
+  it needs to be rolled back.
+- Fix the broken links to the two letters (i.e., dads to mom, Max to dad).
+- Fix the non-display problem for the middle image(s?) in a group of more than two contiguous.
+
+### Enhancements
+
+In decreasing order of priority:
+
+- Add display links:
+    - To Provider(s) on the main page so that users can go explore on their own.
+    - LaScala and Royal Albert Hall (maybe even when the L.A. Philharmonic played there
+      if it could have been one of our trips?)
+- Create the YouTube versions of the recordings and add those as an option instead of
+  the ones on CloudFlare.
 - Load the detail links for recordings in the background when on the "recordings list"
   page, and as they're retrieved, display their count in parentheses alongside each.
   - Cache those links (fixed size LRU) so they can be displayed immediately.
-- Display a link to Provider(s) on the main page so that users can go explore on their own. 
+- Currently, the "synchronization" of the images with the text in the Carousel moves
+  to the next image only after scrolling forward _through_ the corresponding Markdown
+  header.  Preferably, it would select the image
+  
 
 ## In Progress
 
