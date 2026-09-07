@@ -37,3 +37,13 @@ export function rebasePath(rawPath: string, sourceDir: string, targetDir: string
   const resolved = resolve(sourceDir, rawPath)
   return relativeTo(targetDir, resolved)
 }
+
+/**
+ * True for a path meant to be resolved against the document's own location
+ * (rebasePath's domain) - false for a URI with its own scheme (`https:`,
+ * `mailto:`, ...) or a same-page `#fragment`, neither of which rebasePath's
+ * logical-directory math applies to.
+ */
+export function isRelativePath(href: string): boolean {
+  return !/^([a-z][a-z0-9+.-]*:|#)/i.test(href)
+}

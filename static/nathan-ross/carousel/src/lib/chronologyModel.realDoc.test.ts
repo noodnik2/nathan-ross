@@ -2,8 +2,8 @@ import { readFileSync } from 'node:fs'
 import path from 'node:path'
 import MarkdownIt from 'markdown-it'
 import { describe, expect, it } from 'vitest'
-import { deriveSlides } from './chronologyModel'
-import { rebasePath } from './relativePath'
+import { deriveSlides, parseChronology, renderTextPanelHtml } from './chronologyModel'
+import { isRelativePath, rebasePath } from './relativePath'
 
 // Structural checks only — asserts against the document's shape (heading/image
 // counts, ordering, anchor-sharing), never literal prose, since the chronology
@@ -90,5 +90,21 @@ describe('deriveSlides against the real visual-chronology document', () => {
     for (const slide of imageSlides) {
       expect(slide.src).toMatch(/^\.\.\/images\//)
     }
+  })
+
+  it('rebases every relative link href (the PDF letters) to resolve correctly from the deployed carousel location, leaving external links untouched', () => {
+    const rebaseAssetPath = (rawPath: string) => rebasePath(rawPath, 'docs', 'static/nathan-ross/carousel')
+    const rebaseLinkHref = (href: string) => (isRelativePath(href) ? rebaseAssetPath(href) : href)
+
+    const { tokens, md } = parseChronology(markdown)
+    const html = renderTextPanelHtml(tokens, md, rebaseLinkHref)
+
+    const pdfHrefs = [...html.matchAll(/href="([^"]*\.pdf)"/g)].map((match) => match[1])
+    expect(pdfHrefs.length).toBeGreaterThan(0)
+    for (const href of pdfHrefs) {
+      expect(href).toMatch(/^\.\.\/images\//)
+    }
+
+    expect(html).toContain('href="https://en.wikipedia.org/wiki/Isaac_Stern"')
   })
 })

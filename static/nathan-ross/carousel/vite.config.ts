@@ -17,6 +17,7 @@ const CONTENT_TYPES: Record<string, string> = {
   '.jpg': 'image/jpeg',
   '.jpeg': 'image/jpeg',
   '.gif': 'image/gif',
+  '.pdf': 'application/pdf',
 }
 
 function serveSharedImages(): Plugin {

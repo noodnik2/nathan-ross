@@ -8,9 +8,6 @@ The following issues are thought to be needed and are "parked" here for future c
 
 In decreasing order of priority:
 
-- Fix the static deployment so that it waits for user acknowledgement before actually pushing the changes
-  to the GitHub Pages repo.  The incorrect push to `main` from earlier this week caused a major delay since
-  it needs to be rolled back.
 - Fix the broken links to the two letters (i.e., dads to mom, Max to dad).
 - Fix the non-display problem for the middle image(s?) in a group of more than two contiguous.
 
@@ -18,10 +15,8 @@ In decreasing order of priority:
 
 In decreasing order of priority:
 
-- Add display links:
-    - To Provider(s) on the main page so that users can go explore on their own.
-    - LaScala and Royal Albert Hall (maybe even when the L.A. Philharmonic played there
-      if it could have been one of our trips?)
+- Add display links to the music provider(s) on the main page of the MSE SPA app so that
+  users can go explore on their own.
 - Create the YouTube versions of the recordings and add those as an option instead of
   the ones on CloudFlare.
 - Load the detail links for recordings in the background when on the "recordings list"
@@ -29,8 +24,8 @@ In decreasing order of priority:
   - Cache those links (fixed size LRU) so they can be displayed immediately.
 - Currently, the "synchronization" of the images with the text in the Carousel moves
   to the next image only after scrolling forward _through_ the corresponding Markdown
-  header.  Preferably, it would select the image
-  
+  header.  Preferably, it would select the image described within a section when the
+  section's header is first displayed.
 
 ## In Progress
 

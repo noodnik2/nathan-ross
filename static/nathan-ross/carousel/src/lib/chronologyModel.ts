@@ -128,8 +128,20 @@ export function parseChronology(
 // never diverge from parsing's options/plugins. Images are stripped (they're
 // already shown in the carousel); headings, paragraphs, and inline links
 // render normally and stay live/clickable.
-export function renderTextPanelHtml(tokens: Token[], md: MarkdownIt): string {
+export function renderTextPanelHtml(
+  tokens: Token[],
+  md: MarkdownIt,
+  rebaseLinkHref: (href: string) => string = (href) => href,
+): string {
   md.renderer.rules.image = () => ''
+  const defaultLinkOpen =
+    md.renderer.rules.link_open ??
+    ((linkTokens, idx, options, _env, self) => self.renderToken(linkTokens, idx, options))
+  md.renderer.rules.link_open = (linkTokens, idx, options, env, self) => {
+    const href = linkTokens[idx].attrGet('href')
+    if (href !== null) linkTokens[idx].attrSet('href', rebaseLinkHref(href))
+    return defaultLinkOpen(linkTokens, idx, options, env, self)
+  }
   return md.renderer.render(tokens, md.options, {})
 }
 

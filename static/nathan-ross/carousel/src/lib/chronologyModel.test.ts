@@ -252,4 +252,13 @@ describe('renderTextPanelHtml', () => {
 
     expect(html).toContain('<a href="./letter.pdf">this letter</a>')
   })
+
+  it('passes each link href through the supplied rebase callback, if given', () => {
+    const markdown = ['# Title', '', 'See [this letter](./letter.pdf) for details.', ''].join('\n')
+
+    const { tokens, md } = parseChronology(markdown)
+    const html = renderTextPanelHtml(tokens, md, (href) => `REBASED:${href}`)
+
+    expect(html).toContain('<a href="REBASED:./letter.pdf">this letter</a>')
+  })
 })

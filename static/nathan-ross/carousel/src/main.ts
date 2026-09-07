@@ -6,13 +6,15 @@ import './style.css'
 
 import chronologyMarkdown from '../../../../docs/visual-chronology.md?raw'
 import { parseChronology, renderTextPanelHtml, type Slide } from './lib/chronologyModel'
-import { rebasePath } from './lib/relativePath'
+import { isRelativePath, rebasePath } from './lib/relativePath'
 import { activeAnchorId, firstSlideIndexForAnchor, type AnchorPosition } from './lib/scrollSync'
 import { closeZoom, openZoom, zoomAfterSlideChange, type ZoomState } from './lib/zoomState'
 
-const rebaseImageSrc = (rawSrc: string) => rebasePath(rawSrc, 'docs', 'static/nathan-ross/carousel')
+const rebaseAssetPath = (rawPath: string) => rebasePath(rawPath, 'docs', 'static/nathan-ross/carousel')
+const rebaseImageSrc = rebaseAssetPath
+const rebaseLinkHref = (href: string) => (isRelativePath(href) ? rebaseAssetPath(href) : href)
 const { tokens, slides, md } = parseChronology(chronologyMarkdown, rebaseImageSrc)
-const textPanelHtml = renderTextPanelHtml(tokens, md)
+const textPanelHtml = renderTextPanelHtml(tokens, md, rebaseLinkHref)
 
 const app = document.querySelector<HTMLDivElement>('#app')!
 app.innerHTML = `
