@@ -1,11 +1,11 @@
-# Nathan Ross – My Dad
+# Nathan Ross——My Dad
 
 ![normans-painting-cropped](../static/nathan-ross/images/normans-painting-cropped.webp)
 
-This is the story of my late father, Nathan Ross — born Nathan Rothstein, the son of immigrants born into
-the "New World" of Canada. It is told through a chronology of the artifacts he left behind: an oil portrait
-hanging in my office painted by his cousin Norman Pelman, a few photos, newspaper clippings, concert programs,
-diplomas, an army discharge certificate, and a letter from a future President.
+This is the story of my late father, Nathan Ross——born Nathan Rothstein, the son of immigrants who crossed the
+ocean to settle in Canada. It is told through a chronology of the artifacts he left behind: an oil portrait hanging
+in my office painted by his cousin Norman Pelman, a few photos, newspaper clippings, concert programs, diplomas,
+an army discharge certificate, and a letter from a future President.
 
 Piece by piece, these keepsakes trace a life that evolved from a child prodigy on a Vancouver stage, to a radio
 operator and gunner aboard a B-17 flying 35 missions over Germany during World War II, to the concertmaster's
@@ -14,7 +14,7 @@ chair in Hollywood's studio orchestras, to ... well, my dad.
 
 ## Little Nacy
 
-Before he was "Nathan Ross" he was just little Nacy – the curly-haired boy propped up on the table on the left
+Before he was "Nathan Ross" he was just little Nacy——the curly-haired boy propped up on the table on the left
 of this Vancouver family portrait.
 
 ![lil-nacy-with-mom-n-sibs](../static/nathan-ross/images/lil-nacy-with-mom-n-sibs.webp)
@@ -81,7 +81,7 @@ San Francisco Symphony Orchestra.
 > [My First 79 Years](https://www.google.com/search?q=isaac+stern+my+first+79+years):
 > 
 > - _"My 'teenage period' revolved around two friends, both also pupils of Blinder: Nathan Ross, a Candian to_
->   _whom my parents had rented a room in our house, and Henry Shwed.  Nathan would do his practicing in his_
+>   _whom my parents had rented a room in our house, and Henry Shweid.  Nathan would do his practicing in his_
 >   _room and I in mine.  We'd take a break and go out and play tennis on a nearby public court; my life-long_
 >   _passion for tennis was born on that court.  Then, when we got thirsty, we'd go to a store and buy a_
 >   _watermelon, cut off the ends, slice it in half, and eat the whole thing."_
