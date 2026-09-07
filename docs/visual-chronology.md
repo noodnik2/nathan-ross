@@ -127,9 +127,24 @@ By the time these artifacts emerged, Nathan's life looked entirely different. He
 toward U.S. naturalization, and legally changed his surname to "Ross." This less Jewish-sounding name was adopted
 on the advice of Mr. Blinder, with an eye toward smoothing his path toward a future career in Hollywood.
 
+While Nathan was stationed at Elmswell Air Force Base (now called
+[Great Ashfield](https://en.wikipedia.org/wiki/RAF_Great_Ashfield)) in England, he helped entertain troupes
+between bombing missions.  When the soldiers returned home, he was asked to join the Armed Forces Radio Service
+under major [Meredith Willson](https://en.wikipedia.org/wiki/Meredith_Willson).  This photo seems to be from a
+recording of that group (see Nathan on the left):
+
+![in-orchestra-on-left](../static/nathan-ross/images/in-orchestra-on-left.webp)
+![bing-and-frank-goofing-around](../static/nathan-ross/images/bing-and-frank-goofing-around.webp)
+
+[Bing Crosby and Frank Sinatra](https://www.bingmagazine.co.uk/bingmagazine/afrs.htm) made frequent appearances
+with that group, as you can see in this shot within the same session where they were caught "goofing around."   
+
 ![yuma-airfield-newpaper-cover](../static/nathan-ross/images/yuma-airfield-newpaper-cover.webp)
 ![yuma-airfield-paper-cover-note](../static/nathan-ross/images/yuma-airfield-paper-cover-note.webp)
 
+With the end of the war approaching and the mass demobilization of troops underway, Nathan returned to his
+permanent duty station at Yuma Army Air Field. He transitioned his skills toward supporting troop morale,
+trading combat duties for a seat behind the microphone as a base DJ spinning records.
 The cover of the *Actioneer*, the base newspaper of Yuma Army Air Field in June 1945, features T/Sgt.
 Nathan Ross on the front page. With headphones on, he is pictured introducing records over the base's
 radio station, KGI. The violinist's ear and the entertainer's instinct did not go to waste in uniform;
