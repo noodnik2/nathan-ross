@@ -8,7 +8,6 @@ The following issues are thought to be needed and are "parked" here for future c
 
 In decreasing order of priority:
 
-- Fix the broken links to the two letters (i.e., dads to mom, Max to dad).
 - Fix the non-display problem for the middle image(s?) in a group of more than two contiguous.
 
 ### Enhancements

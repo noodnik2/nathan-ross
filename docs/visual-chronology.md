@@ -1,6 +1,5 @@
-# Nathan Ross—My Dad
-
 ![normans-painting-cropped](../static/nathan-ross/images/normans-painting-cropped.webp)
+# Nathan Ross—My Dad
 
 This is the story of my late father, Nathan Ross—born Nathan Rothstein, the son of immigrants who crossed the
 ocean to settle in Canada. It is told through a chronology of the artifacts he left behind: an oil portrait hanging
@@ -11,20 +10,21 @@ Piece by piece, these keepsakes trace a life that evolved from a child prodigy o
 operator and gunner aboard a B-17 flying 35 missions over Germany during World War II, to the concertmaster's
 chair in Hollywood's studio orchestras, to ... well, my dad. 
 
+---
 
+![lil-nacy-with-mom-n-sibs](../static/nathan-ross/images/lil-nacy-with-mom-n-sibs.webp)
 ## Little Nacy
 
 Before he was "Nathan Ross" he was just little Nacy—the curly-haired boy propped up on the table on the left
 of this Vancouver family portrait.
 
-![lil-nacy-with-mom-n-sibs](../static/nathan-ross/images/lil-nacy-with-mom-n-sibs.webp)
-
 Family lore says that not long after this photo, his father, Max, spotted him strumming a rubber band stretched over
 a ruler. Recognizing a kindred musical spark, Max took it as a sign and became his young son's first violin teacher.
 
-## Violinist
+---
 
 ![violinist-nathan-ross](../static/nathan-ross/images/violinist-nathan-ross.webp)
+## Violinist
 
 This photo showcases the outward-facing role Nathan held the longest, and it serves as the focus for many
 of the artifacts gathered here.
@@ -91,6 +91,9 @@ San Francisco Symphony Orchestra.
 Though Nathan returned periodically to Vancouver during his scholarship years, this move to California ultimately
 proved to be permanent.
 
+---
+
+![nathan-in-uniform](../static/nathan-ross/images/nathan-in-uniform.webp)
 ## World War II
 
 After the attack on Pearl Harbor, Nathan faced a brutal choice. He could sign an exemption from the
@@ -120,12 +123,18 @@ risk everything to secure the life, the country, and the future career he wanted
 
 ![hero-airman-homecoming](../static/nathan-ross/images/hero-airman-homecoming.webp)
 
-![lucky-bastards-club](../static/nathan-ross/images/lucky-bastards-club.webp)
-
 By the time these artifacts emerged, Nathan's life looked entirely different. He had not only participated in, but had
 *survived* dozens of live combat missions over Germany. He was awarded an Air Medal for courage, secured his path
 toward U.S. naturalization, and legally changed his surname to "Ross." This less Jewish-sounding name was adopted
 on the advice of Mr. Blinder, with an eye toward smoothing his path toward a future career in Hollywood.
+
+![lucky-bastards-club](../static/nathan-ross/images/lucky-bastards-club.webp)
+
+Whenever I look at my dad’s
+[Lucky Bastard’s Club](https://en.wikipedia.org/wiki/Lucky_Bastard_Club)
+certificate, I'm reminded that my entire existence relies on him beating the odds in the skies over Europe.
+
+![in-orchestra-on-left](../static/nathan-ross/images/in-orchestra-on-left.webp)
 
 While Nathan was stationed at Elmswell Air Force Base (now called
 [Great Ashfield](https://en.wikipedia.org/wiki/RAF_Great_Ashfield)) in England, he helped entertain troupes
@@ -133,14 +142,12 @@ between bombing missions.  When the soldiers returned home, he was asked to join
 under major [Meredith Willson](https://en.wikipedia.org/wiki/Meredith_Willson).  This photo seems to be from a
 recording of that group (see Nathan on the left):
 
-![in-orchestra-on-left](../static/nathan-ross/images/in-orchestra-on-left.webp)
 ![bing-and-frank-goofing-around](../static/nathan-ross/images/bing-and-frank-goofing-around.webp)
 
 [Bing Crosby and Frank Sinatra](https://www.bingmagazine.co.uk/bingmagazine/afrs.htm) made frequent appearances
 with that group, as you can see in this shot within the same session where they were caught "goofing around."   
 
 ![yuma-airfield-newpaper-cover](../static/nathan-ross/images/yuma-airfield-newpaper-cover.webp)
-![yuma-airfield-paper-cover-note](../static/nathan-ross/images/yuma-airfield-paper-cover-note.webp)
 
 With the end of the war approaching and the mass demobilization of troops underway, Nathan returned to his
 permanent duty station at Yuma Army Air Field. He transitioned his skills toward supporting troop morale,
@@ -150,11 +157,18 @@ Nathan Ross on the front page. With headphones on, he is pictured introducing re
 radio station, KGI. The violinist's ear and the entertainer's instinct did not go to waste in uniform;
 even between combat postings, he found his way back in front of a microphone.
 
+![yuma-airfield-paper-cover-note](../static/nathan-ross/images/yuma-airfield-paper-cover-note.webp)
+
+The inside cover of that magazine edition explains what's featured on its front cover...
+
 ![army-honorable-discharge](../static/nathan-ross/images/army-honorable-discharge.webp)
 
 Then came the discharge itself: Fort MacArthur, California, October 3, 1945—"awarded as a testimonial
 of Honest and Faithful Service to this country." The war was over, and so, for Nathan Ross, was the Army.
 
+---
+
+![nathan-anne-connie-beach-party](../static/nathan-ross/images/nathan-anne-connie-beach-party.webp)
 ## Los Angeles
 
 Nathan resumed his career as a classical violinist upon his postwar re-entry into professional life.
@@ -163,31 +177,33 @@ and concertmaster for the NBC orchestra under [Henry Russell](https://henryrusse
 What came next was the daunting task of building a new life in a city where he hadn't grown up,
 among people he hadn't yet met.
 
-![nathan-anne-connie-beach-party](../static/nathan-ross/images/nathan-anne-connie-beach-party.webp)
-
 A mutual friend, playing matchmaker, intentionally brought my parents together by organizing a beach outing.
 You can see the two of them on the right side of this photograph, standing less than a mile from where they
 would eventually settle down to raise our family.
 
+![nathan-anne-party-date](../static/nathan-ross/images/nathan-anne-party-date.webp)
+
 Because they traveled in glamorous Hollywood circles—my future mother was a fashion model—we are lucky
 to have pictures of them together in fashionable places like this one.
 
-![nathan-anne-party-date](../static/nathan-ross/images/nathan-anne-party-date.webp)
+---
 
+![home-for-plaudits-soup](../static/nathan-ross/images/home-for-plaudits-soup.webp)
 ## Postwar Homecoming
 
 After living for a while in California, Nathan returned to Vancouver to visit his family and was welcomed
 with a true hero's homecoming.
 
-![home-for-plaudits-soup](../static/nathan-ross/images/home-for-plaudits-soup.webp)
+![scores-at-pop-concert](../static/nathan-ross/images/scores-at-pop-concert.webp)
 
 During the trip to his hometown, Nathan performed as a guest soloist with the Vancouver Symphony under
-Jacques Singer, playing the Bruch G-minor Concerto. The critic who'd previously covered him as a boy
+Jacques Singer, playing the Bruch G-minor Concerto. 
+
+![charms-1500-pop-goers](../static/nathan-ross/images/charms-1500-pop-goers.webp)
+
+The critic who'd previously covered him as a boy
 was still there to cover him again as a man: "From a very stocky little boy he has grown into a handsome
 young man nearly six feet in height."
-
-![scores-at-pop-concert](../static/nathan-ross/images/scores-at-pop-concert.webp)
-![charms-1500-pop-goers](../static/nathan-ross/images/charms-1500-pop-goers.webp)
 
 Toward the end of his visit, Nathan faced a profound personal dilemma. You can read his own words about this
 heartfelt identity crisis in
@@ -201,9 +217,10 @@ of—and eventually learned to accept—the union, Nathan's father wrote him
 [this touching letter](../static/nathan-ross/images/1950-april4-letter-from-max.pdf),
 an incredibly heartwarming and validating artifact of a father's enduring love.
 
-## Hollywood Here We Come!
+---
 
 ![concertmaster-nbc-symphony](../static/nathan-ross/images/concertmaster-nbc-symphony.webp)
+## Hollywood Here We Come!
 
 The fullest single account of Nathan's career appears here, written when he was just twenty-seven and
 serving as the concertmaster of the NBC orchestra in Los Angeles. It captures a remarkable trajectory: 
@@ -226,6 +243,8 @@ behind the scenes of the recording studios.
 While Nathan is clearly recognizable in this photograph, the location and the identities of the people surrounding
 him remain a mystery. If you happen to recognize any of the faces or the setting in this image, please reach out
 and let me know!
+
+---
 
 ## Studio Recordings
 
@@ -257,6 +276,8 @@ he didn't generally love the music itself, or the lack of challenge in the popul
 
 - [Listen to some recordings in which Nathan Ross played violin](https://noodnik2.github.io/music-session-explorer/#/?artist=Nathan+Ross)
 
+---
+
 ## Continuing in The Classical Music Scene
 
 To nourish his deep connection to classical music, Nathan turned to more intimate spaces. He hosted and attended
@@ -279,13 +300,14 @@ Los Angeles Philharmonic when needed and participated in several local classical
 > [Royal Albert Hall](https://www.royalalberthall.com/) during the Los Angeles Philharmonic's 1974 European tour,
 > documented in [Six Decades of Zubin Mehta](https://www.laphil.com/posts/six-decades-of-zubin-mehta).
 
+---
+
+![sheldon-sanov-obit](../static/nathan-ross/images/sheldon-sanov-obit.webp)
 ## Taken Too Soon
 
 In the early 1980s, a routine checkup on a dental filling revealed a suspicious infection that was later diagnosed
 as an aggressive small-cell cancer. Despite undergoing surgery and chemotherapy, the disease metastasized. 
 Nathan deteriorated rapidly, passing away on March 2, 1984.
-
-![sheldon-sanov-obit](../static/nathan-ross/images/sheldon-sanov-obit.webp)
 
 The close of his story is best summarized not in his own words, but by the community he served. In a tribute published
 in the Recording Musicians Association newsletter, colleague Sheldon Sanov wrote:

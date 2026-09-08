@@ -63,6 +63,14 @@ implementation.
 in the correct order, keyboard-navigable. Verified live via `make run-local` (see below) plus a
 headless-browser screenshot — not just "tests pass."
 
+**Sync mechanism redesign — agreed with the developer 2026-09-08, not yet implemented (read this
+next):** the anchor definition and two hard invariants under Content model above, plus the "no
+stale-cached anchor positions" requirement under Sync mechanism above, supersede the sync mechanism
+described as "done" further below in this section. That earlier work isn't wrong — it's the old
+(preceding-paragraph, shared-anchor) design, working as built — but it's superseded and is not the
+current target. See Content model / Sync mechanism above for the current design; the "Sync mechanism
++ header strip" paragraph below is historical (what shipped on 2026-08-31), not what to build next.
+
 **Built so far, all under `static/nathan-ross/carousel/`** (own `package.json`/`vite.config.ts`/
 `tsconfig.json`/`Makefile`, nested inside the existing `static/nathan-ross/` component per the design
 above; 16 Vitest tests passing across 3 files):
@@ -104,7 +112,9 @@ above; 16 Vitest tests passing across 3 files):
   `overflow-y: auto`), padded `padding-bottom: 50vh` to satisfy the scroll-clamp guarantee (so the
   last real anchor can still reach the panel viewport's top). Verified live via `make run-local`
   (developer confirmed 2026-08-30): real chronology text renders, panel scrolls, no images inside it.
-  **Sync mechanism + header strip: done, verified live (2026-08-31)** — `src/lib/scrollSync.ts` holds
+  **Sync mechanism + header strip (OLD DESIGN, superseded 2026-09-08 — see the callout at the top of
+  this section; description below is historical, not current):** done, verified live (2026-08-31) —
+  `src/lib/scrollSync.ts` holds
   the pure scrollspy math (`activeAnchorId`, `firstSlideIndexForAnchor`, unit-tested); `main.ts` wires
   it to Swiper's `slideChange` event and a `.text-panel` scroll listener, each guarded by a boolean
   flag cleared on the next animation frame so a gesture's own resulting update doesn't re-trigger
@@ -180,8 +190,10 @@ above; 16 Vitest tests passing across 3 files):
 (`http://localhost:5173/nathan-ross/carousel/` — note the path, `base` is set to match the deployed
 location, so it is *not* served at the bare root).
 
-**Suggested next step:** visual styling for the text-only card slides (Open Item 2) — the only
-remaining piece, cosmetic and non-blocking.
+**Suggested next step:** implement the 2026-09-08 sync mechanism redesign (Content model / Sync
+mechanism above) — the anchor-direction inversion, the two build-time invariants, and the anchor-
+position drift fix. Visual styling for card slides (Open Item 2, below) remains cosmetic/non-blocking
+and can wait.
 
 ### Full navigability guarantee (hard constraint)
 
@@ -218,49 +230,91 @@ choices below, in particular:
 
 ### Content model — deriving slides from `docs/visual-chronology.md`
 
-No forked/duplicated content: both `/nathan-ross` (existing) and `/nathan-ross-carousel` (new)
-render from this single Markdown file.
+No forked/duplicated content: both `/nathan-ross` (existing) and `/nathan-ross/carousel` (this
+Milestone) render from this single Markdown file.
 
 - Every image in the document becomes one carousel slide. Adjacent images are never merged into one
-  slide, even when there's no text between them.
-- **Anchor definition** (a starting point, expected to evolve as an implementation detail): each
-  slide's anchor is the single paragraph immediately preceding its image (back to the previous
-  image/heading).
-  - When two images have no distinct preceding paragraph between them — in the current file: lines
-    118–119 (`hero-airman-homecoming`/`lucky-bastards-club`), 126–127 (the two Yuma airfield images),
-    171–172 (`scores-at-pop-concert`/`charms-1500-pop-goers`) — both slides share the same anchor.
-    This is intentional (see Sync Mechanism below for the consequence), not a bug.
-  - The very first image (line 3, before any heading or paragraph) has no preceding paragraph; its
-    anchor is document start (top of document / the H1).
+  slide, even when there's no text between them (see the hard invariant below — "adjacent, no text
+  between" isn't a case that's allowed to exist in the source document at all).
 - Any `##` (H2) section containing **zero** images gets a synthetic text-only "card" slide in the
-  carousel (title only, no photo), anchored at that heading. In the current document this applies to
-  exactly two sections: "Studio Recordings" and "Continuing in The Classical Music Scene." This is a
-  general, deterministic rule — any future zero-image H2 section gets one automatically — not a
-  one-off special case for these two. Rationale: gives the sync mechanism a checkpoint instead of one
-  long, image-static scroll region between `with-so-and-so` and the obituary photo. The visual
-  treatment of these card slides is not yet specified.
+  carousel (title only, no photo). In the current document this applies to exactly two sections:
+  "Studio Recordings" and "Continuing in The Classical Music Scene." This is a general, deterministic
+  rule — any future zero-image H2 section gets one automatically — not a one-off special case for
+  these two. Rationale: gives the sync mechanism a checkpoint instead of one long, image-static scroll
+  region between `with-so-and-so` and the obituary photo. The visual treatment of these card slides is
+  not yet specified. Image slides and card slides interleave in document order and are collectively
+  "slides" for everything below.
+- **Anchor definition (revised 2026-09-08 — supersedes the original "preceding paragraph" design, see
+  "Explicitly superseded/rejected ideas"):** each slide's anchor is the first visible (non-image)
+  content that begins its own span in the text panel.
+  - For an **image** slide, that's the paragraph/heading immediately *following* the image — the
+    image itself renders as nothing in the text panel (see below), so the first thing a reader
+    actually sees after it is that slide's anchor. A slide's span runs from its anchor up to (not
+    including) the next slide's anchor; the last slide's span runs to the end of the document.
+  - For a **card** slide, that's its own heading — already the first visible content of its span,
+    since there's no image ahead of it to render invisibly and skip over. No special-casing needed:
+    it's the same "first visible content" rule as image slides, applied to a slide with nothing to
+    skip.
+  - The very first slide (always an image, per the invariant below) has no preceding slide; its
+    span starts at document start (top of document).
+- **Hard invariants on the source document, enforced by a build/test-time structural check against
+  `docs/visual-chronology.md` (fail the build — no runtime fallback is defined for either case, since
+  neither is expected to occur):**
+  1. No two images may appear with no text between them. (Two adjacent images would have no distinct
+     "following content" to tell them apart, which the old design handled via a shared-anchor
+     compromise — see "Explicitly superseded/rejected ideas." The new model has no equivalent
+     fallback; it simply must not happen.)
+  2. No content may appear before the first image. (There is no earlier slide to own it.)
 - The text panel renders the same Markdown with images stripped out of the HTML (they're already
   shown in the carousel) — headings, paragraphs, and inline links (PDF letters, MusicBrainz/audio
   links, Wikipedia links, etc.) render normally and stay live/clickable.
 
 ### Sync mechanism
 
-One canonical mapping function drives both directions: **the anchor paragraph's top aligns to the
-top of the text-panel viewport.** This is a standard "scrollspy" model — the active slide is
-whichever anchor paragraph has most recently crossed the top of the text-panel viewport. (An earlier
+One canonical mapping function drives both directions: **the active slide's anchor element's top
+aligns to the top of the text-panel viewport.** This is a standard "scrollspy" model — the active
+slide is whichever anchor has most recently crossed the top of the text-panel viewport. (An earlier
 draft of this design proposed bottom-alignment; that was corrected during review — top-alignment is
 what makes text→slide and slide→text the same function instead of two that must be kept
-consistent by hand.)
+consistent by hand. This principle is unchanged by the 2026-09-08 anchor-direction revision below —
+only *which* element is each slide's anchor changed, not the alignment rule itself.)
 
-- **Slide → text:** navigating the carousel scrolls the text panel so the active slide's anchor
-  paragraph is at the top.
+- **Slide → text:** navigating the carousel scrolls the text panel so the active slide's anchor is
+  at the top.
 - **Text → slide:** scrolling the text panel updates the active slide via the same scrollspy check.
 - **Feedback-loop guard:** sync updates are one-directional per user gesture — the region that
   originated an interaction is never redundantly re-scrolled by its own resulting update.
-- **Consequence of shared anchors:** text-driven scrolling can only ever resolve to the *first*
-  slide of a same-anchor cluster (both images map to the same scrollspy position). Reaching the
-  second slide of a cluster is carousel-navigation-only (arrow key/swipe/wheel-over-carousel). The
-  developer explicitly accepted this ("to the extent possible") as a reasonable compromise.
+- **Every slide has its own, unique anchor** — a direct consequence of the anchor-definition
+  revision (see Content model above) plus its two hard invariants: since no two images can be
+  adjacent with no text between them, no two slides can ever end up pointing at the same anchor.
+  This removes the old design's "shared anchor cluster" compromise entirely (see "Explicitly
+  superseded/rejected ideas") — every slide is now independently, always reachable from *both* the
+  carousel and the text panel, with no carousel-navigation-only case.
+- **Fix the "drift" the developer observed (required — not automatically fixed by the anchor-
+  direction revision above; an equally load-bearing, not-yet-diagnosed part of this work):** the
+  developer sees active-slide/text-panel sync gradually go wrong purely from normal back-and-forth
+  navigation — **not** from resizing the window (confirmed 2026-09-08; an earlier draft of this note
+  wrongly centered on resize-triggered stale `offsetTop` caching as "the obvious case" — don't
+  restart from that assumption). Two candidate root causes, neither yet confirmed live, to check
+  during implementation rather than picking one and building around it unverified:
+  1. **Stale cached anchor positions.** `anchorPositions` (`main.ts`) is captured once via
+     `el.offsetTop` at startup and never recomputed. Any later layout shift invalidates it — window
+     resize is the obvious trigger but evidently isn't what the developer is hitting, so if this is
+     the cause, something else must be shifting layout post-capture (e.g. late web-font swap,
+     something in Swiper's own post-init re-layout). Fix, if confirmed: recompute on layout change or
+     measure live (e.g. `getBoundingClientRect()` at scroll time) instead of caching once at startup.
+  2. **A race in the feedback-loop guard.** `suppressTextPanelScroll`/`suppressSlideChange`
+     (`main.ts:94-124`) are cleared on the *next* `requestAnimationFrame` after a programmatic
+     update, assuming the resulting `scroll`/`slideChange` event will have already fired by then.
+     That ordering (native scroll-event dispatch vs. an `rAF` callback) isn't guaranteed. If the
+     guard clears before its own resulting event fires, that event is treated as user-originated
+     instead of suppressed, triggering an unwanted extra sync update in the other direction — this
+     would surface from ordinary repeated navigation, matching what the developer described, with no
+     resize needed. Fix, if confirmed: a more robust suppression mechanism (e.g. comparing the
+     scroll/slide position actually reached against what the programmatic update targeted, rather
+     than a fixed one-frame timer).
+  Diagnose live (e.g. via a headless-browser repro of repeated back-and-forth navigation) before
+  committing to either fix — don't implement a fix for an unconfirmed cause.
 - **Section-header context strip:** a small persistent UI element above the text panel shows the
   nearest preceding heading text — at *any* Markdown heading level (H1–H6), not just H2 — for
   whatever's currently in view, updated by the same sync logic. (The current document only has H1
@@ -268,7 +322,8 @@ consistent by hand.)
   unrelated to the H2-scoped rule for synthetic zero-image card slides below, which stays H2-only
   by design since it governs structural chunking, not the header strip's display text.) For the
   intro content (before any heading at all), the strip defaults to showing the H1 title ("Nathan
-  Ross – My Dad") rather than staying empty.
+  Ross – My Dad") rather than staying empty. Unaffected by the anchor-direction revision — this
+  logic reads each slide's already-computed `sectionHeading`, not its anchor.
 
 ### Input handling — no click-to-focus needed
 
@@ -416,6 +471,13 @@ build`: only `index.html` and `assets/`, no source or config files.
 
 ### Explicitly superseded/rejected ideas (do not resurrect without new reasoning)
 
+- Anchoring each image slide to its *preceding* paragraph (with images that had no distinct
+  preceding paragraph sharing one anchor, reachable via carousel-navigation-only for the second+
+  slide of the cluster) — superseded 2026-09-08 in favor of anchoring each slide to the first visible
+  content that *follows* it (see Content model's "Anchor definition" and Sync mechanism above),
+  combined with two hard invariants on the source document (no adjacent images with no text between
+  them; no content before the first image) that make every slide's anchor unique by construction and
+  eliminate the shared-anchor-cluster compromise entirely.
 - Merging adjacent same-anchor images into a single multi-image slide — rejected; each image is
   always its own slide.
 - Bottom-aligning the anchor paragraph in the text viewport — corrected to top-alignment (see Sync
