@@ -1,8 +1,8 @@
-# Nathan Ross——My Dad
+# Nathan Ross—My Dad
 
 ![normans-painting-cropped](../static/nathan-ross/images/normans-painting-cropped.webp)
 
-This is the story of my late father, Nathan Ross——born Nathan Rothstein, the son of immigrants who crossed the
+This is the story of my late father, Nathan Ross—born Nathan Rothstein, the son of immigrants who crossed the
 ocean to settle in Canada. It is told through a chronology of the artifacts he left behind: an oil portrait hanging
 in my office painted by his cousin Norman Pelman, a few photos, newspaper clippings, concert programs, diplomas,
 an army discharge certificate, and a letter from a future President.
@@ -14,7 +14,7 @@ chair in Hollywood's studio orchestras, to ... well, my dad.
 
 ## Little Nacy
 
-Before he was "Nathan Ross" he was just little Nacy——the curly-haired boy propped up on the table on the left
+Before he was "Nathan Ross" he was just little Nacy—the curly-haired boy propped up on the table on the left
 of this Vancouver family portrait.
 
 ![lil-nacy-with-mom-n-sibs](../static/nathan-ross/images/lil-nacy-with-mom-n-sibs.webp)
@@ -38,7 +38,7 @@ prize for the most talented child under ten.
 ![portrait-young-violinist](../static/nathan-ross/images/portrait-young-violinist.webp)
 
 Four years after that first victory, the same festival named Nathan its most talented competitor under nineteen.
-By fourteen, he was no longer a novelty act — he had a real instrument, a mature stance, and the flower boutonnière
+By fourteen, he was no longer a novelty act—he had a real instrument, a mature stance, and the flower boutonnière
 of a young man being presented, not just exhibited.
 
 ![nathan-violinist-at14](../static/nathan-ross/images/nathan-violinist-at14.webp)
@@ -152,7 +152,7 @@ even between combat postings, he found his way back in front of a microphone.
 
 ![army-honorable-discharge](../static/nathan-ross/images/army-honorable-discharge.webp)
 
-Then came the discharge itself: Fort MacArthur, California, October 3, 1945 — "awarded as a testimonial
+Then came the discharge itself: Fort MacArthur, California, October 3, 1945—"awarded as a testimonial
 of Honest and Faithful Service to this country." The war was over, and so, for Nathan Ross, was the Army.
 
 ## Los Angeles
@@ -169,7 +169,7 @@ A mutual friend, playing matchmaker, intentionally brought my parents together b
 You can see the two of them on the right side of this photograph, standing less than a mile from where they
 would eventually settle down to raise our family.
 
-Because they traveled in glamorous Hollywood circles — my future mother was a fashion model — we are lucky
+Because they traveled in glamorous Hollywood circles—my future mother was a fashion model—we are lucky
 to have pictures of them together in fashionable places like this one.
 
 ![nathan-anne-party-date](../static/nathan-ross/images/nathan-anne-party-date.webp)
@@ -197,7 +197,7 @@ Hollywood, his mind was firmly made up: he was going to marry my mother.
 
 Both of them were rebels within their own families, choosing to follow their hearts rather than bow to the
 strict expectations and preplanned futures their parents had laid out for them. After his family learned
-of — and eventually learned to accept — the union, Nathan's father wrote him
+of—and eventually learned to accept—the union, Nathan's father wrote him
 [this touching letter](../static/nathan-ross/images/1950-april4-letter-from-max.pdf),
 an incredibly heartwarming and validating artifact of a father's enduring love.
 
@@ -253,7 +253,7 @@ he didn't generally love the music itself, or the lack of challenge in the popul
 >   section for "Rocket Love" on his *[Hotter than July](https://en.wikipedia.org/wiki/Hotter_than_July)* album.
 >   Between takes, Stevie was incredibly warm, entirely present in the room with me. The vivid image of watching
 >   Stevie next to me, swaying along with the overlaid tracks during the recording sessions, stays with me to this
->   day — he truly felt the music.
+>   day—he truly felt the music.
 
 - [Listen to some recordings in which Nathan Ross played violin](https://noodnik2.github.io/music-session-explorer/#/?artist=Nathan+Ross)
 
@@ -292,7 +292,7 @@ in the Recording Musicians Association newsletter, colleague Sheldon Sanov wrote
 
 > "Nate was truly a musicians' musician in his love and dedication to the art."
 
-Nathan Ross lived a life of profound transitions — from a child prodigy on a Canadian stage, to a soldier risking
+Nathan Ross lived a life of profound transitions—from a child prodigy on a Canadian stage, to a soldier risking
 everything in a flying target over Europe, to the recording booths of Hollywood's greatest legends. He chose a
 quieter studio career because he valued the simplicity of a peaceful home and a loving family above all else. 
 
