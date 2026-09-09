@@ -121,18 +121,26 @@ test of courage. He earned his eventual citizenship by surviving 35 combat missi
 freezing, thin air inside a flying target.  It speaks clearly of Nathan's resolve: he was a man willing to
 risk everything to secure the life, the country, and the future career he wanted.
 
-![hero-airman-homecoming](../static/nathan-ross/images/hero-airman-homecoming.webp)
-
-By the time these artifacts emerged, Nathan's life looked entirely different. He had not only participated in, but had
-*survived* dozens of live combat missions over Germany. He was awarded an Air Medal for courage, secured his path
-toward U.S. naturalization, and legally changed his surname to "Ross." This less Jewish-sounding name was adopted
-on the advice of Mr. Blinder, with an eye toward smoothing his path toward a future career in Hollywood.
-
 ![lucky-bastards-club](../static/nathan-ross/images/lucky-bastards-club.webp)
 
-Whenever I look at my dad’s
-[Lucky Bastard’s Club](https://en.wikipedia.org/wiki/Lucky_Bastard_Club)
-certificate, I'm reminded that my entire existence relies on him beating the odds in the skies over Europe.
+Whenever I look at my dad’s [Lucky Bastard’s Club](https://en.wikipedia.org/wiki/Lucky_Bastard_Club) certificate,
+I'm reminded that my entire existence relies on him beating the odds in the skies over Europe. 
+Nathan’s [handwritten mission log](../static/nathan-ross/images/b17-mission-log.pdf) shows he flew
+[missions #202 and #209](https://www.385thbga.com/records/index-mission-number-to-date-and-target-2/mission-summaries/).
+But a single scheduling assignment separated him from disaster. Had he been ordered to fly mission #206 to Merseburg,
+he likely wouldn't have survived. On November 2nd, the
+[aircraft he most often flew](https://b17flyingfortress.de/en/b17/43-37888/) was
+[shot down](../static/nathan-ross/images/b17-43-37888-crashed.webp), 
+his regular crew vanished into enemy territory, and his own trail of artifacts might have ended forever in
+[this report](https://aircrewremembered.com/keeler-hyrum.html).
+
+![hero-airman-homecoming](../static/nathan-ross/images/hero-airman-homecoming.webp)
+
+By the time these artifacts emerged, Nathan's life looked entirely different. He had not only participated in,
+but had *survived* dozens of live combat missions over Germany. He was awarded an Air Medal with four oak leaf
+clusters for courage, secured his path toward U.S. naturalization, and legally changed his surname to "Ross."
+This less Jewish-sounding name was adopted on the advice of Mr. Blinder, with an eye toward smoothing his path
+toward a future career in Hollywood.
 
 ![in-orchestra-on-left](../static/nathan-ross/images/in-orchestra-on-left.webp)
 

@@ -63,17 +63,45 @@ implementation.
 in the correct order, keyboard-navigable. Verified live via `make run-local` (see below) plus a
 headless-browser screenshot — not just "tests pass."
 
-**Sync mechanism redesign — agreed with the developer 2026-09-08, not yet implemented (read this
-next):** the anchor definition and two hard invariants under Content model above, plus the "no
-stale-cached anchor positions" requirement under Sync mechanism above, supersede the sync mechanism
-described as "done" further below in this section. That earlier work isn't wrong — it's the old
-(preceding-paragraph, shared-anchor) design, working as built — but it's superseded and is not the
-current target. See Content model / Sync mechanism above for the current design; the "Sync mechanism
-+ header strip" paragraph below is historical (what shipped on 2026-08-31), not what to build next.
+**Sync mechanism redesign — agreed with the developer 2026-09-08, IMPLEMENTED 2026-09-08 (TDD +
+live-verified).** The forward-anchor definition and two hard invariants under Content model above,
+and the drift diagnosis under Sync mechanism above, are now the shipping design. The "Sync mechanism
++ header strip (OLD DESIGN)" paragraph below is historical (what shipped 2026-08-31), fully
+superseded. What changed:
+
+- **Anchor direction inverted** — each slide now anchors to the first visible content that *follows*
+  it (image slide → the paragraph/heading after the image; card slide → its own heading), not the
+  preceding paragraph. Every slide gets a unique anchor; the old "shared anchor cluster" /
+  carousel-only-reachable case is gone.
+- **Drift root cause found and fixed.** Live diagnosis (not the two candidates this doc originally
+  listed — neither reproduced): slides 10 (`awarded-scholarship`) and 27 (`jfk-thanks`) anchored to
+  a markdown-it **`hidden` tight-list-item `paragraph_open`** (the "Listen to…" bullets), which
+  renders to no element, so `getElementById` returned `null` and the text panel jumped to
+  `scrollTop = 0` every time you crossed those slides. The forward-anchor model resolves this by
+  construction (following content is always a real rendered `<p>`/`<h2>`); additionally the
+  qualifying-anchor rule now skips `hidden` paragraphs, and a realDoc test asserts every slide's
+  `anchorId` actually appears in the rendered text-panel HTML.
+- **`doc-start` sentinel retired** — `activeAnchorId` clamps to the first anchor instead.
+  `firstSlideIndexForAnchor` renamed `slideIndexForAnchor` (anchors are 1:1 now). New `DOC_END_ANCHOR`
+  sentinel for a hypothetical trailing image with no following content (not produced by the real doc;
+  `main.ts` gives it a synthetic max-scroll position so it stays bidirectional).
+- **Card-slide section attribution fixed** (`countImagesPerH2Section`) — section-leading images sit
+  one line *above* their `## heading` in source, so the old counter mis-filed each under the previous
+  section. Result before the fix: "Taken Too Soon" (has the obit photo) wrongly got a card and
+  "Continuing in The Classical Music Scene" (genuinely image-less) did not. Now the two card sections
+  are "Studio Recordings" and "Continuing in The Classical Music Scene", as this doc's Content model
+  states, and no image slide shares an anchor with a card.
+- **`sectionHeading` now computed at the anchor**, not the image's source position (developer
+  decision 2026-09-08, overriding the earlier "unaffected by the anchor revision" note) — so the
+  header strip always names the section whose heading is at the top of the text panel. Bonus: the
+  intro image's strip now shows the H1 title instead of being blank.
+- **Build gate** — `npm run build` runs `scripts/checkSource.ts` (`node` native TS, no new dep),
+  which fails the build if `docs/visual-chronology.md` violates either invariant. Also exercised by
+  Vitest.
 
 **Built so far, all under `static/nathan-ross/carousel/`** (own `package.json`/`vite.config.ts`/
-`tsconfig.json`/`Makefile`, nested inside the existing `static/nathan-ross/` component per the design
-above; 16 Vitest tests passing across 3 files):
+`tsconfig.json`/`Makefile`/`scripts/`, nested inside the existing `static/nathan-ross/` component per
+the design above; 50 Vitest tests passing across 5 files):
 
 - **`src/lib/relativePath.ts`** — `rebasePath(rawPath, sourceDir, targetDir)`, pure string-based POSIX
   path math with **no dependency on Node's `path` module** (deliberate: it runs both at build/test
@@ -82,22 +110,22 @@ above; 16 Vitest tests passing across 3 files):
   (relative to `docs/`) into `../images/...` (relative to wherever the carousel page is served from).
 - **`src/lib/chronologyModel.ts`** — `deriveSlides(markdown, rebaseImageSrc?)`. Full TDD history is in
   git; the load-bearing points to know before touching this file again:
-  - `ImageSlide`/`CardSlide` both carry `anchorId` and `sectionHeading` (nearest preceding heading at
-    *any* level, per the developer's clarification — naturally defaults to the H1 title for intro
-    content with no special-casing needed, since heading tracking starts at the H1).
+  - `ImageSlide`/`CardSlide` both carry `anchorId` and `sectionHeading`. `anchorId` is the first
+    visible content that *follows* the slide (see "Sync mechanism redesign" above and Content model).
+    `sectionHeading` is the heading in effect *at that anchor* (not the image's source position), so
+    the header strip matches what sits at the panel top; it defaults to the H1 title for intro
+    content.
   - **Anchor ids are minted exactly once, directly onto the markdown-it tokens** (`token.attrSet('id',
-    ...)`), not recomputed from a parallel counter. **This is a hard constraint on the next piece of
-    work (the text-panel renderer): it must render from these same annotated tokens, not re-parse the
-    raw Markdown and recompute its own ids** — two independent id-minting implementations will drift
-    (a real, previously-caught bug class — see the softbreak fix below) and silently break the
-    scrollspy sync mechanism, since the text panel's element ids and the slides' `anchorId`s would stop
-    matching. `deriveSlides` doesn't yet expose the annotated tokens publicly (no test has needed that
-    yet) — add that surface, driven by a test, when building the text renderer.
-  - A paragraph holding only images joined by a markdown-it `softbreak` (two image lines with no blank
-    line between them) is deliberately excluded from anchor-minting — an earlier version of this code
-    let such a paragraph mint a "phantom" anchor id that no real text paragraph would ever get, which
-    could hand a later image an id matching nothing in the rendered text. Covered by a regression test;
-    don't reintroduce the bug by simplifying the `hasTextContent` check.
+    ...)`), not recomputed from a parallel counter. `renderTextPanelHtml` renders from these same
+    annotated tokens — never re-parsing — so the text panel's element ids and the slides' `anchorId`s
+    can't drift apart. `parseChronology` returns `{ tokens, slides, md }`; `deriveSlides` is a thin
+    wrapper over `.slides`.
+  - Anchor resolution skips tokens that render to nothing: image-only paragraphs (incl. `softbreak`-
+    joined image lines) and **`hidden` tight-list-item paragraphs** — an id on any of those would
+    never reach the DOM. Covered by regression tests; don't loosen the `hasTextContent` /
+    `paragraphOpenToken.hidden !== true` guards.
+  - `assertSourceInvariants(tokens)` enforces the two Content-model invariants; `countImagesPerH2Section`
+    files section-leading images (image line above its `## heading`) under the following section.
   - `rebaseImageSrc` is an injected callback (default identity), not hardcoded — keeps this module
     decoupled from any specific directory layout. Tested both via synthetic fixtures and against the
     real `docs/visual-chronology.md` (confirms every image slide's `src` matches `^\.\./images/`).
@@ -112,26 +140,17 @@ above; 16 Vitest tests passing across 3 files):
   `overflow-y: auto`), padded `padding-bottom: 50vh` to satisfy the scroll-clamp guarantee (so the
   last real anchor can still reach the panel viewport's top). Verified live via `make run-local`
   (developer confirmed 2026-08-30): real chronology text renders, panel scrolls, no images inside it.
-  **Sync mechanism + header strip (OLD DESIGN, superseded 2026-09-08 — see the callout at the top of
-  this section; description below is historical, not current):** done, verified live (2026-08-31) —
-  `src/lib/scrollSync.ts` holds
-  the pure scrollspy math (`activeAnchorId`, `firstSlideIndexForAnchor`, unit-tested); `main.ts` wires
+  **Sync mechanism + header strip:** `src/lib/scrollSync.ts` holds the pure scrollspy math
+  (`activeAnchorId` clamped to the first anchor, `slideIndexForAnchor`, unit-tested); `main.ts` wires
   it to Swiper's `slideChange` event and a `.text-panel` scroll listener, each guarded by a boolean
   flag cleared on the next animation frame so a gesture's own resulting update doesn't re-trigger
-  itself. `.section-strip` shows the active slide's `sectionHeading` (already computed by
-  `deriveSlides` — no separate parsing needed). Verified via headless browser against the real
-  document: keyboard slide→text sync, real-mouse-wheel and programmatic text→slide sync, `doc-start`,
-  a mid-document anchor, a card slide, and the last slide — no oscillation across repeated navigation.
-  Two bugs caught and fixed only by this live check (not visible to the unit tests):
-  - `.text-panel` needed `position: relative` — without it, `el.offsetTop` resolves relative to
-    `<body>`, not the panel's own scroll box, breaking the sync math entirely.
-  - `main.ts`'s anchor-position list must be **filtered to ids actually referenced by some slide's
-    `anchorId`**, not "every minted id in the panel." The real document's last paragraph ("And the
-    close of the story…") comes *after* its last image, so `parseChronology` mints it a real anchor id
-    but no slide ever adopts it. Including it meant scrolling past the last slide's anchor landed in a
-    dead zone that mapped to no slide — silently breaking navigability for the document's tail. Fixed
-    by intersecting the panel's `[id]` elements with `new Set(slides.map(s => s.anchorId))` before
-    building the scrollspy list.
+  itself. `.section-strip` shows the active slide's `sectionHeading`. `.text-panel` needs
+  `position: relative` (so `el.offsetTop` measures against the panel, not `<body>`); `anchorPositions`
+  is filtered to ids some slide actually references. Verified live (2026-09-08) against the real
+  document: slide→text and text→slide sync, first-anchor clamp, a card slide, the last slide reached
+  from both directions, and 12 rounds of back-and-forth with zero drift. (Historical: the 2026-08-31
+  build anchored each slide to its *preceding* paragraph with shared anchors for adjacent images —
+  superseded, see "Sync mechanism redesign" above.)
   **Click-to-zoom: done, verified live (2026-08-31)** — `src/lib/zoomState.ts` holds the pure
   open/close/auto-close state machine (`ZoomState`, `openZoom`, `closeZoom`,
   `zoomAfterSlideChange`), unit-tested with Vitest (6 new tests). `main.ts` wires it to: a click
@@ -158,15 +177,10 @@ above; 16 Vitest tests passing across 3 files):
 
   **Not yet built:** visual styling for card slides (Open Item 2 — cosmetic, non-blocking); the
   Up/Down text-panel keyboard handler noted above.
-- **`src/lib/chronologyModel.ts` — additive surface for the text panel (2026-08-30):**
-  `parseChronology(markdown, rebaseImageSrc?)` now does the one parse+anchor-minting pass and returns
-  `{ tokens, slides, md }` (the `MarkdownIt` instance that parsed, kept alongside `tokens` so rendering
-  can never diverge from parsing's options/plugins — see the code comment). `deriveSlides` is now a
-  thin wrapper returning just `.slides`; all its existing tests are unchanged and still green.
-  `renderTextPanelHtml(tokens, md)` renders those same annotated tokens to HTML with images stripped;
-  headings/paragraphs/links render normally, carrying whatever `id` `parseChronology` minted onto them
-  — satisfies the "must render from the same annotated tokens" hard constraint structurally, not just
-  by convention.
+- **`scripts/checkSource.ts`** — build-time invariant gate, wired into `npm run build` as
+  `tsc -b && npm run check:source && vite build`. Run standalone with `npm run check:source`
+  (`node scripts/checkSource.ts` — Node's native TypeScript, no new dependency; `tsconfig.json` gained
+  `allowImportingTsExtensions` and `scripts` in `include`).
 - **`vite.config.ts`** — `base: '/nathan-ross/carousel/'` (see the revised URI path above), plus a
   small custom `serveSharedImages` plugin (hooked into both `configureServer` and
   `configurePreviewServer`) that serves `static/nathan-ross/images/` under the `/nathan-ross/images/…`
@@ -190,10 +204,10 @@ above; 16 Vitest tests passing across 3 files):
 (`http://localhost:5173/nathan-ross/carousel/` — note the path, `base` is set to match the deployed
 location, so it is *not* served at the bare root).
 
-**Suggested next step:** implement the 2026-09-08 sync mechanism redesign (Content model / Sync
-mechanism above) — the anchor-direction inversion, the two build-time invariants, and the anchor-
-position drift fix. Visual styling for card slides (Open Item 2, below) remains cosmetic/non-blocking
-and can wait.
+**Suggested next step:** the two remaining open items, independent of each other — (a) the Up/Down
+text-panel keyboard handler (a real "full navigability" gap; `main.ts` has no `ArrowUp`/`ArrowDown`
+handling — see "Input handling" below), and (b) visual styling for the text-only card slides (Open
+Item 2, cosmetic/non-blocking).
 
 ### Full navigability guarantee (hard constraint)
 
@@ -255,16 +269,19 @@ Milestone) render from this single Markdown file.
     since there's no image ahead of it to render invisibly and skip over. No special-casing needed:
     it's the same "first visible content" rule as image slides, applied to a slide with nothing to
     skip.
-  - The very first slide (always an image, per the invariant below) has no preceding slide; its
-    span starts at document start (top of document).
-- **Hard invariants on the source document, enforced by a build/test-time structural check against
-  `docs/visual-chronology.md` (fail the build — no runtime fallback is defined for either case, since
-  neither is expected to occur):**
-  1. No two images may appear with no text between them. (Two adjacent images would have no distinct
-     "following content" to tell them apart, which the old design handled via a shared-anchor
-     compromise — see "Explicitly superseded/rejected ideas." The new model has no equivalent
-     fallback; it simply must not happen.)
-  2. No content may appear before the first image. (There is no earlier slide to own it.)
+  - The very first slide (always an image, per the invariant below) anchors to the first visible
+    content that follows it — in the real document, the H1 (`offsetTop` ≈ the panel's top padding,
+    which `activeAnchorId`'s first-anchor clamp treats as active at `scrollTop 0`).
+  - A trailing image with no following content anchors to the `DOC_END_ANCHOR` sentinel (synthetic
+    max-scroll position). Not producible from an invariant-satisfying document — totality only.
+- Because images sit one line *above* their `## heading` in source, `countImagesPerH2Section` files
+  each section-leading image under the *following* section, so "which H2 has zero images" (→ card
+  slide) matches how the document reads. Likewise a slide's `sectionHeading` is the heading in effect
+  *at its anchor*, so the header strip names the section at the panel top.
+- **Hard invariants on the source document, enforced by `scripts/checkSource.ts` (wired into
+  `npm run build`) and by Vitest — fail the build, no runtime fallback:**
+  1. No two images may appear with no visible text between them.
+  2. No visible content may appear before the first image.
 - The text panel renders the same Markdown with images stripped out of the HTML (they're already
   shown in the carousel) — headings, paragraphs, and inline links (PDF letters, MusicBrainz/audio
   links, Wikipedia links, etc.) render normally and stay live/clickable.
@@ -290,31 +307,16 @@ only *which* element is each slide's anchor changed, not the alignment rule itse
   This removes the old design's "shared anchor cluster" compromise entirely (see "Explicitly
   superseded/rejected ideas") — every slide is now independently, always reachable from *both* the
   carousel and the text panel, with no carousel-navigation-only case.
-- **Fix the "drift" the developer observed (required — not automatically fixed by the anchor-
-  direction revision above; an equally load-bearing, not-yet-diagnosed part of this work):** the
-  developer sees active-slide/text-panel sync gradually go wrong purely from normal back-and-forth
-  navigation — **not** from resizing the window (confirmed 2026-09-08; an earlier draft of this note
-  wrongly centered on resize-triggered stale `offsetTop` caching as "the obvious case" — don't
-  restart from that assumption). Two candidate root causes, neither yet confirmed live, to check
-  during implementation rather than picking one and building around it unverified:
-  1. **Stale cached anchor positions.** `anchorPositions` (`main.ts`) is captured once via
-     `el.offsetTop` at startup and never recomputed. Any later layout shift invalidates it — window
-     resize is the obvious trigger but evidently isn't what the developer is hitting, so if this is
-     the cause, something else must be shifting layout post-capture (e.g. late web-font swap,
-     something in Swiper's own post-init re-layout). Fix, if confirmed: recompute on layout change or
-     measure live (e.g. `getBoundingClientRect()` at scroll time) instead of caching once at startup.
-  2. **A race in the feedback-loop guard.** `suppressTextPanelScroll`/`suppressSlideChange`
-     (`main.ts:94-124`) are cleared on the *next* `requestAnimationFrame` after a programmatic
-     update, assuming the resulting `scroll`/`slideChange` event will have already fired by then.
-     That ordering (native scroll-event dispatch vs. an `rAF` callback) isn't guaranteed. If the
-     guard clears before its own resulting event fires, that event is treated as user-originated
-     instead of suppressed, triggering an unwanted extra sync update in the other direction — this
-     would surface from ordinary repeated navigation, matching what the developer described, with no
-     resize needed. Fix, if confirmed: a more robust suppression mechanism (e.g. comparing the
-     scroll/slide position actually reached against what the programmatic update targeted, rather
-     than a fixed one-frame timer).
-  Diagnose live (e.g. via a headless-browser repro of repeated back-and-forth navigation) before
-  committing to either fix — don't implement a fix for an unconfirmed cause.
+- **The "drift" the developer observed — diagnosed and fixed 2026-09-08.** Live headless-browser
+  repro showed it was *not* either candidate this doc originally listed (stale `anchorPositions` —
+  `offsetTop` was stable across load and Swiper settle, and the page uses only `system-ui`; and the
+  rAF guard race — 0 drift across 15 rapid animated `slideNext()` and 12 settled next/prev rounds).
+  Actual cause: slides 10 (`awarded-scholarship`) and 27 (`jfk-thanks`) anchored to a markdown-it
+  **`hidden` tight-list-item `paragraph_open`** token (the "Listen to…" bullets), which renders to no
+  element — `getElementById` returned `null` and the panel jumped to `scrollTop 0` whenever you
+  crossed those slides. Fixed by the forward-anchor model (following content is always a rendered
+  `<p>`/`<h2>`) plus skipping `hidden` paragraphs in anchor resolution; a realDoc test asserts every
+  slide's `anchorId` appears in the rendered text-panel HTML.
 - **Section-header context strip:** a small persistent UI element above the text panel shows the
   nearest preceding heading text — at *any* Markdown heading level (H1–H6), not just H2 — for
   whatever's currently in view, updated by the same sync logic. (The current document only has H1
@@ -322,8 +324,10 @@ only *which* element is each slide's anchor changed, not the alignment rule itse
   unrelated to the H2-scoped rule for synthetic zero-image card slides below, which stays H2-only
   by design since it governs structural chunking, not the header strip's display text.) For the
   intro content (before any heading at all), the strip defaults to showing the H1 title ("Nathan
-  Ross – My Dad") rather than staying empty. Unaffected by the anchor-direction revision — this
-  logic reads each slide's already-computed `sectionHeading`, not its anchor.
+  Ross – My Dad") rather than staying empty. Each slide's `sectionHeading` is the heading in effect
+  *at its anchor* (developer decision 2026-09-08), so the strip always names the section whose
+  heading sits at the top of the text panel — including for section-leading images, whose anchor is
+  their new section's `## heading`.
 
 ### Input handling — no click-to-focus needed
 

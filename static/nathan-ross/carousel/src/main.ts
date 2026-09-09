@@ -5,9 +5,14 @@ import 'swiper/css/effect-coverflow'
 import './style.css'
 
 import chronologyMarkdown from '../../../../docs/visual-chronology.md?raw'
-import { parseChronology, renderTextPanelHtml, type Slide } from './lib/chronologyModel'
+import {
+  DOC_END_ANCHOR,
+  parseChronology,
+  renderTextPanelHtml,
+  type Slide,
+} from './lib/chronologyModel'
 import { isRelativePath, rebasePath } from './lib/relativePath'
-import { activeAnchorId, firstSlideIndexForAnchor, type AnchorPosition } from './lib/scrollSync'
+import { activeAnchorId, slideIndexForAnchor, type AnchorPosition } from './lib/scrollSync'
 import { closeZoom, openZoom, zoomAfterSlideChange, type ZoomState } from './lib/zoomState'
 
 const rebaseAssetPath = (rawPath: string) => rebasePath(rawPath, 'docs', 'static/nathan-ross/carousel')
@@ -70,19 +75,28 @@ const swiper = new Swiper('.swiper', {
 const textPanel = app.querySelector<HTMLDivElement>('.text-panel')!
 const sectionStrip = app.querySelector<HTMLDivElement>('.section-strip')!
 
-// Anchor elements that at least one slide actually references - captured
-// once at startup. Not every minted id qualifies: a paragraph after the
-// final image (e.g. the document's closing remarks) still gets an id from
-// parseChronology, but no slide ever adopts it as its anchorId, since
-// nothing follows it to adopt it. Including such an id here would let the
-// user scroll past the last real slide's anchor into a dead zone that maps
-// to no slide, silently breaking sync for the tail of the document. The
-// 'doc-start' sentinel deliberately has no element here; it means "before
-// the first real anchor."
+// Anchor elements a slide actually references, in DOM (== ascending offsetTop)
+// order, captured once at startup. Under the forward-anchor model every minted
+// id is adopted by some slide, so this filter is belt-and-suspenders - but it
+// keeps the scrollspy list honest if the model ever mints an unused id again.
 const usedAnchorIds = new Set(slides.map((slide) => slide.anchorId))
 const anchorPositions: AnchorPosition[] = Array.from(textPanel.querySelectorAll<HTMLElement>('[id]'))
   .filter((el) => usedAnchorIds.has(el.id))
   .map((el) => ({ anchorId: el.id, top: el.offsetTop }))
+
+// The doc-end sentinel (a trailing image with no following content - not
+// produced by the invariant-satisfying real document) has no element. Its
+// scrollspy position is max-scroll, measured live in the scroll handler below
+// (not here - the panel's clientHeight isn't final until Swiper's post-init
+// layout settles).
+const hasDocEndSlide = usedAnchorIds.has(DOC_END_ANCHOR)
+const scrollspyPositions = () =>
+  hasDocEndSlide
+    ? [
+        ...anchorPositions,
+        { anchorId: DOC_END_ANCHOR, top: textPanel.scrollHeight - textPanel.clientHeight },
+      ]
+    : anchorPositions
 
 function updateSectionStrip(sectionHeading: string) {
   sectionStrip.textContent = sectionHeading
@@ -98,9 +112,11 @@ let suppressSlideChange = false
 
 function scrollTextPanelToSlide(slideIndex: number) {
   const slide = slides[slideIndex]
-  const anchorEl = slide.anchorId === 'doc-start' ? null : document.getElementById(slide.anchorId)
   suppressTextPanelScroll = true
-  textPanel.scrollTop = anchorEl?.offsetTop ?? 0
+  textPanel.scrollTop =
+    slide.anchorId === DOC_END_ANCHOR
+      ? textPanel.scrollHeight - textPanel.clientHeight
+      : (document.getElementById(slide.anchorId)?.offsetTop ?? 0)
   requestAnimationFrame(() => {
     suppressTextPanelScroll = false
   })
@@ -114,8 +130,8 @@ swiper.on('slideChange', () => {
 
 textPanel.addEventListener('scroll', () => {
   if (suppressTextPanelScroll) return
-  const anchorId = activeAnchorId(anchorPositions, textPanel.scrollTop)
-  const slideIndex = firstSlideIndexForAnchor(slides, anchorId)
+  const anchorId = activeAnchorId(scrollspyPositions(), textPanel.scrollTop)
+  const slideIndex = slideIndexForAnchor(slides, anchorId)
   if (slideIndex === -1) return
   suppressSlideChange = true
   swiper.slideTo(slideIndex, 0)

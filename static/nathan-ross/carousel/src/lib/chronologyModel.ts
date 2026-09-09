@@ -27,12 +27,25 @@ export interface ChronologyParse {
   md: MarkdownIt
 }
 
-// Anchor ids are minted here, once, directly onto the paragraph_open /
-// heading_open tokens they belong to (via each token's own `id` attr) rather
-// than recomputed by a separate counter. renderTextPanelHtml() below renders
-// from these same annotated tokens - it never re-parses the raw Markdown or
-// re-derives its own ids - so the ids slides reference are guaranteed to
-// match the ids that actually land on elements in the rendered text panel.
+// Sentinel anchorId for a trailing image with no visible content after it. Not
+// producible from a document that satisfies assertSourceInvariants (its final
+// section's prose always follows the last image), so this is only a totality
+// guarantee for the model - see docs/milestones/milestone8.md, "Content model".
+export const DOC_END_ANCHOR = 'doc-end'
+
+// Each slide's anchor is the FIRST visible (non-image) content that follows it
+// (docs/milestones/milestone8.md, "Anchor definition", revised 2026-09-08):
+// - an image slide anchors to the paragraph/heading after the image (the image
+//   renders as nothing in the text panel, so the first thing a reader sees
+//   after it is that anchor);
+// - a zero-image H2 "card" slide anchors to its own heading.
+// A slide's sectionHeading is the heading in effect AT ITS ANCHOR (so the
+// header strip always matches what sits at the top of the text panel when the
+// slide is active), not at the image's source position.
+// Anchor ids are minted once, directly onto the resolving paragraph_open /
+// heading_open token (via `id` attr). renderTextPanelHtml() below renders from
+// these same annotated tokens, so every id a Slide references is guaranteed to
+// appear on an element in the rendered text panel.
 export function deriveSlides(
   markdown: string,
   rebaseImageSrc: (rawSrc: string) => string = (src) => src,
@@ -50,13 +63,30 @@ export function parseChronology(
   const imageCountByH2Index = countImagesPerH2Section(tokens)
 
   const slides: Slide[] = []
-  let currentAnchorId = 'doc-start'
+  // Image slides whose forward anchor has not been seen yet. Every image slide
+  // sits here from the moment it is created until the next qualifying anchor
+  // token resolves it (or, if none follows, until the trailing fallback below).
+  const pendingImageSlides: ImageSlide[] = []
   let currentSectionHeading = ''
   let anchorCount = 0
   let h2SectionIndex = -1
-  let paragraphOpenToken: Token | null = null
   let inHeadingLevel: number | null = null
   let headingOpenToken: Token | null = null
+  let paragraphOpenToken: Token | null = null
+
+  const resolvePendingWith = (id: string) => {
+    for (const slide of pendingImageSlides) {
+      slide.anchorId = id
+      slide.sectionHeading = currentSectionHeading
+    }
+    pendingImageSlides.length = 0
+  }
+
+  const resolvePendingOnToken = (token: Token) => {
+    if (pendingImageSlides.length === 0) return
+    resolvePendingWith(mintAnchorId(token, anchorCount))
+    anchorCount += 1
+  }
 
   for (const token of tokens) {
     if (token.type === 'paragraph_open') {
@@ -82,42 +112,60 @@ export function parseChronology(
 
     if (inHeadingLevel !== null) {
       currentSectionHeading = token.content
-      if (inHeadingLevel === 2 && imageCountByH2Index[h2SectionIndex] === 0) {
-        const anchorId = mintAnchorId(headingOpenToken!, anchorCount)
+      const isCard =
+        inHeadingLevel === 2 && imageCountByH2Index[h2SectionIndex] === 0
+      if (isCard) {
+        // The card's own heading is its anchor, and also the first visible
+        // content resolving any pending image(s). Degenerate case (an image
+        // immediately followed by a zero-image H2 with no text between - not
+        // present in the real document): the image slide and the card share
+        // this id; slideIndexForAnchor resolves to the image.
+        const id = mintAnchorId(headingOpenToken!, anchorCount)
         anchorCount += 1
+        resolvePendingWith(id)
         slides.push({
           kind: 'card',
           heading: token.content,
-          anchorId,
+          anchorId: id,
           sectionHeading: token.content,
         })
+      } else {
+        resolvePendingOnToken(headingOpenToken!)
       }
       continue
     }
 
-    const images = imageChildrenOf(token)
-    for (const image of images) {
-      slides.push({
+    for (const image of imageChildrenOf(token)) {
+      const slide: ImageSlide = {
         kind: 'image',
         src: rebaseImageSrc(image.attrGet('src') ?? ''),
         alt: image.content,
-        anchorId: currentAnchorId,
-        sectionHeading: currentSectionHeading,
-      })
+        anchorId: '',
+        sectionHeading: '',
+      }
+      slides.push(slide)
+      pendingImageSlides.push(slide)
     }
 
-    // A paragraph containing real text becomes the anchor for whatever image
-    // slide(s) follow it. A paragraph holding only images (optionally joined
-    // by softbreaks, when consecutive image lines have no blank line between
-    // them) is not text and must not mint an anchor no image ever uses.
+    // A qualifying anchor paragraph has real text (not just images/softbreaks)
+    // and is not `hidden` - tight-list-item paragraphs are `hidden` and render
+    // to no element, so an id minted on one would never appear in the DOM (a
+    // real bug this replaced - see milestone8.md Step 1 diagnosis). Knowingly
+    // unhandled: if an image were immediately followed by ONLY a tight list
+    // then a real paragraph, the image would anchor past the list and the
+    // list's <li> text would fall in the previous slide's span. assertSource-
+    // Invariants and countImagesPerH2Section both also treat hidden paragraphs
+    // as non-content; keep the three consistent. The real document never puts a
+    // bare list directly after an image.
     const hasTextContent = (token.children ?? []).some(
       (child) => child.type !== 'image' && child.type !== 'softbreak',
     )
-    if (paragraphOpenToken && hasTextContent) {
-      currentAnchorId = mintAnchorId(paragraphOpenToken, anchorCount)
-      anchorCount += 1
+    if (hasTextContent && paragraphOpenToken && paragraphOpenToken.hidden !== true) {
+      resolvePendingOnToken(paragraphOpenToken)
     }
   }
+
+  resolvePendingWith(DOC_END_ANCHOR)
 
   return { tokens, slides, md }
 }
@@ -145,25 +193,96 @@ export function renderTextPanelHtml(
   return md.renderer.render(tokens, md.options, {})
 }
 
+// Structural check enforced at build time (scripts/checkSource.ts) and test
+// time (chronologyModel.realDoc.test.ts). The two invariants make every slide's
+// forward anchor unique by construction; neither is expected to occur, so there
+// is no runtime fallback - a violation fails the build.
+export function assertSourceInvariants(tokens: Token[]): void {
+  let sawFirstImage = false
+  let imagePending = false
+
+  for (let i = 0; i < tokens.length; i += 1) {
+    const token = tokens[i]
+
+    if (token.type === 'heading_open') {
+      if (!sawFirstImage) {
+        throw new Error('visual-chronology.md: a heading appears before the first image')
+      }
+      imagePending = false
+      continue
+    }
+
+    if (token.type !== 'paragraph_open') continue
+
+    const inline = tokens[i + 1]
+    if (!inline || inline.type !== 'inline') continue
+
+    for (const child of inline.children ?? []) {
+      if (child.type === 'image') {
+        if (imagePending) {
+          throw new Error('visual-chronology.md: two images appear with no text between them')
+        }
+        sawFirstImage = true
+        imagePending = true
+      } else if (child.type !== 'softbreak') {
+        if (!sawFirstImage) {
+          throw new Error('visual-chronology.md: text content appears before the first image')
+        }
+        // Only non-hidden (rendered) text separates two images - a hidden
+        // tight-list paragraph cannot serve as an anchor, so it does not count.
+        if (token.hidden !== true) imagePending = false
+      }
+    }
+  }
+}
+
 function mintAnchorId(token: Token, anchorCount: number): string {
   const id = `anchor-${anchorCount}`
   token.attrSet('id', id)
   return id
 }
 
+// Images physically precede their section's H2 in the source document (the
+// image line sits just above `## Heading`), so a naive "count images seen after
+// this H2 opened" mis-files each section-leading image under the PREVIOUS
+// section. This holds image-only paragraphs as "unattributed" and files them
+// under whichever section's heading comes next - matching how they render.
 function countImagesPerH2Section(tokens: Token[]): number[] {
   const counts: number[] = []
   let h2SectionIndex = -1
+  let unattributedImages = 0
 
-  for (const token of tokens) {
-    if (token.type === 'heading_open' && token.tag === 'h2') {
-      h2SectionIndex += 1
-      counts[h2SectionIndex] = 0
+  for (let i = 0; i < tokens.length; i += 1) {
+    const token = tokens[i]
+
+    if (token.type === 'heading_open') {
+      if (token.tag === 'h2') {
+        h2SectionIndex += 1
+        counts[h2SectionIndex] = unattributedImages
+      } else if (h2SectionIndex >= 0) {
+        counts[h2SectionIndex] += unattributedImages
+      }
+      unattributedImages = 0
       continue
     }
-    if (h2SectionIndex === -1) continue
-    counts[h2SectionIndex] += imageChildrenOf(token).length
+
+    if (token.type !== 'inline') continue
+
+    const images = imageChildrenOf(token).length
+    const hasText = (token.children ?? []).some(
+      (child) => child.type !== 'image' && child.type !== 'softbreak',
+    )
+    const inHiddenParagraph = tokens[i - 1]?.type === 'paragraph_open' && tokens[i - 1].hidden === true
+
+    if (images > 0 && !hasText) {
+      unattributedImages += images
+    } else if (hasText && !inHiddenParagraph) {
+      if (h2SectionIndex >= 0) counts[h2SectionIndex] += unattributedImages + images
+      unattributedImages = 0
+    }
   }
+
+  if (h2SectionIndex >= 0) counts[h2SectionIndex] += unattributedImages
 
   return counts
 }
