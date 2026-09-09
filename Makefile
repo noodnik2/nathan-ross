@@ -9,11 +9,18 @@ help: ## Show available targets
 		awk 'BEGIN {FS = ":.*?## "}; {printf "  \033[36m%-16s\033[0m %s\n", $$1, $$2}'
 
 .PHONY: build
-build: ## Build the MSE SPA production bundle
+build: build-static-assets build-mse ## Build all components
+
+.PHONY: build-mse
+build-mse: ## Build the MSE SPA component
 	$(MAKE) -C $(MSE_SPA_DIR) build
 
+.PHONY: build-static-assets
+build-static-assets: ## Build the static-assets component
+	$(MAKE) -C $(STATIC_DIR) build
+
 .PHONY: test-unit
-test-unit: ## Run the MSE SPA and static-assets (carousel) unit test suites
+test-unit: ## Run the MSE SPA and static-assets unit test suites
 	$(MAKE) -C $(MSE_SPA_DIR) test-unit
 	$(MAKE) -C $(STATIC_DIR) test-unit
 
@@ -26,11 +33,11 @@ deploy-mse: ## Deploy the built MSE SPA to GitHub Pages
 	$(MAKE) -C $(MSE_SPA_DIR) deploy
 
 .PHONY: deploy-static-assets
-deploy-static-assets: ## Deploy the Nathan Ross static assets to GitHub Pages
+deploy-static-assets: ## Deploy the static-assets to GitHub Pages
 	$(MAKE) -C $(STATIC_DIR) deploy
 
 .PHONY: deploy
-deploy: deploy-mse deploy-static-assets ## Deploy everything
+deploy: deploy-static-assets deploy-mse ## Deploy everything
 
 .PHONY: test-e2e
 test-e2e: ## Run the MSE SPA end-to-end smoke suite against the deployed site (assumes prior deploy-mse; override target with MSE_DEPLOY_URL)
@@ -45,7 +52,9 @@ test: ## Run all test suites in sequence, stopping at the first failure
 .PHONY: clean
 clean: ## Remove generated build output
 	$(MAKE) -C $(MSE_SPA_DIR) clean
+	$(MAKE) -C $(STATIC_DIR) clean
 
 .PHONY: clean-deep
 clean-deep: clean ## Remove build output and installed dependencies
 	$(MAKE) -C $(MSE_SPA_DIR) clean-deep
+	$(MAKE) -C $(STATIC_DIR) clean-deep

@@ -23,7 +23,8 @@ _push_target:
 	@echo "Staging files and pushing..."
 	cd $(TMP_DIR) && git add .
 	cd $(TMP_DIR) && git diff-index --quiet HEAD || git commit -m "Deploy via Makefile workflow"
-	@echo "WARNING: You are about to deploy to production!"
+	cd $(TMP_DIR) && git diff --stat HEAD @{upstream}
+	@echo "WARNING: You are about to deploy the changes above to production!"
 	@read -p "Are you sure you want to proceed? [y/N]: " ans && [ $${ans:-N} = y ] || [ $${ans:-N} = Y ] || (echo "Deployment cancelled."; exit 1)
 	cd $(TMP_DIR) && git push origin $(BRANCH)
 	@echo "Cleaning up workspace..."
