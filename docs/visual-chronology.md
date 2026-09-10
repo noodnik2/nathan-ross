@@ -32,33 +32,35 @@ of the artifacts gathered here.
 ![nathan-practicing-ataround5or6](../static/nathan-ross/images/nathan-practicing-ataround5or6.webp)
 
 Nathan had already achieved remarkable mastery over his instrument by the time this portrait was taken.
-He made his concert debut at just six years old at the British Columbia Musical Festival, winning first
-prize for the most talented child under ten.
 
 ![portrait-young-violinist](../static/nathan-ross/images/portrait-young-violinist.webp)
 
-Four years after that first victory, the same festival named Nathan its most talented competitor under nineteen.
+He made his concert debut at just six years old at the British Columbia Musical Festival, winning first
+prize for the most talented child under ten. Four years after that first victory, the same festival named Nathan its most talented competitor under nineteen.
+
+![nathan-violinist-at14](../static/nathan-ross/images/nathan-violinist-at14.webp)
+
 By fourteen, he was no longer a novelty act—he had a real instrument, a mature stance, and the flower boutonnière
 of a young man being presented, not just exhibited.
 
-![nathan-violinist-at14](../static/nathan-ross/images/nathan-violinist-at14.webp)
+![heard-in-recital-at14](../static/nathan-ross/images/heard-in-recital-at14.webp)
 
 A critic's account of a solo recital that same year at Kitsilano Junior High offers an honest kind of review.
 It praised his "excellent elasticity in bowing" while also noting where his playing still fell short.
 
-![heard-in-recital-at14](../static/nathan-ross/images/heard-in-recital-at14.webp)
+![symphony-program-buzzer_1937_07_23](../static/nathan-ross/images/symphony-program-buzzer_1937_07_23.webp)
 
 Shortly following that recital, a program note for a larger stage announced: "Nathan Rothstein, brilliant
 boy violinist of Vancouver, will be the guest artist at the next concert of the Vancouver Symphony orchestra
 in Stanley Park."
 
-![symphony-program-buzzer_1937_07_23](../static/nathan-ross/images/symphony-program-buzzer_1937_07_23.webp)
+![symphony-soloist-at14](../static/nathan-ross/images/symphony-soloist-at14.webp)
 
 Another clipping survives from that same Stanley Park engagement. Vancouver's music community was small enough
 that a fourteen-year-old's progress was genuine news, and thorough enough that the local paper printed his
 entire musical pedigree.
 
-![symphony-soloist-at14](../static/nathan-ross/images/symphony-soloist-at14.webp)
+![newsclip-violinist-study-in-south](../static/nathan-ross/images/newsclip-violinist-study-in-south.webp)
 
 That concert proved to be a watershed moment for Nathan. [Isaac Stern](https://en.wikipedia.org/wiki/Isaac_Stern),
 another up-and-coming young violinist, happened to be in the audience. Isaac was so impressed by Nathan's playing
@@ -69,7 +71,7 @@ Blinder was convinced, extending a full three-year scholarship for Nathan to com
 > You can listen to a classic 1956 recording of Isaac Stern performing the piece on Apple Music
 > [here](https://music.apple.com/us/album/symphonie-espagnole-in-d-minor-op-21-ii-scherzando/1563679982?i=1563680347).*
 
-![newsclip-violinist-study-in-south](../static/nathan-ross/images/newsclip-violinist-study-in-south.webp)
+![awarded-scholarship](../static/nathan-ross/images/awarded-scholarship.webp)
 
 And so, at just fourteen, Nathan went south to study under Naoum Blinder in the Stern residence in San Francisco.
 Sharing the same roof and teachers, Isaac and Nathan practiced together, played tennis on the sly (family lore
@@ -85,8 +87,6 @@ San Francisco Symphony Orchestra.
 >   _room and I in mine.  We'd take a break and go out and play tennis on a nearby public court; my life-long_
 >   _passion for tennis was born on that court.  Then, when we got thirsty, we'd go to a store and buy a_
 >   _watermelon, cut off the ends, slice it in half, and eat the whole thing."_
-
-![awarded-scholarship](../static/nathan-ross/images/awarded-scholarship.webp)
 
 Though Nathan returned periodically to Vancouver during his scholarship years, this move to California ultimately
 proved to be permanent.
