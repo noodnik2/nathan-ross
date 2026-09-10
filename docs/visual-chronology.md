@@ -123,7 +123,7 @@ risk everything to secure the life, the country, and the future career he wanted
 
 ![lucky-bastards-club](../static/nathan-ross/images/lucky-bastards-club.webp)
 
-Whenever I look at my dad’s [Lucky Bastard’s Club](https://en.wikipedia.org/wiki/Lucky_Bastard_Club) certificate,
+Whenever I look at my dad’s [Lucky Bastard Club](https://en.wikipedia.org/wiki/Lucky_Bastard_Club) certificate,
 I'm reminded that my entire existence relies on him beating the odds in the skies over Europe. 
 Nathan’s [handwritten mission log](../static/nathan-ross/images/b17-mission-log.pdf) shows he flew
 [missions #202 and #209](https://www.385thbga.com/records/index-mission-number-to-date-and-target-2/mission-summaries/).
@@ -144,11 +144,11 @@ toward a future career in Hollywood.
 
 ![in-orchestra-on-left](../static/nathan-ross/images/in-orchestra-on-left.webp)
 
-While Nathan was stationed at Elmswell Air Force Base (now called
-[Great Ashfield](https://en.wikipedia.org/wiki/RAF_Great_Ashfield)) in England, he helped entertain troupes
-between bombing missions.  When the soldiers returned home, he was asked to join the Armed Forces Radio Service
-under major [Meredith Willson](https://en.wikipedia.org/wiki/Meredith_Willson).  This photo seems to be from a
-recording of that group (see Nathan on the left):
+While stationed at Elmswell Air Force Base ([Great Ashfield](https://en.wikipedia.org/wiki/RAF_Great_Ashfield)) in England, Nathan's work entertaining troops
+between bombing missions caught the attention of
+[Major Meredith Willson](https://en.wikipedia.org/wiki/Meredith_Willson),
+who invited him to join the Armed Forces Radio Service. This photo likely captures a recording session with that
+group (Nathan is on the left).
 
 ![bing-and-frank-goofing-around](../static/nathan-ross/images/bing-and-frank-goofing-around.webp)
 
@@ -272,8 +272,9 @@ he didn't generally love the music itself, or the lack of challenge in the popul
 > that music, I hear it in my headphones all day!"
 >
 > But sometimes there was a countering coolness factor: 
-> - Discovering a bond with dad when we discovered a shared liking for certain songs (such as those by the soft
->   rock band Bread) and later learning he had actually played on some of them!
+> - Discovering a bond with dad when we discovered a shared liking for certain songs and later
+>   learning he had actually played on some of them (such as
+>   ["If" by the soft rock band Bread](https://www.youtube.com/watch?v=n-cK70DXsSA))!
 > - The thrill of meeting some of my favorite artists, like Diana Ross, Stevie Wonder, and Elton John,
 >   on the rare occasions I accompanied my dad to work.
 > - One of my fondest memories is hanging out in a trailer with Stevie Wonder during the tracking of the string

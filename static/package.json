@@ -2,6 +2,9 @@
   "name": "nathan-ross-static-assets",
   "private": true,
   "type": "module",
+  "scripts": {
+    "test": "node --test scripts/render.test.mjs"
+  },
   "dependencies": {
     "markdown-it": "^14.1.0"
   }

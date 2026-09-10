@@ -30,8 +30,12 @@ deploy: build ## Deploy the Nathan Ross static assets to the GitHub Pages target
 	cp -r $(BUILD_DIR)/* $(TMP_DIR)/$(DEPLOY_SUBFOLDER)/
 	$(MAKE) _push_target
 
+.PHONY: test-scripts
+test-scripts: node_modules ## Run the Markdown render-script unit tests
+	node --test scripts/render.test.mjs
+
 .PHONY: test-unit
-test-unit: ## Run the carousel unit test suite
+test-unit: test-scripts ## Run the render-script and carousel unit test suites
 	$(MAKE) -C $(CAROUSEL_DIR) test-unit
 
 .PHONY: test

@@ -199,6 +199,18 @@ the design above; 50 Vitest tests passing across 5 files):
   (This was previously broken: an early `make deploy` ran before this wiring existed, so `render.mjs`'s
   generic asset-copy step swept the carousel's *source* tree — including whatever `node_modules`
   happened to be on disk at the time — into the deployed output. Fixed 2026-08-30.)
+- **`render.mjs` link-path fix + first `static/scripts/` test harness (2026-09-09).** Separate from
+  the carousel, found while the existing `/nathan-ross` page was under review: `render.mjs` rebased
+  Markdown image `src`s from source-relative (`docs/`) to component-relative but did **not** do the
+  same for link `href`s, so the chronology page's four in-text links to local assets (the two scanned
+  letters, the B-17 mission log, the "shot down" photo) shipped as `../static/nathan-ross/images/…`
+  and 404'd on the live site. Fixed by adding a `link_open` renderer rule that rebases `href` through
+  a shared `rebaseRelativeUrl` helper (a guard leaves `http(s):`, protocol-relative, `#`-anchor and
+  root-absolute URLs untouched — the image rule now shares that guard too). `render.mjs` was also
+  split into an importable module + a direct-invocation guard so it can be unit-tested.
+  `static/scripts/` gained its first harness: `render.test.mjs` run by Node's built-in `node --test`
+  (no new dependency), wired as a new `static/Makefile` `test-scripts` target that is a prerequisite
+  of `test-unit` (so `make test-unit` from the repo root covers it).
 
 **How to see it:** `cd static/nathan-ross/carousel && make run-local`, then open the URL Vite prints
 (`http://localhost:5173/nathan-ross/carousel/` — note the path, `base` is set to match the deployed

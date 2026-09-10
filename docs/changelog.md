@@ -27,6 +27,14 @@ using the format suggested by [Keep a Changelog](https://keepachangelog.com/en/1
   browser-tab icon was also replaced with one designed for the MSE application, in place of the
   default Vite scaffold icon.
 
+### Fixed
+- Nathan Ross static chronology page (`/nathan-ross`): the four in-text links to local assets (the two
+  scanned letters, the B-17 mission log, and the "shot down" aircraft photo) returned 404 on the
+  deployed site. The Markdown→HTML renderer rewrote image paths from source-relative to
+  deployed-relative but left link paths untouched, so `../static/nathan-ross/images/…` hrefs leaked
+  through unchanged. Link `href`s are now rebased the same way image `src`s already were; absolute and
+  external URLs are left alone.
+
 ### Changed
 - Switched client-side routing from `react-router-dom`'s `BrowserRouter` to `HashRouter` (routes now
   live after a `#`, e.g. `.../music-session-explorer/#/recordings/<id>`). GitHub Pages has no
