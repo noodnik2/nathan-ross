@@ -180,7 +180,8 @@ of Honest and Faithful Service to this country." The war was over, and so, for N
 ## Los Angeles
 
 Nathan resumed his career as a classical violinist upon his postwar re-entry into professional life.
-His first few roles included first violinist for the Los Angeles Philharmonic under Alfred Wallenstein,
+His first few roles included first violinist for the Los Angeles Philharmonic under
+[Alfred Wallenstein](https://en.wikipedia.org/wiki/Alfred_Wallenstein),
 and concertmaster for the NBC orchestra under [Henry Russell](https://henryrussellmusic.com/). 
 What came next was the daunting task of building a new life in a city where he hadn't grown up,
 among people he hadn't yet met.
