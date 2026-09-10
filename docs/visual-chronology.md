@@ -147,8 +147,8 @@ toward a future career in Hollywood.
 While stationed at Elmswell Air Force Base ([Great Ashfield](https://en.wikipedia.org/wiki/RAF_Great_Ashfield)) in England, Nathan's work entertaining troops
 between bombing missions caught the attention of
 [Major Meredith Willson](https://en.wikipedia.org/wiki/Meredith_Willson),
-who invited him to join the Armed Forces Radio Service. This photo likely captures a recording session with that
-group (Nathan is on the left).
+who invited him to join the Armed Forces Radio Service in Hollywood. This photo likely captures a recording session
+with that group (Nathan is on the left).
 
 ![bing-and-frank-goofing-around](../static/nathan-ross/images/bing-and-frank-goofing-around.webp)
 
@@ -158,7 +158,7 @@ with that group, as you can see in this shot within the same session where they 
 ![yuma-airfield-newpaper-cover](../static/nathan-ross/images/yuma-airfield-newpaper-cover.webp)
 
 With the end of the war approaching and the mass demobilization of troops underway, Nathan returned to his
-permanent duty station at Yuma Army Air Field. He transitioned his skills toward supporting troop morale,
+permanent duty station at Yuma Army Air Field. He leveraged his radio skills to support troop morale,
 trading combat duties for a seat behind the microphone as a base DJ spinning records.
 The cover of the *Actioneer*, the base newspaper of Yuma Army Air Field in June 1945, features T/Sgt.
 Nathan Ross on the front page. With headphones on, he is pictured introducing records over the base's
@@ -172,7 +172,8 @@ The inside cover of that magazine edition explains what's featured on its front 
 ![army-honorable-discharge](../static/nathan-ross/images/army-honorable-discharge.webp)
 
 Then came the discharge itself: Fort MacArthur, California, October 3, 1945—"awarded as a testimonial
-of Honest and Faithful Service to this country." The war was over, and so, for Nathan Ross, was the Army.
+of Honest and Faithful Service to this country."  The war was over, and so his service in the Army was
+over for Nathan Ross.
 
 ---
 
