@@ -1,3 +1,5 @@
+SOURCE_MARKDOWN=../../../docs/visual-chronology.md
+
 .DEFAULT_GOAL := help
 
 .PHONY: help
@@ -9,7 +11,7 @@ node_modules: package-lock.json
 	npm ci
 
 dist/.build-stamp: node_modules package.json package-lock.json index.html vite.config.ts tsconfig.json \
-					$(shell find src -type f 2>/dev/null)
+					$(SOURCE_MARKDOWN) $(shell find src -type f 2>/dev/null)
 	npm run build
 	touch dist/.build-stamp
 
