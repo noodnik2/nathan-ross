@@ -66,11 +66,12 @@ const swiper = new Swiper('.swiper', {
 })
 
 // --- Sync mechanism (carousel <-> text panel) ---------------------------
-// One canonical rule drives both directions: an anchor's top aligns to the
-// top of the text-panel viewport (see docs/milestones/milestone8.md, "Sync
-// mechanism"). scrollSync.ts holds the pure scrollspy math; everything here
-// is DOM glue, verified live rather than by Vitest (no jsdom harness is set
-// up in this package - see chronologyModel.ts/main.ts split from Piece A).
+// One canonical rule drives both directions: an anchor's top aligns to a
+// point `scrollLead` pixels below the top of the text-panel viewport (see
+// docs/milestones/milestone8.md, "Sync mechanism"). scrollSync.ts holds the
+// pure scrollspy math; everything here is DOM glue, verified live rather than
+// by Vitest (no jsdom harness is set up in this package - see
+// chronologyModel.ts/main.ts split from Piece A).
 
 const textPanel = app.querySelector<HTMLDivElement>('.text-panel')!
 const sectionStrip = app.querySelector<HTMLDivElement>('.section-strip')!
@@ -80,9 +81,31 @@ const sectionStrip = app.querySelector<HTMLDivElement>('.section-strip')!
 // id is adopted by some slide, so this filter is belt-and-suspenders - but it
 // keeps the scrollspy list honest if the model ever mints an unused id again.
 const usedAnchorIds = new Set(slides.map((slide) => slide.anchorId))
-const anchorPositions: AnchorPosition[] = Array.from(textPanel.querySelectorAll<HTMLElement>('[id]'))
-  .filter((el) => usedAnchorIds.has(el.id))
-  .map((el) => ({ anchorId: el.id, top: el.offsetTop }))
+const anchorElements = Array.from(textPanel.querySelectorAll<HTMLElement>('[id]')).filter((el) =>
+  usedAnchorIds.has(el.id),
+)
+const anchorPositions: AnchorPosition[] = anchorElements.map((el) => ({ anchorId: el.id, top: el.offsetTop }))
+
+// A one-line lead on the scrollspy alignment (see scrollSync.ts's `lead` param
+// and docs/milestones/milestone8.md, "Sync mechanism"): the active slide
+// switches this many pixels before its anchor would otherwise reach the
+// viewport top, leaving that much of the prior anchor's text visible above it
+// in both scroll directions. Sized in real text lines, not viewport fraction -
+// the point is reading headroom, not panel size - so it's measured off a
+// rendered body paragraph rather than the text panel itself (which sets no
+// font-size/line-height of its own in style.css for getComputedStyle to
+// resolve against) or the first anchor element (which, in the real document,
+// is the H1 title - a much larger font than body text). A stable font metric,
+// unlike offsetTop/clientHeight, so (unlike those) it doesn't need a live
+// re-read once Swiper's post-init layout settles.
+const LEAD_LINES = 1
+function lineHeightOf(el: HTMLElement): number {
+  const style = getComputedStyle(el)
+  const lineHeight = parseFloat(style.lineHeight)
+  return Number.isNaN(lineHeight) ? parseFloat(style.fontSize) * 1.2 : lineHeight
+}
+const bodyParagraph = textPanel.querySelector<HTMLElement>('p')
+const scrollLead = bodyParagraph ? LEAD_LINES * lineHeightOf(bodyParagraph) : 0
 
 // The doc-end sentinel (a trailing image with no following content - not
 // produced by the invariant-satisfying real document) has no element. Its
@@ -116,7 +139,7 @@ function scrollTextPanelToSlide(slideIndex: number) {
   textPanel.scrollTop =
     slide.anchorId === DOC_END_ANCHOR
       ? textPanel.scrollHeight - textPanel.clientHeight
-      : (document.getElementById(slide.anchorId)?.offsetTop ?? 0)
+      : (document.getElementById(slide.anchorId)?.offsetTop ?? 0) - scrollLead
   requestAnimationFrame(() => {
     suppressTextPanelScroll = false
   })
@@ -130,7 +153,7 @@ swiper.on('slideChange', () => {
 
 textPanel.addEventListener('scroll', () => {
   if (suppressTextPanelScroll) return
-  const anchorId = activeAnchorId(scrollspyPositions(), textPanel.scrollTop)
+  const anchorId = activeAnchorId(scrollspyPositions(), textPanel.scrollTop, scrollLead)
   const slideIndex = slideIndexForAnchor(slides, anchorId)
   if (slideIndex === -1) return
   suppressSlideChange = true

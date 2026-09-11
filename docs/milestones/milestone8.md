@@ -301,16 +301,36 @@ Milestone) render from this single Markdown file.
 ### Sync mechanism
 
 One canonical mapping function drives both directions: **the active slide's anchor element's top
-aligns to the top of the text-panel viewport.** This is a standard "scrollspy" model — the active
-slide is whichever anchor has most recently crossed the top of the text-panel viewport. (An earlier
-draft of this design proposed bottom-alignment; that was corrected during review — top-alignment is
-what makes text→slide and slide→text the same function instead of two that must be kept
-consistent by hand. This principle is unchanged by the 2026-09-08 anchor-direction revision below —
-only *which* element is each slide's anchor changed, not the alignment rule itself.)
+aligns to a point `scrollLead` pixels below the top of the text-panel viewport.** This is a standard
+"scrollspy" model — the active slide is whichever anchor has most recently crossed that line. (An
+earlier draft of this design proposed bottom-alignment; that was corrected during review —
+top-alignment is what makes text→slide and slide→text the same function instead of two that must be
+kept consistent by hand. This principle is unchanged by the 2026-09-08 anchor-direction revision
+above — only *which* element is each slide's anchor changed, not the alignment rule itself.)
+- **`scrollLead` (added 2026-09-10):** strict top-alignment (`scrollLead = 0`) meant the switch fired
+  only once the anchor's own text had already scrolled past the viewport top — by which point the
+  reader had already been looking at that paragraph for a while, and switching back on scroll-up
+  required scrolling past the *next* anchor's own top too. `scrollLead` moves the alignment line down
+  by one line of body text (measured live off a rendered `<p>` in the text panel, not off the panel
+  itself — `.text-panel` sets no `font-size`/`line-height` of its own — and not off the first anchor
+  element, which in the real document is the H1 title, not body text; see `main.ts`), so the switch
+  fires that much earlier going down and that much later going up, leaving roughly a line of the
+  adjacent section's text visible above the new anchor at the switch point in both directions. A
+  fixed-line offset, not a fraction of panel height, since the goal is reading headroom tied to text
+  size, not to viewport size. `scrollSync.ts`'s `activeAnchorId` takes it as an optional `lead`
+  parameter (default 0); `main.ts` computes the actual value and threads it through both directions.
+  Considered and rejected: redefining each slide's anchor itself to the *last* content of the *prior*
+  span instead of adding an alignment offset — the lead lives on the anchor-to-text-panel scroll
+  position, not on which element is the anchor to begin with, so it's an amount of alignment, not a
+  reversal, and doesn't reopen the anchor-direction analysis. It also would have been anchor-length-
+  dependent (unbounded, following prior paragraph length) rather than a bounded, tunable amount, and
+  would have made a slide's `sectionHeading` name the *prior* section instead of its own, undoing the
+  reason `sectionHeading` is defined "at its anchor" in the first place (see Content model above).
 
 - **Slide → text:** navigating the carousel scrolls the text panel so the active slide's anchor is
-  at the top.
-- **Text → slide:** scrolling the text panel updates the active slide via the same scrollspy check.
+  `scrollLead` pixels below the top.
+- **Text → slide:** scrolling the text panel updates the active slide via the same scrollspy check,
+  offset by the same `scrollLead`.
 - **Feedback-loop guard:** sync updates are one-directional per user gesture — the region that
   originated an interaction is never redundantly re-scrolled by its own resulting update.
 - **Every slide has its own, unique anchor** — a direct consequence of the anchor-definition

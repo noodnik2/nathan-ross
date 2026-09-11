@@ -7,15 +7,19 @@ export interface AnchorPosition {
 
 // The scrollspy rule that drives both directions of sync (see
 // docs/milestones/milestone8.md, "Sync mechanism"): an anchor becomes active
-// once its top has crossed above scrollTop; among anchors that qualify, the
-// last one in document order wins. When scrollTop is above every anchor
-// (possible because the text panel has top padding, so even the first anchor's
-// top is > 0), it clamps to the first anchor rather than reporting "nothing".
-export function activeAnchorId(anchors: AnchorPosition[], scrollTop: number): string {
+// once its top has crossed above scrollTop + lead; among anchors that
+// qualify, the last one in document order wins. `lead` (default 0, pixels)
+// fires the switch that many pixels before the anchor would otherwise reach
+// the viewport top, leaving that much of the prior anchor's content visible
+// above it - see main.ts for how the lead is sized (one line of text). When
+// scrollTop is above every anchor (possible because the text panel has top
+// padding, so even the first anchor's top is > 0), it clamps to the first
+// anchor rather than reporting "nothing".
+export function activeAnchorId(anchors: AnchorPosition[], scrollTop: number, lead = 0): string {
   if (anchors.length === 0) return ''
   let active = anchors[0].anchorId
   for (const anchor of anchors) {
-    if (anchor.top <= scrollTop) active = anchor.anchorId
+    if (anchor.top <= scrollTop + lead) active = anchor.anchorId
     else break
   }
   return active

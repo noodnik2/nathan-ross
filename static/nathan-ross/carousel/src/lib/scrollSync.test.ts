@@ -43,6 +43,44 @@ describe('activeAnchorId', () => {
   it('returns an empty string for an empty anchor list', () => {
     expect(activeAnchorId([], 300)).toEqual('')
   })
+
+  it('defaults to a zero lead, preserving today\'s top-alignment behavior', () => {
+    const anchors = [
+      { anchorId: 'anchor-0', top: 200 },
+      { anchorId: 'anchor-1', top: 600 },
+    ]
+
+    expect(activeAnchorId(anchors, 599)).toEqual('anchor-0')
+  })
+
+  it('with a lead, activates an anchor before scrollTop reaches its top', () => {
+    const anchors = [
+      { anchorId: 'anchor-0', top: 200 },
+      { anchorId: 'anchor-1', top: 600 },
+    ]
+
+    expect(activeAnchorId(anchors, 580, 20)).toEqual('anchor-1')
+  })
+
+  it('with a lead, does not activate an anchor until scrollTop + lead reaches its top', () => {
+    const anchors = [
+      { anchorId: 'anchor-0', top: 200 },
+      { anchorId: 'anchor-1', top: 600 },
+    ]
+
+    expect(activeAnchorId(anchors, 579, 20)).toEqual('anchor-0')
+  })
+
+  it('is self-consistent: scrolling to (anchorTop - lead) reports that same anchor active', () => {
+    const anchors = [
+      { anchorId: 'anchor-0', top: 200 },
+      { anchorId: 'anchor-1', top: 600 },
+      { anchorId: 'anchor-2', top: 1000 },
+    ]
+    const lead = 20
+
+    expect(activeAnchorId(anchors, anchors[1].top - lead, lead)).toEqual('anchor-1')
+  })
 })
 
 describe('slideIndexForAnchor', () => {
