@@ -256,6 +256,7 @@ and let me know!
 
 ---
 
+![sinatra-conducts-first-capital-session](../static/nathan-ross/images/sinatra-conducts-first-capital-session.webp)
 ## Studio Recordings
 
 Several factors influenced Nathan's decision to work primarily in the Los Angeles recording industry instead of
@@ -289,6 +290,7 @@ he didn't generally love the music itself, or the lack of challenge in the popul
 
 ---
 
+![nathan-baroque-garb.webp](../static/nathan-ross/images/nathan-baroque-garb.webp)
 ## Continuing in The Classical Music Scene
 
 To nourish his deep connection to classical music, Nathan turned to more intimate spaces. He hosted and attended
