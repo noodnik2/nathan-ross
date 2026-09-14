@@ -36,7 +36,11 @@ Nathan had already achieved remarkable mastery over his instrument by the time t
 ![portrait-young-violinist](../static/nathan-ross/images/portrait-young-violinist.webp)
 
 He made his concert debut at just six years old at the British Columbia Musical Festival, winning first
-prize for the most talented child under ten. Four years after that first victory, the same festival named Nathan its most talented competitor under nineteen.
+prize for the most talented child under ten. 
+
+![young-nathan-playing-shot](../static/nathan-ross/images/young-nathan-playing-shot.webp)
+
+Four years after that first victory, the same festival named Nathan its most talented competitor under nineteen.
 
 ![nathan-violinist-at14](../static/nathan-ross/images/nathan-violinist-at14.webp)
 
@@ -256,7 +260,7 @@ and let me know!
 
 ---
 
-![sinatra-conducts-first-capital-session](../static/nathan-ross/images/sinatra-conducts-first-capital-session.webp)
+![sinatra-conducts-first-capitol-session](../static/nathan-ross/images/sinatra-conducts-first-capitol-session.webp)
 ## Studio Recordings
 
 Several factors influenced Nathan's decision to work primarily in the Los Angeles recording industry instead of
@@ -269,28 +273,42 @@ war alive and unmaimed that he just wanted a simple, regular home and family lif
 travel and career pressures."
 
 As much as Nathan enjoyed the predictability, steady pay, and benefits of working in the recording industry,
-he didn't generally love the music itself, or the lack of challenge in the popular repertoire he had to play.
+he didn't generally love the music itself or the lack of a challenge in the popular repertoire he had to play.
 
 > Sometimes after coming home from recording with some of the louder bands, Nathan would ask me to "please turn down
 > that music, I hear it in my headphones all day!"
 >
 > But sometimes there was a countering coolness factor: 
-> - Discovering a bond with dad when we discovered a shared liking for certain songs and later
->   learning he had actually played on some of them (such as
->   ["If" by the soft rock band Bread](https://www.youtube.com/watch?v=n-cK70DXsSA))!
-> - The thrill of meeting some of my favorite artists, like Diana Ross, Stevie Wonder, and Elton John,
->   on the rare occasions I accompanied my dad to work.
-> - One of my fondest memories is hanging out in a trailer with Stevie Wonder during the tracking of the string
->   section for "Rocket Love" on his *[Hotter than July](https://en.wikipedia.org/wiki/Hotter_than_July)* album.
->   Between takes, Stevie was incredibly warm, entirely present in the room with me. The vivid image of watching
->   Stevie next to me, swaying along with the overlaid tracks during the recording sessions, stays with me to this
+> - **Bonding with Dad** when we discovered a shared taste for certain songs, and later learning he had
+>   actually played on some of them (such as ["If" by the soft rock band Bread](https://www.youtube.com/watch?v=n-cK70DXsSA))!
+> - **Experiencing the thrill** of meeting some of my favorite artists (like Diana Ross, Stevie Wonder,
+>   and Elton John) on the rare occasions I went with my dad to work.
+> - **Hanging out** in a trailer with Stevie Wonder during the tracking of the string section for "Rocket Love"
+>   on his *[Hotter than July](https://en.wikipedia.org/wiki/Hotter_than_July)* album.  One of my fondest memories
+>   is talking with Stevie between takes, and of how genuinely warm and welcoming he was. The vivid image of watching
+>   him next to me, swaying along with the overlaid tracks during the recording sessions, stays with me to this
 >   day—he truly felt the music.
 
 - [Listen to some recordings in which Nathan Ross played violin](https://noodnik2.github.io/music-session-explorer/#/?artist=Nathan+Ross)
 
 ---
 
-![nathan-baroque-garb.webp](../static/nathan-ross/images/nathan-baroque-garb.webp)
+## TV and Film
+![hollywood-palace-jack-benny](../static/nathan-ross/images/hollywood-palace-jack-benny.webp)
+
+Nathan was frequently called to join orchestras for TV and film gigs, such as the
+[Hollywood Palace](https://en.wikipedia.org/wiki/The_Hollywood_Palace).  Many episodes such as 
+[this one](https://www.youtube.com/watch?v=PDXT_BxC1WA&list=PLKx5WXp9562GqUem-2VfCjXOjlHVyNOez&index=39&t=49m6s)
+are still available to watch on YouTube! 
+
+![nathan-baroque-garb](../static/nathan-ross/images/nathan-baroque-garb.webp)
+
+Here's a fun shot found in our collection of memorabilia: Nathan playing dressed up in a baroque setting and
+outfit, possibly on an episode of the Hollywood Palace or other TV show.
+
+---
+
+![nathan-headshot-middleage](../static/nathan-ross/images/nathan-headshot-middleage.webp)
 ## Continuing in The Classical Music Scene
 
 To nourish his deep connection to classical music, Nathan turned to more intimate spaces. He hosted and attended
@@ -302,11 +320,20 @@ Los Angeles Philharmonic when needed and participated in several local classical
 * The Southern California Chamber Music Society
 * The Musical Arts Society of La Jolla
 
-> One of my favorite recordings of Nathan's is a performance my mother taped from a radio broadcast of Chausson's
-> *Concerto for Violin, Piano, and String Quartet* (Op. 21) at the Los Angeles County Museum of Art. I am happy
-> to have found the original cassette, digitized it, and preserved it here:
-> 
-> - [Listen to L.A. County Museum Concert: Chausson Concerto Op. 21](https://pub-cade15fc7c0b4b1da577523fe86c83c7.r2.dev/chausson-concerto-op21.m4a)
+![nathan-sharing-stage](../static/nathan-ross/images/nathan-sharing-stage.webp)
+
+And here's Nathan on stage at my high school when he performed with the Palisades Symphony with its
+founder, Joel Lish (who I believe is the violinist on the left).  
+
+---
+
+One of my favorite recordings of Nathan's is a performance my mother taped from a radio broadcast of Chausson's
+*Concerto for Violin, Piano, and String Quartet* (Op. 21) at the Los Angeles County Museum of Art. I am happy
+to have found the original cassette, digitized it, and preserved it here:
+
+- [Listen to L.A. County Museum Concert: Chausson Concerto Op. 21](https://pub-cade15fc7c0b4b1da577523fe86c83c7.r2.dev/chausson-concerto-op21.m4a)
+
+--- 
 
 > I fondly remember family trips abroad to watch my dad perform in historic venues. A particular highlight was
 > watching him perform at [La Scala](https://www.teatroallascala.org/en) and the
