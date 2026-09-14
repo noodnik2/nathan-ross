@@ -303,8 +303,8 @@ are still available to watch on YouTube!
 
 ![nathan-baroque-garb](../static/nathan-ross/images/nathan-baroque-garb.webp)
 
-Here's a fun shot found in our collection of memorabilia: Nathan playing dressed up in a baroque setting and
-outfit, possibly on an episode of the Hollywood Palace or other TV show.
+Here's a fun shot found in our collection of memorabilia: Nathan playing dressed up in a baroque setting and outfit,
+in [another episode](https://youtu.be/9YH-MKSal8I?si=dijyMDxVLiOYH5ar&t=53m) of the Hollywood Palace.
 
 ---
 
