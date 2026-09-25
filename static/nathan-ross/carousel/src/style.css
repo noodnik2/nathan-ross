@@ -1,0 +1,126 @@
+body {
+  margin: 0;
+  background: #1b1b1b;
+  color: #f2f2f2;
+  font-family: system-ui, sans-serif;
+}
+
+.carousel-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.swiper {
+  width: 100%;
+  height: 50vh;
+  flex: none;
+}
+
+.section-strip {
+  flex: none;
+  padding: 0.75rem 2rem 0;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #9a9a9a;
+}
+
+.text-panel {
+  /*
+   * position: relative makes this the offsetParent for its own content, so
+   * child.offsetTop (used by main.ts's sync mechanism) is measured relative
+   * to this panel's own scroll box - not relative to <body>, which is what
+   * offsetTop would resolve to otherwise (no positioned ancestor).
+   */
+  position: relative;
+  flex: 1;
+  overflow-y: auto;
+  box-sizing: border-box;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem 2rem;
+  /*
+   * Roughly one text-panel-viewport-height of trailing space, so the LAST
+   * anchor paragraph can still scroll all the way to the top of the panel's
+   * own viewport - without it, the scrollspy sync mechanism could never mark
+   * the final slide(s) as active from the text panel (see milestone8.md,
+   * "Full navigability guarantee" / text-panel scroll-clamp edge case).
+   */
+  padding-bottom: 50vh;
+}
+
+.text-panel :first-child {
+  margin-top: 0;
+}
+
+.text-panel a {
+  color: #8ecbff;
+}
+
+.swiper-slide {
+  width: 320px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.swiper-slide img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
+}
+
+.swiper-slide--card {
+  background: #2a2a2a;
+  height: 100%;
+  width: 320px;
+  border-radius: 4px;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.swiper-slide-active img {
+  cursor: zoom-in;
+}
+
+.zoom-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 100;
+}
+
+.zoom-overlay[hidden] {
+  display: none;
+}
+
+.zoom-overlay__img {
+  max-width: 90vw;
+  max-height: 90vh;
+  object-fit: contain;
+  border-radius: 4px;
+  cursor: zoom-out;
+}
+
+.zoom-overlay__close {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  color: #f2f2f2;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+}

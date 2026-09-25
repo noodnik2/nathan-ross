@@ -2,22 +2,68 @@
 
 This repository is used to manage artifacts related to building a website for Nathan Ross.
 
-## Streams of Work
+## Motivation
 
-- [Notebooks](./notebooks)
-- [CLI Commands](./cmd)
-- [Images](./docs/image-timeline.md)
+A son of Nathan Ross would like to create a website to help others (mainly other family members
+and more distant relatives) to recall his life and works.
+
+## Components
+
+The website comprises several components:
+
+### Visual Chronology
+
+The main theme of the project is a Visual Chronology used to tell Nathan's story through a series of photographs
+collected by his family or from his personal memoirs.  The driving source document of this chronology is the
+[docs/visual-chronology](./docs/visual-chronology.md) Markdown file, written in GitHub-compatible Markdown. 
+
+Two main modes of viewing the Chronology in the website are:
+
+#### Straight Viewing
+
+The chronology markdown gets [compiled](static/scripts/render.mjs) into an `index.html` file
+at the base URL, and is viewable as a standard, scrollable document.
+
+#### Carousel
+
+This alternate viewing mode renders a swipeable slide deck at the `/carousel` relative URL path in which
+the user can scroll back and forth through the chronology to see each picture (slide) and its corresponding
+text.  The scrolling can be done either through the text area or through the slides.
+
+The [Carousel](./static/nathan-ross/carousel/README.md) is implemented in its own separate single page
+application (SPA) that runs in the user's browser.
+
+### Music Session Explorer
+
+Implemented in its own React Single Page Application (SPA), the [Music Session Explorer](./mse-spa/README.md)
+component features a list of recordings by Nathan.  Selecting any recording opens a list of external links where
+you can listen to the track and find more information.
+
+## Building and Deployment
+
+The various `Makefile`s at each level of the source tree provide the standard tooling used during the
+development and deployment workflow.  Running the `make` or `make help` command in each will bring up
+the list of valid targets for each.
+
+## Inspiration & Planning
+
+- See [this ChatGPT](https://chatgpt.com/c/6a6a3682-a7a0-83ea-b892-39bf1149828f) conversation.
 
 ## Resources
 
-## Data Sources
+### Data Sources
 
 To find recordings in which Nate was involved, the following sources have been identified:
 
-- [MusicBrainz](https://musicbrainz.org)
+- [MusicBrainz](https://musicbrainz.org/doc/Development)
+  - [Online API](https://musicbrainz.org/doc/MusicBrainz_API) 
+  - [Database Dumps](https://data.metabrainz.org/pub/musicbrainz/data/fullexport)
+  - [Database Documentation](https://musicbrainz.org/doc/MusicBrainz_Database)
+  - [Covert Art Archive](https://coverartarchive.org/)
+    - [Online API](https://musicbrainz.org/doc/Cover_Art_Archive/API)
 - [Discogs](https://www.discogs.com/)
 
-### Relevant Sites
+### Other Relevant Sites
 
 - Nathan Ross
     - [Discogs](https://www.discogs.com/artist/398631-Nathan-Ross?superFilter=Instruments+%26+Performance)

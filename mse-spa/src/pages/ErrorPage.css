@@ -1,0 +1,8 @@
+.error-page {
+  padding: 2rem 1.5rem;
+}
+
+.error-page__message {
+  font-size: 1.1rem;
+  color: #b02a2a;
+}

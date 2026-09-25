@@ -1,16 +1,34 @@
+#! /bin/bash
 
-
-input_file="static/images/$1.heic"
-output_file="static/images/$1.jpg"
-
-fatal() {
-  echo "fatal: $*" >&2
+error() {
+  echo "$@" >&2
   exit 1
 }
 
-[ -e "$output_file" ] && fatal "output file already exists: $output_file"
-[ ! -f "$input_file" ] && fatal "input file does not exist: $input_file"
+fatal() {
+  error "fatal: $@"
+  exit 1
+}
 
+process() {
+  [ $# -ne 1 ] && fatal "invalid number of arguments specified"
 
-magick "$input_file" -resize 2048x2048 -quality 85 -strip "$output_file"
+  input_file="$1" # e.g., "<filename>.heic"
+  output_file="$1.jpg"
 
+  if [ -e "$output_file" ]; then
+    error "output file already exists: $output_file"
+    return
+  fi
+
+  if [ ! -f "$input_file" ]; then
+    error "input file does not exist: $input_file"
+    return
+  fi
+
+  magick "$input_file" -resize 2048x2048 -quality 85 -strip "$output_file"
+}
+
+for file in "$@"; do
+  process "$file"
+done
