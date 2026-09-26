@@ -299,7 +299,13 @@ he didn't generally love the music itself or the lack of a challenge in the popu
 Nathan was frequently called to join orchestras for TV and film gigs, such as the
 [Hollywood Palace](https://en.wikipedia.org/wiki/The_Hollywood_Palace).  Many episodes such as 
 [this one](https://www.youtube.com/watch?v=PDXT_BxC1WA&list=PLKx5WXp9562GqUem-2VfCjXOjlHVyNOez&index=39&t=49m6s)
-are still available to watch on YouTube! 
+are still available to watch on YouTube!
+
+![tonight-show-1976-11-12](../static/nathan-ross/images/tonight-show-1976-11-12.webp)
+
+We also laughed with him on the
+[Tonight Show Starring Johnny Carson](https://en.wikipedia.org/wiki/The_Tonight_Show_Starring_Johnny_Carson)
+as they occasionally [flashed to the orchestra](https://www.youtube.com/watch?v=tknOt4skK-E&t=105s).
 
 ![nathan-baroque-garb](../static/nathan-ross/images/nathan-baroque-garb.webp)
 
