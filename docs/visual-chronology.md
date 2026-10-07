@@ -278,7 +278,7 @@ he didn't generally love the music itself or the lack of a challenge in the popu
 > Sometimes after coming home from recording with some of the louder bands, Nathan would ask me to "please turn down
 > that music, I hear it in my headphones all day!"
 >
-> But sometimes there was a countering coolness factor: 
+> At least for me, though, there was a counterbalancing cool factor:
 > - **Bonding with Dad** when we discovered a shared taste for certain songs, and later learning he had
 >   actually played on some of them (such as ["If" by the soft rock band Bread](https://www.youtube.com/watch?v=n-cK70DXsSA))!
 > - **Experiencing the thrill** of meeting some of my favorite artists (like Diana Ross, Stevie Wonder,
@@ -301,35 +301,61 @@ Nathan was frequently called to join orchestras for TV and film gigs, such as th
 [this one](https://www.youtube.com/watch?v=PDXT_BxC1WA&list=PLKx5WXp9562GqUem-2VfCjXOjlHVyNOez&index=39&t=49m6s)
 are still available to watch on YouTube!
 
-![tonight-show-1976-11-12](../static/nathan-ross/images/tonight-show-1976-11-12.webp)
-
-We also laughed with him on the
-[Tonight Show Starring Johnny Carson](https://en.wikipedia.org/wiki/The_Tonight_Show_Starring_Johnny_Carson)
-as they occasionally [flashed to the orchestra](https://www.youtube.com/watch?v=tknOt4skK-E&t=105s).
-
 ![nathan-baroque-garb](../static/nathan-ross/images/nathan-baroque-garb.webp)
 
-Here's a fun shot found in our collection of memorabilia: Nathan playing dressed up in a baroque setting and outfit,
-in [another episode](https://youtu.be/9YH-MKSal8I?si=dijyMDxVLiOYH5ar&t=53m) of the Hollywood Palace.
+We tracked this photo found in our collection of memorabilia to another Hollywood Palace episode
+[spotted on YouTube](https://www.youtube.com/watch?v=9YH-MKSal8I&t=51m45s).
+Nathan plays dressed up in a baroque setting and outfit alongside Bing Crosby and Frank Sinatra, Jr.
+
+![tonight-show-1976-11-12](../static/nathan-ross/images/tonight-show-1976-11-12.webp)
+
+On occasion, we also laughed with Nathan on the
+[Tonight Show Starring Johnny Carson](https://en.wikipedia.org/wiki/The_Tonight_Show_Starring_Johnny_Carson)
+when they [flashed to the orchestra](https://www.youtube.com/watch?v=tknOt4skK-E&t=105s)
+as caught in this screenshot.
 
 ---
 
 ![nathan-headshot-middleage](../static/nathan-ross/images/nathan-headshot-middleage.webp)
 ## Continuing in The Classical Music Scene
 
-To nourish his deep connection to classical music, Nathan turned to more intimate spaces. He hosted and attended
-vibrant chamber music gatherings at home and with local colleagues.  He also stepped in to perform with the
-Los Angeles Philharmonic when needed and participated in several local classical organizations, including:
+To continue nourishing his deep connection to classical music, Nathan turned also to more intimate spaces. 
+In addition to occasional performance and touring with the Los Angeles Philharmonic by invitation, he hosted
+and attended vibrant chamber music gatherings with colleagues through his participation in several local
+classical organizations, including:
 
 * The [Los Angeles Baroque Players](https://cdnc.ucr.edu/?a=d&d=BMTN19630116.1.5&e=-------en--20--1--txt-txIN--------)
 * The Los Angeles County Museum Chamber Music Society
 * The Southern California Chamber Music Society
 * The Musical Arts Society of La Jolla
 
+> I fondly remember family trips abroad to watch my dad perform in historic venues. A particular highlight was
+> watching him perform at [La Scala](https://www.teatroallascala.org/en) and the
+> [Royal Albert Hall](https://www.royalalberthall.com/) during the Los Angeles Philharmonic's 1974 European tour,
+> documented in [Six Decades of Zubin Mehta](https://www.laphil.com/posts/six-decades-of-zubin-mehta).
+
 ![nathan-sharing-stage](../static/nathan-ross/images/nathan-sharing-stage.webp)
 
-And here's Nathan on stage at my high school when he performed with the Palisades Symphony with its
-founder, Joel Lish (who I believe is the violinist on the left).  
+--- 
+
+Here's Nathan on stage at my high school when he performed with the Palisades Symphony and its founder,
+Joel Lish (who I believe is the violinist on the left).
+
+---
+
+![isaac-stern-letter](../static/nathan-ross/images/isaac-stern-letter.webp)
+
+Isaac Stern was just one of many extraordinary artists who crossed over into our family's personal life.
+
+Nathan often included us in the social side of his profession. Occasionally, my family hosted chamber music,
+or we attended others' get-togethers — especially if they had kids our age.  Or, we would sometimes join other
+musicians' families for summer vacations, such as the
+[Dicterows]([Dicterows](https://benningviolins.com/the-dicterow-family-of-violinists/))
+(who were close family friends) or the Sterns.
+
+Family get-togethers with long-distance musician friends who came to town, or with whom we vacationed, are
+remembered as incredibly special occasions—made even more unforgettable by the live classical music that
+sometimes accompanied them.
 
 ---
 
@@ -338,13 +364,6 @@ One of my favorite recordings of Nathan's is a performance my mother taped from 
 to have found the original cassette, digitized it, and preserved it here:
 
 - [Listen to L.A. County Museum Concert: Chausson Concerto Op. 21](https://pub-cade15fc7c0b4b1da577523fe86c83c7.r2.dev/chausson-concerto-op21.m4a)
-
---- 
-
-> I fondly remember family trips abroad to watch my dad perform in historic venues. A particular highlight was
-> watching him perform at [La Scala](https://www.teatroallascala.org/en) and the
-> [Royal Albert Hall](https://www.royalalberthall.com/) during the Los Angeles Philharmonic's 1974 European tour,
-> documented in [Six Decades of Zubin Mehta](https://www.laphil.com/posts/six-decades-of-zubin-mehta).
 
 ---
 

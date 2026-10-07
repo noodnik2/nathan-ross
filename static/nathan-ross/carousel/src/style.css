@@ -124,3 +124,28 @@ body {
   cursor: pointer;
   padding: 0.25rem 0.5rem;
 }
+
+/* GitHub style blockquotes */
+blockquote {
+  padding: 0.25em 1em;
+  margin: 1em 0;
+  font-style: italic;
+
+  /* Semi-transparent grey border works on both light and dark backgrounds */
+  border-left: 0.25em solid rgba(128, 128, 128, 0.5);
+
+  /* Very subtle tint overlay that adapts to whatever is underneath */
+  background-color: rgba(128, 128, 128, 0.2);
+
+  /* Inherit the existing text color, but slightly soften it */
+  color: inherit;
+  opacity: 0.85;
+}
+
+/* Ensure the first and last paragraphs inside the blockquote align properly */
+blockquote > :first-child {
+  margin-top: 0;
+}
+blockquote > :last-child {
+  margin-bottom: 0;
+}

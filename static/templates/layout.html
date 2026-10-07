@@ -32,6 +32,21 @@
       margin: 1rem 0;
       border-radius: 6px;
     }
+    blockquote {
+      padding: 0.25em 1em;
+      margin: 1em 0;
+      font-style: italic;
+      border-left: 0.25em solid rgba(128, 128, 128, 0.5);
+      background-color: rgba(128, 128, 128, 0.2);
+      color: inherit;
+      opacity: 0.85;
+    }
+    blockquote > :first-child {
+      margin-top: 0;
+    }
+    blockquote > :last-child {
+      margin-bottom: 0;
+    }
     @media (prefers-color-scheme: dark) {
       body {
         background: #0d1117;
