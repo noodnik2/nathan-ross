@@ -350,7 +350,7 @@ Isaac Stern was just one of many extraordinary artists who crossed over into our
 Nathan often included us in the social side of his profession. Occasionally, my family hosted chamber music,
 or we attended others' get-togethers — especially if they had kids our age.  Or, we would sometimes join other
 musicians' families for summer vacations, such as the
-[Dicterows]([Dicterows](https://benningviolins.com/the-dicterow-family-of-violinists/))
+[Dicterows](https://benningviolins.com/the-dicterow-family-of-violinists/)
 (who were close family friends) or the Sterns.
 
 Family get-togethers with long-distance musician friends who came to town, or with whom we vacationed, are

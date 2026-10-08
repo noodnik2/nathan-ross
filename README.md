@@ -1,15 +1,26 @@
 # Nathan Ross Site Builder
 
-This repository is used to manage artifacts related to building a website for Nathan Ross.
+This repository contains the code and assets used to build and deploy a tribute website for Nathan Ross.
 
 ## Motivation
 
 A son of Nathan Ross would like to create a website to help others (mainly other family members
-and more distant relatives) to recall his life and works.
+and more distant relatives) to recall and continue to celebrate his life and works.
+
+## Deployment Targets
+
+Makefile targets are provided to carry out deployment to publicly available URLs:
+
+1. Nathan's [visual chronology](./docs/visual-chronology.md) source document, deployed in two flavors:
+   - As a [scrollable document](https://noodnik2.github.io/nathan-ross)
+   - In a ["Carousel" Single Page Application (SPA)](https://noodnik2.github.io/nathan-ross/carousel)
+2. The [Music Session Explorer](https://noodnik2.github.io/music-session-explorer/#/?artist=Nathan+Ross)
+   to retrieve recording sessions in which Nathan participated.
 
 ## Components
 
-The website comprises several components:
+The website comprises several components, as described briefly below, and in more detail in the
+[Architecture](./docs/architecture.md) document.
 
 ### Visual Chronology
 
@@ -35,7 +46,7 @@ application (SPA) that runs in the user's browser.
 
 ### Music Session Explorer
 
-Implemented in its own React Single Page Application (SPA), the [Music Session Explorer](./mse-spa/README.md)
+Implemented in its own React Single Page Application (SPA), the [Music Session Explorer](./docs/music-session-explorer-spa.md)
 component features a list of recordings by Nathan.  Selecting any recording opens a list of external links where
 you can listen to the track and find more information.
 
