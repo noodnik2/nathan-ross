@@ -30,7 +30,7 @@ collected by his family or from his personal memoirs.  The driving source docume
 
 Two main modes of viewing the Chronology in the website are:
 
-#### Straight Viewing
+#### Scrollable Document
 
 The chronology markdown gets [compiled](static/scripts/render.mjs) into an `index.html` file
 at the base URL, and is viewable as a standard, scrollable document.

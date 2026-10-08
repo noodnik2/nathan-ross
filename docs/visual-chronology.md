@@ -100,7 +100,9 @@ proved to be permanent.
 ![nathan-in-uniform](../static/nathan-ross/images/nathan-in-uniform.webp)
 ## World War II
 
-After the attack on Pearl Harbor, Nathan faced a brutal choice. He could sign an exemption from the
+After the
+[attack on Pearl Harbor](https://en.wikipedia.org/wiki/Attack_on_Pearl_Harbor),
+Nathan faced a brutal choice. He could sign an exemption from the
 American draft, which would permanently bar him from citizenship and risk eventual deportation. Alternatively,
 he could return to Canada—a move that meant relinquishing his budding footing in the American classical
 music scene to face mandatory enlistment in the Canadian military.
@@ -215,9 +217,10 @@ Jacques Singer, playing the Bruch G-minor Concerto.
 
 ![charms-1500-pop-goers](../static/nathan-ross/images/charms-1500-pop-goers.webp)
 
-The critic who'd previously covered him as a boy
-was still there to cover him again as a man: "From a very stocky little boy he has grown into a handsome
-young man nearly six feet in height."
+The critic who had followed Nathan as a boy was still there to cover him as a man: "From a very stocky
+little boy he has grown into a handsome young man nearly six feet in height."
+
+![nathan-anne-letter-p1](../static/nathan-ross/images/nathan-anne-letter-p1.webp)
 
 Toward the end of his visit, Nathan faced a profound personal dilemma. You can read his own words about this
 heartfelt identity crisis in
@@ -225,11 +228,14 @@ heartfelt identity crisis in
 Ultimately, the long trip home gave Nathan the quiet clarity he needed to reflect. By the time he returned to
 Hollywood, his mind was firmly made up: he was going to marry my mother.
 
-Both of them were rebels within their own families, choosing to follow their hearts rather than bow to the
-strict expectations and preplanned futures their parents had laid out for them. After his family learned
-of—and eventually learned to accept—the union, Nathan's father wrote him
-[this touching letter](../static/nathan-ross/images/1950-april4-letter-from-max.pdf),
-an incredibly heartwarming and validating artifact of a father's enduring love.
+![max-nathan-letter-envelope](../static/nathan-ross/images/max-nathan-letter-envelope.webp)
+
+Both my father and mother were rebels within their own families, choosing to follow their hearts rather than bow to the
+strict expectations and preplanned futures their parents had laid out for them. After Nathan's family learned of—and
+came to accept—the union, his father wrote him
+[this touching letter](../static/nathan-ross/images/1950-april4-letter-from-max.pdf). It stands as an incredibly
+heartwarming and validating artifact not just of a father's enduring love, but of an immigrant patriarch’s profound
+willingness to conquer his own deep-seated fears and long-held cultural truths for the sake of his son.
 
 ---
 
