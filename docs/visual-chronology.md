@@ -72,8 +72,9 @@ that he put in a good word with his own teacher, [Naoum Blinder](https://en.wiki
 Blinder was convinced, extending a full three-year scholarship for Nathan to come study with him in San Francisco.
 
 > *Note: The pieces Nathan performed at the recital and in Stanley Park included Lalo’s Symphonie Espagnole.
-> You can listen to a classic 1956 recording of Isaac Stern performing the piece on Apple Music
-> [here](https://music.apple.com/us/album/symphonie-espagnole-in-d-minor-op-21-ii-scherzando/1563679982?i=1563680347).*
+> You can listen to a classic 1956 recording of Isaac Stern performing the piece on
+> [Apple Music here](https://music.apple.com/us/album/symphonie-espagnole-in-d-minor-op-21-ii-scherzando/1563679982?i=1563680347),
+> or on [YouTube here](https://www.youtube.com/watch?v=zwWFZT6npaA).*
 
 ![awarded-scholarship](../static/nathan-ross/images/awarded-scholarship.webp)
 
@@ -228,6 +229,70 @@ heartfelt identity crisis in
 Ultimately, the long trip home gave Nathan the quiet clarity he needed to reflect. By the time he returned to
 Hollywood, his mind was firmly made up: he was going to marry my mother.
 
+<details>
+<summary><i>Click to see/hide transcription of the letter</i></summary>
+
+<blockquote>
+Saturday, July 31
+
+My darling Anne—
+
+The time is 5:30 A.M. It’s getting light outside, but I can’t seem to sleep. I’ve been tossing and turning for 
+the past 3½ hours, trying to banish thoughts, turning them over and over again in my mind, but no use. I just
+lie there thinking about us, and I get angrier and lonelier. Angrier with myself for being so weak and so badly
+confused and influenced. Lonelier because I miss you so terribly—but I guess I’m just not man enough to make up
+my mind and stick to it.
+
+To tell you what I think about—in fact, I guess I’m too damn proud—must feel real penitently \[unclear]. Lots
+of times you can write things you could never say, and I wish I could just sit here and pour out to you all the
+things that give me no solution.
+
+I realize that this is a hell of a way to start a letter off, and you probably wonder what it’s all about—but
+then again, I think you know.
+
+We left for \[Vancouver?] July 13 and got there Thursday afternoon, the 15th. It was wonderful seeing the \[entire?]
+family again, seeing that most of them are well and the same as ever. The kids are a little exhausting for \[unclear].
+
+Larry, because of the heat going through Fresno, Sacramento, etc., Eddie decided that they should fly back, and
+he came back with me alone. We got back last Thursday evening, and now I’m back at work again.
+
+Actually, I had a wonderful time, but after 10 days of being subjected to a word here and there—and a bit here and
+there—I don’t know where I am, and am mentally so confused.
+
+Anne, I love you so very much. Ever not being here has been a \[big?] void in my life. I want you here with me,
+but I also love my parents and going back there and seeing how they are and how they live, and feel about things
+brought the real right to the point for me.
+
+You see, having been away from home and that kind of influence for so long, I have forgotten—probably because I
+wanted to—I’ve forgotten the \[pleasantness?], the \[unclear], the most of most of all the people that surround me.
+Going back and seeing it hit me right between the eyes harder than ever, and I have to ask myself, “Do I dare do
+this to them?” Then I start thinking of the way you’ve been \[unclear]—think of me and so many little things like
+that. I believe that these may be the reason behind all this confused segregation—that it would be a horrible
+mistake, and so many people would get hurt by it.
+
+But then my mind goes back to how much you mean to me, and how very much I love you, and I’m right back where I
+started! And you, my poor darling, are right in the center of the mess.
+
+Oh, if only I could \[unclear] you. Because being so self-sufficient, how happy I would be! But you picked a
+man—not a man of \[unclear]—for I just can’t close my eyes blindly to conditions and to people who have had
+their own \[unclear] of happiness for me, and say, “I’ll be with them” \[unclear].
+
+Darling, I’m not writing this to you for sympathy. I don’t want to be guessing or worrying—but you’ve always been
+frank with me, and I know you’ll understand my plight.
+
+I’m just going to have to think this thing out, and that’s all—but the minute I start doing this, I’m back again.
+But I must hold to my \[unclear].
+
+If my letter you may receive \[unclear]—I shall answer it when this \[unclear]. A different letter, more \[unclear].
+
+Well, here it is 7:25. Eddie is getting up now, about for work—and the sun is up. I’m not having gone to sleep yet,
+so will say goodnight for now, my love.
+
+Please take care of yourself for me, my beloved.
+</blockquote>
+
+</details>
+
 ![max-nathan-letter-envelope](../static/nathan-ross/images/max-nathan-letter-envelope.webp)
 
 Both my father and mother were rebels within their own families, choosing to follow their hearts rather than bow to the
@@ -236,6 +301,70 @@ came to accept—the union, his father wrote him
 [this touching letter](../static/nathan-ross/images/1950-april4-letter-from-max.pdf). It stands as an incredibly
 heartwarming and validating artifact not just of a father's enduring love, but of an immigrant patriarch’s profound
 willingness to conquer his own deep-seated fears and long-held cultural truths for the sake of his son.
+
+<details>
+<summary><i>Click to see/hide transcription of the letter</i></summary>
+
+<blockquote>
+April 4, 1950
+
+Dear Nathan,
+
+It’s many weeks past since I received your last letter. I was quite busy for the last month before our Passover,
+distributing Palestine wine to our Jewish members, as the Government would not let me sell this in the Gold Store.
+There was some work to be done in the house: a few of our rooms got empty, and before we may rent them, I have to
+paint them and put new linoleum. And so time passed. Now, after we have celebrated the Seder night together, all
+our family—we have in our house 22, including the children of the Delmans, Aggie’s \[unclear; possibly “said he
+came from Seattle”]—Mr. \[unclear] has done lots of work with Mallie, and so tonight I thought I would drop you
+a line or two, to go back to your letter.
+
+I really don’t know what to say. I think you know yourself how we should feel. You have said it in your letter.
+We are wrong in your way; you may be right, but we are not wrong, too. Don’t you understand the way Mama and myself
+have been brought up in my Hebrew school? The teaching is different from the school teaching in this country. The
+first book is to teach how to live, not how to earn a living. Here they teach how to make money—school for doctors,
+lawyers, musicians, business people, and so on. It is all how to make more money. There is no teaching how to respect
+each other, or how to respect your older brother, your father and mother.
+
+I can’t write this all, as there are books of 1,000 pages. All is about how a man should live and be happy. I will
+first give you one story, not a Robin Hood story.
+
+There was a great teacher, Rabbi Akiva. He had 400 students. Rabbi Akiva had one child, which he loved very much.
+One day his child became sick, and the doctor gave up all hope of its recovery. So Rabbi Akiva left the child with
+the doctor and nurse; he himself went to the synagogue. Three days in succession he did not eat or drink. He prayed
+to God. He was weak; he could not stay on his feet, but still refused to eat or drink. On the fourth day the child
+died. All his students came together to the synagogue. Seeing their rabbi and teacher weak and pale, they were afraid
+to tell him about his child’s death. Rabbi Akiva noticed them, called to them, and said, “Tell me all what happened.”
+They could not open their mouths. Then he asked again, “Is my child dead?” They shook their heads yes, and watched,
+expecting he may faint. But instead he looked at them and said, “Bring me to the holy ark.” When he reached the ark,
+he called out, “O Lord, You are always right. Your judgment is right. You have given to me and You have taken back
+from me.” Then he said to his students, “Bring me something and I will eat.” All the students were \[unclear; possibly
+“dumbfounded”] and could not open their mouths. Rabbi Akiva said to them, “Don’t you understand? When my child was
+alive, I was praying to God, and now when all is over, I have no more to say. It is God’s will; I have to make the
+best of it.”
+
+It may be just a story, but we can learn this way how to live in this world. And then, my son, you will understand us,
+and how to have in your imagination that I don’t want to see you unhappy, but just to please myself. Yes, I would
+be happy, like all the rest of my friends, to celebrate that one day in my life at my child’s wedding, and to see
+my children’s family dear to me. You have seen how dear to me are Ruby, Toby, and their children, and how much
+pleasure Mama and myself are getting when Jose and Eddie are coming here with our loving \[unclear]. I am looking
+forward to your future. You are as dear to my heart as the rest of my children, perhaps more. And I have \[unclear]
+my hopes and dreams.
+
+I want you to know that I am not a fanatic \[about] religion. I do not think that we are better than other religions,
+but I will admit I am a nationalist. But I am not a hater of other nationals; but is it great if the other nationalist
+is not a hater? There are a few young couples that we know; some are very nice, Jessie and Doves \[names uncertain;
+possibly “Doves”]. Jessie is more with Doves’ friends, but some of them are in different directions. And you understand
+that it is a father and mother’s heart breaking when they have their child go away from them, being unable to come
+close to them.
+
+But all what I can say now is I wish both of you all the luck in the world. As for you, you will be to my heart as
+long as I live. And if your loving wife will love my son, I will admire her like the rest of my family. Your letters
+to us will be my best wish, and again with best wishes to both.
+
+Your loving dad
+</blockquote>
+
+</details>
 
 ---
 
