@@ -2,6 +2,8 @@
 
 This repository contains the code and assets used to build and deploy a tribute website for Nathan Ross.
 
+See [this video](https://github.com/user-attachments/assets/eb602e4f-666b-4ada-9690-032ca06b0025) for quick overview.
+
 ## Motivation
 
 A son of Nathan Ross would like to create a website to help others (mainly other family members
