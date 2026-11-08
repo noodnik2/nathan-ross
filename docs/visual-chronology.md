@@ -72,8 +72,9 @@ that he put in a good word with his own teacher, [Naoum Blinder](https://en.wiki
 Blinder was convinced, extending a full three-year scholarship for Nathan to come study with him in San Francisco.
 
 > *Note: The pieces Nathan performed at the recital and in Stanley Park included Lalo’s Symphonie Espagnole.
-> You can listen to a classic 1956 recording of Isaac Stern performing the piece on Apple Music
-> [here](https://music.apple.com/us/album/symphonie-espagnole-in-d-minor-op-21-ii-scherzando/1563679982?i=1563680347).*
+> You can listen to a classic 1956 recording of Isaac Stern performing the piece on
+> [Apple Music here](https://music.apple.com/us/album/symphonie-espagnole-in-d-minor-op-21-ii-scherzando/1563679982?i=1563680347),
+> or on [YouTube here](https://www.youtube.com/watch?v=zwWFZT6npaA).*
 
 ![awarded-scholarship](../static/nathan-ross/images/awarded-scholarship.webp)
 
@@ -224,7 +225,7 @@ little boy he has grown into a handsome young man nearly six feet in height."
 
 Toward the end of his visit, Nathan faced a profound personal dilemma. You can read his own words about this
 heartfelt identity crisis in
-[this letter to his future wife](../static/nathan-ross/images/1948-jul31-letter-to-anne.pdf). 
+[this letter to his future wife](../static/nathan-ross/images/1948-jul31-letter-to-anne.pdf) \[[transcription](../static/nathan-ross/texts/1948-jul31-letter-to-anne-text.md)]. 
 Ultimately, the long trip home gave Nathan the quiet clarity he needed to reflect. By the time he returned to
 Hollywood, his mind was firmly made up: he was going to marry my mother.
 
@@ -233,7 +234,8 @@ Hollywood, his mind was firmly made up: he was going to marry my mother.
 Both my father and mother were rebels within their own families, choosing to follow their hearts rather than bow to the
 strict expectations and preplanned futures their parents had laid out for them. After Nathan's family learned of—and
 came to accept—the union, his father wrote him
-[this touching letter](../static/nathan-ross/images/1950-april4-letter-from-max.pdf). It stands as an incredibly
+[this touching letter](../static/nathan-ross/images/1950-april4-letter-from-max.pdf) \[[transcription](../static/nathan-ross/texts/1950-april4-letter-from-max-text.md)].
+It stands as an incredibly
 heartwarming and validating artifact not just of a father's enduring love, but of an immigrant patriarch’s profound
 willingness to conquer his own deep-seated fears and long-held cultural truths for the sake of his son.
 
@@ -352,6 +354,13 @@ Joel Lish (who I believe is the violinist on the left).
 ![isaac-stern-letter](../static/nathan-ross/images/isaac-stern-letter.webp)
 
 Isaac Stern was just one of many extraordinary artists who crossed over into our family's personal life.
+
+---
+
+![nathan-with-isaac-near-the-beach](../static/nathan-ross/images/nathan-with-isaac-near-the-beach.webp)
+
+Here's a picture we found of Nathan and Isaac hanging out at the beach, likely taken during one of
+Isaac's visits to Los Angeles.
 
 Nathan often included us in the social side of his profession. Occasionally, my family hosted chamber music,
 or we attended others' get-togethers — especially if they had kids our age.  Or, we would sometimes join other
